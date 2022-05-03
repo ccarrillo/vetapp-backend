@@ -56,7 +56,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
 				.authenticationEntryPoint(authenticationEntryPoint).and()
-				.authorizeRequests((request) -> request.antMatchers("/h2-console/**", "/api/v1/auth/login").permitAll()
+				.authorizeRequests(
+						(request) -> request.antMatchers("/h2-console/**", "/api/v1/auth/login",
+								"/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html")
+						.permitAll()
 						.antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated())
 				.addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
 						UsernamePasswordAuthenticationFilter.class);

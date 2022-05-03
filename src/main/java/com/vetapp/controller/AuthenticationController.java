@@ -24,9 +24,16 @@ import com.vetapp.util.AuthenticationRequest;
 import com.vetapp.util.LoginResponse;
 import com.vetapp.util.UserInfo;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin
+@Tag(name = "login")
 public class AuthenticationController {
 
 	@Autowired
@@ -39,6 +46,8 @@ public class AuthenticationController {
 	private UserDetailsService userDetailsService;
 
 	@PostMapping("/auth/login")
+	@Operation(summary = "Login For Access Token", responses = {
+			@ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponse.class))) })
 	public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest)
 			throws InvalidKeySpecException, NoSuchAlgorithmException {
 
@@ -58,6 +67,8 @@ public class AuthenticationController {
 	}
 
 	@GetMapping("/auth/userinfo")
+	@Operation(summary = "Read User Info", responses = {
+			@ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserInfo.class))) })
 	public ResponseEntity<?> getUserInfo(Principal user) {
 		User userObj = (User) userDetailsService.loadUserByUsername(user.getName());
 
