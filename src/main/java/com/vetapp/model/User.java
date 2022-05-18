@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Table(name = "AUTH_USER_DETAILS")
+@Table(name = "user")
 @Entity
 public class User implements UserDetails {
 
@@ -30,43 +30,51 @@ public class User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
-	@Column(name = "USER_NAME", unique = true)
+	@Column(name = "username", unique = true)
 	private String userName;
 
-	@Column(name = "USER_KEY")
-	private String password;
-
-	@Column(name = "CREATED_ON")
-	private Date createdAt;
-
-	@Column(name = "UPDATED_ON")
-	private Date updatedAt;
-
-	@Column(name = "first_name")
-	private String firstName;
-
-	@Column(name = "last_name")
-	private String lastName;
-
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 
-	@Column(name = "phone_number")
-	private String phoneNumber;
+	@Column(name = "hashed_password")
+	private String password;
 
-	@Column(name = "enabled")
-	private boolean enabled = true;
+	@Column(name = "is_active")
+	private boolean is_active = true;
+
+	@Column(name = "is_superuser")
+	private boolean is_superuser = false;
+
+	@Column(name = "created_at")
+	private Date created_at;
+
+	@Column(name = "user_creation")
+	private Integer user_creation;
+
+	@Column(name = "modified_at")
+	private Date modified_at;
+
+	@Column(name = "user_updated")
+	private Integer user_updated;
+
+	@Column(name = "enterprise_id")
+	private Long enterprise_id;
+
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "AUTH_USER_AUTHORITY", joinColumns = @JoinColumn(referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
+	@JoinTable(name = "userrole", joinColumns = @JoinColumn(referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
 	private List<Authority> authorities;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		return authorities;
+	}
+
+	public void setAuthorities(List<Authority> authorities) {
+		this.authorities = authorities;
 	}
 
 	@Override
@@ -83,33 +91,29 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return this.enabled;
+		return this.is_active;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return this.enabled;
+		return this.is_active;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return this.enabled;
+		return this.is_active;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return this.enabled;
+		return this.is_active;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -121,38 +125,6 @@ public class User implements UserDetails {
 		this.userName = userName;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -161,23 +133,63 @@ public class User implements UserDetails {
 		this.email = email;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public void setAuthorities(List<Authority> authorities) {
-		this.authorities = authorities;
+	public boolean isIs_active() {
+		return is_active;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setIs_active(boolean is_active) {
+		this.is_active = is_active;
+	}
+
+	public boolean isIs_superuser() {
+		return is_superuser;
+	}
+
+	public void setIs_superuser(boolean is_superuser) {
+		this.is_superuser = is_superuser;
+	}
+
+	public Date getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
+	}
+
+	public Integer getUser_creation() {
+		return user_creation;
+	}
+
+	public void setUser_creation(Integer user_creation) {
+		this.user_creation = user_creation;
+	}
+
+	public Date getModified_at() {
+		return modified_at;
+	}
+
+	public void setModified_at(Date modified_at) {
+		this.modified_at = modified_at;
+	}
+
+	public Integer getUser_updated() {
+		return user_updated;
+	}
+
+	public void setUser_updated(Integer user_updated) {
+		this.user_updated = user_updated;
+	}
+
+	public Long getEnterprise_id() {
+		return enterprise_id;
+	}
+
+	public void setEnterprise_id(Long enterprise_id) {
+		this.enterprise_id = enterprise_id;
 	}
 }

@@ -31,53 +31,53 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/login")
 @CrossOrigin
 @Tag(name = "login")
 public class AuthenticationController {
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-	@Autowired
-	JWTTokenHelper jWTTokenHelper;
+    @Autowired
+    JWTTokenHelper jWTTokenHelper;
 
-	@Autowired
-	private UserDetailsService userDetailsService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-	@PostMapping("/auth/login")
-	@Operation(summary = "Login For Access Token", responses = {
-			@ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponse.class))) })
-	public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest)
-			throws InvalidKeySpecException, NoSuchAlgorithmException {
+    @PostMapping("/token")
+    @Operation(summary = "Login For Access Token", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponse.class)))})
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest)
+            throws InvalidKeySpecException, NoSuchAlgorithmException {
 
-		final Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
-						authenticationRequest.getPassword()));
+        final Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
+                        authenticationRequest.getPassword()));
 
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		User user = (User) authentication.getPrincipal();
-		String jwtToken = jWTTokenHelper.generateToken(user.getUsername());
+        User user = (User) authentication.getPrincipal();
+        String jwtToken = jWTTokenHelper.generateToken(user.getUsername());
 
-		LoginResponse response = new LoginResponse();
-		response.setToken(jwtToken);
+        LoginResponse response = new LoginResponse();
+        response.setAccess_token(jwtToken);
+        response.setToken_type("Bearer");
 
-		return ResponseEntity.ok(response);
-	}
+        return ResponseEntity.ok(response);
+    }
 
-	@GetMapping("/auth/userinfo")
-	@Operation(summary = "Read User Info", responses = {
-			@ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserInfo.class))) })
-	public ResponseEntity<?> getUserInfo(Principal user) {
-		User userObj = (User) userDetailsService.loadUserByUsername(user.getName());
+    @GetMapping("/auth/userinfo")
+    @Operation(summary = "Read User Info", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserInfo.class)))})
+    public ResponseEntity<?> getUserInfo(Principal user) {
+        User userObj = (User) userDetailsService.loadUserByUsername(user.getName());
 
-		UserInfo userInfo = new UserInfo();
-		userInfo.setFirstName(userObj.getFirstName());
-		userInfo.setLastName(userObj.getLastName());
-		userInfo.setRoles(userObj.getAuthorities().toArray());
+        UserInfo userInfo = new UserInfo();
+        userInfo.setFirstName(userObj.getUserName());
+        userInfo.setLastName(userObj.getUserName());
+        userInfo.setRoles(userObj.getAuthorities().toArray());
 
-		return ResponseEntity.ok(userInfo);
-
-	}
+        return ResponseEntity.ok(userInfo);
+    }
 }
