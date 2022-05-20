@@ -13,12 +13,7 @@ import java.util.Date;
 
 @Table(name = "role")
 @Entity
-public class Authority implements GrantedAuthority {
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,12 +36,6 @@ public class Authority implements GrantedAuthority {
 
     @Column(name = "user_updated")
     private Integer user_updated;
-
-    @Override
-    public String getAuthority() {
-        // TODO Auto-generated method stub
-        return name;
-    }
 
     public Long getId() {
         return id;

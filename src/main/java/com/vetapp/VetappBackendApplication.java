@@ -11,9 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.vetapp.dao.UserDetailsRepository;
-import com.vetapp.model.Authority;
-import com.vetapp.model.User;
+import com.vetapp.dao.UserAuthRepository;
+import com.vetapp.model.Role;
+import com.vetapp.model.UserAuth;
 
 @SpringBootApplication
 public class VetappBackendApplication {
@@ -22,7 +22,7 @@ public class VetappBackendApplication {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserDetailsRepository userDetailsRepository;
+    private UserAuthRepository userDetailsRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(VetappBackendApplication.class, args);
@@ -30,27 +30,27 @@ public class VetappBackendApplication {
 
     @PostConstruct
     protected void init() {
-        List<Authority> authorityList = new ArrayList<>();
+        List<Role> roleList = new ArrayList<>();
 
-        authorityList.add(createAuthority("SUPERUSUARIO"));
-        //authorityList.add(createAuthority("ADMIN"));
+        roleList.add(createRoles("SUPERUSUARIO"));
+        //roleList.add(createAuthority("ADMIN"));
 
-        User user = new User();
-        user.setUserName("admin@example.com");
+        UserAuth user = new UserAuth();
+        user.setUsername("admin@example.com");
         user.setEmail("admin@example.com");
         user.setPassword(passwordEncoder.encode("admin"));
         user.setIs_active(true);
         user.setIs_superuser(true);
         user.setUser_creation(1);
         user.setCreated_at(Calendar.getInstance().getTime());
-        user.setAuthorities(authorityList);
+        //user.setAuthorities(authorityList);
 
         userDetailsRepository.save(user);
 
     }
 
-    private Authority createAuthority(String roleCode) {
-        Authority authority = new Authority();
+    private Role createRoles(String roleCode) {
+        Role authority = new Role();
         authority.setName(roleCode);
         authority.setIs_active(true);
         authority.setUser_creation(1);

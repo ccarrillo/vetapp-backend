@@ -7,9 +7,12 @@ import java.security.spec.InvalidKeySpecException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vetapp.config.JWTTokenHelper;
-import com.vetapp.model.User;
+import com.vetapp.model.UserAuth;
 import com.vetapp.util.AuthenticationRequest;
 import com.vetapp.util.LoginResponse;
 import com.vetapp.util.UserInfo;
@@ -49,11 +52,13 @@ public class AuthenticationController {
     @Operation(summary = "Login For Access Token", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponse.class)))})
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest)
-            throws InvalidKeySpecException, NoSuchAlgorithmException {
+            throws Exception {
 
-        final Authentication authentication = authenticationManager
+        /*final Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
-                        authenticationRequest.getPassword()));
+                        authenticationRequest.getPassword()));*/
+
+        Authentication authentication = this.authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -71,13 +76,23 @@ public class AuthenticationController {
     @Operation(summary = "Read User Info", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserInfo.class)))})
     public ResponseEntity<?> getUserInfo(Principal user) {
-        User userObj = (User) userDetailsService.loadUserByUsername(user.getName());
+        UserAuth userObj = (UserAuth) userDetailsService.loadUserByUsername(user.getName());
 
         UserInfo userInfo = new UserInfo();
-        userInfo.setFirstName(userObj.getUserName());
-        userInfo.setLastName(userObj.getUserName());
-        userInfo.setRoles(userObj.getAuthorities().toArray());
+        userInfo.setFirstName(userObj.getUsername());
+        userInfo.setLastName(userObj.getUsername());
+        //userInfo.setRoles(userObj.getAuthorities().toArray());
 
         return ResponseEntity.ok(userInfo);
+    }
+
+    private Authentication authenticate(String username, String password) throws Exception {
+        try {
+            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        } catch (DisabledException e) {
+            throw new Exception("USER_DISABLED", e);
+        } catch (BadCredentialsException e) {
+            throw new Exception("INVALID_CREDENTIALS", e);
+        }
     }
 }

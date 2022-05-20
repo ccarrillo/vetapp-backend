@@ -3,12 +3,12 @@ package com.vetapp.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.vetapp.model.User;
+import com.vetapp.model.UserAuth;
 
 
 @Repository
-public interface UserDetailsRepository extends JpaRepository<User, Long> {
+public interface UserAuthRepository extends JpaRepository<UserAuth, Long> {
 
-	User findByUserName(String userName);
+	UserAuth findByUsername(String userName);
 	
 }
