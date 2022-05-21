@@ -48,7 +48,7 @@ public class EmployeeDto extends BaseModelDto {
 
     private Long afpId;
 
-    private String afp_code;
+    private String afpCode;
 
     private String note;
 
@@ -228,12 +228,12 @@ public class EmployeeDto extends BaseModelDto {
         this.afpId = afpId;
     }
 
-    public String getAfp_code() {
-        return afp_code;
+    public String getAfpCode() {
+        return afpCode;
     }
 
-    public void setAfp_code(String afp_code) {
-        this.afp_code = afp_code;
+    public void setAfpCode(String afp_code) {
+        this.afpCode = afpCode;
     }
 
     public String getNote() {
