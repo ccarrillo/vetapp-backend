@@ -1,29 +1,24 @@
-package com.vetapp.model;
+package com.vetapp.dto;
 
-import javax.persistence.*;
+public class EnterpriseDto extends BaseModelDto {
 
-@Entity
-@Table(name = "subsidiary")
-public class Subsidiary extends BaseModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length = 100)
     private String name;
 
-    @Column(name = "address", length = 150)
+    private String ruc;
+
+    private String email;
+
+    private String website;
+
     private String address;
 
-    @Column(name = "phone")
     private Integer phone;
 
-    @Column(name = "mobile")
     private Integer mobile;
 
-    @Column(name = "enterprise_id")
-    private Long enterpriseId;
+    private Float igv;
 
     public Long getId() {
         return id;
@@ -39,6 +34,30 @@ public class Subsidiary extends BaseModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public String getAddress() {
@@ -65,11 +84,11 @@ public class Subsidiary extends BaseModel {
         this.mobile = mobile;
     }
 
-    public Long getEnterpriseId() {
-        return enterpriseId;
+    public Float getIgv() {
+        return igv;
     }
 
-    public void setEnterpriseId(Long enterpriseId) {
-        this.enterpriseId = enterpriseId;
+    public void setIgv(Float igv) {
+        this.igv = igv;
     }
 }

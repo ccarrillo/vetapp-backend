@@ -1,19 +1,11 @@
-package com.vetapp.model;
+package com.vetapp.dto;
 
-import javax.persistence.*;
+public class ParListValueDto extends BaseModelDto {
 
-@Entity
-@Table(name = "parlistvalue")
-public class ParListValue extends BaseModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length = 70)
     private String name;
 
-    @Column(name = "parlist_id")
     private Long parlistId;
 
     public Long getId() {

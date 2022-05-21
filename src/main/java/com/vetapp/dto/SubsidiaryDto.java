@@ -1,28 +1,17 @@
-package com.vetapp.model;
+package com.vetapp.dto;
 
-import javax.persistence.*;
+public class SubsidiaryDto extends BaseModelDto {
 
-@Entity
-@Table(name = "subsidiary")
-public class Subsidiary extends BaseModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length = 100)
     private String name;
 
-    @Column(name = "address", length = 150)
     private String address;
 
-    @Column(name = "phone")
     private Integer phone;
 
-    @Column(name = "mobile")
     private Integer mobile;
 
-    @Column(name = "enterprise_id")
     private Long enterpriseId;
 
     public Long getId() {

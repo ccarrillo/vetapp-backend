@@ -1,8 +1,6 @@
 package com.vetapp.dto;
 
-import java.util.List;
-
-public class RolDto {
+public class RoleDto extends BaseModelDto{
 
     private String id;
     private String name;

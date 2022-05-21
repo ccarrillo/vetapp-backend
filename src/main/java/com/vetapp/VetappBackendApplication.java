@@ -39,10 +39,10 @@ public class VetappBackendApplication {
         user.setUsername("admin@example.com");
         user.setEmail("admin@example.com");
         user.setPassword(passwordEncoder.encode("admin"));
-        user.setIs_active(true);
-        user.setIs_superuser(true);
-        user.setUser_creation(1);
-        user.setCreated_at(Calendar.getInstance().getTime());
+        user.setActive(true);
+        user.setSuperuser(true);
+        user.setUserCreation(1);
+        user.setCreatedAt(Calendar.getInstance().getTime());
         //user.setAuthorities(authorityList);
 
         userDetailsRepository.save(user);
@@ -52,9 +52,9 @@ public class VetappBackendApplication {
     private Role createRoles(String roleCode) {
         Role authority = new Role();
         authority.setName(roleCode);
-        authority.setIs_active(true);
-        authority.setUser_creation(1);
-        authority.setCreated_at(Calendar.getInstance().getTime());
+        authority.setActive(true);
+        authority.setUserCreation(1);
+        authority.setCreatedAt(Calendar.getInstance().getTime());
         return authority;
     }
 

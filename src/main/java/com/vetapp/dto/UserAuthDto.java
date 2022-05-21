@@ -1,35 +1,17 @@
-package com.vetapp.model;
+package com.vetapp.dto;
 
-import java.util.Date;
+public class UserAuthDto extends BaseModelDto {
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Table(name = "user")
-@Entity
-public class UserAuth extends BaseModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "hashed_password")
     private String password;
 
-    @Column(name = "is_superuser")
     private boolean isSuperuser = false;
 
-    @Column(name = "enterprise_id")
     private Long enterpriseId;
 
     public Long getId() {
