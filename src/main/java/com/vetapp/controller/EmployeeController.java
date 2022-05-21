@@ -1,9 +1,7 @@
 package com.vetapp.controller;
 
 import com.vetapp.dto.EmployeeDto;
-import com.vetapp.model.UserAuth;
 import com.vetapp.service.EmployeeService;
-import com.vetapp.util.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController
