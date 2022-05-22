@@ -1,14 +1,12 @@
 package com.vetapp.util;
 
-import com.vetapp.dto.RoleDto;
-
 import java.util.List;
 
 public class LoginResponse {
 
     private String access_token;
     private String token_type;
-    private List<RoleDto> roles ;
+    private List<UserRoleResponse> roles ;
 
     public String getAccess_token() {
         return access_token;
@@ -26,11 +24,11 @@ public class LoginResponse {
         this.token_type = token_type;
     }
 
-    public List<RoleDto> getRoles() {
+    public List<UserRoleResponse> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleDto> roles) {
+    public void setRoles(List<UserRoleResponse> roles) {
         this.roles = roles;
     }
 }

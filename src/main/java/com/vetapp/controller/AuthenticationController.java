@@ -1,8 +1,17 @@
 package com.vetapp.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.vetapp.dao.UserAuthRepository;
+import com.vetapp.dto.RoleDto;
+import com.vetapp.dto.UserRoleDto;
+import com.vetapp.service.RoleService;
+import com.vetapp.service.UserRoleService;
+import com.vetapp.util.UserRoleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -46,28 +55,49 @@ public class AuthenticationController {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    UserAuthRepository userAuthRepository;
+
+    @Autowired
+    private UserRoleService userRoleService;
+
+    @Autowired
+    private RoleService roleService;
+
     @PostMapping("/token")
     @Operation(summary = "Login For Access Token", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponse.class)))})
-    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest)
-            throws Exception {
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) {
+        try {
+            //final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 
-        /*final Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
-                        authenticationRequest.getPassword()));*/
+            Authentication authentication = this.authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-        Authentication authentication = this.authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            User user = (User) authentication.getPrincipal();
+            String jwtToken = jWTTokenHelper.generateToken(user.getUsername());//El username es el Email a nivel de login
 
-        User user = (User) authentication.getPrincipal();
-        String jwtToken = jWTTokenHelper.generateToken(user.getUsername());
+            LoginResponse response = new LoginResponse();
+            response.setAccess_token(jwtToken);
+            response.setToken_type("Bearer");
 
-        LoginResponse response = new LoginResponse();
-        response.setAccess_token(jwtToken);
-        response.setToken_type("Bearer");
+            UserAuth userAuth = userAuthRepository.findByEmail(user.getUsername());
+            List<UserRoleDto> userRoleDtos = userRoleService.obtenerUserRolePorUserId(userAuth.getId());
+            List<UserRoleResponse> listRolTmp = new ArrayList<>();
+            for (UserRoleDto ur: userRoleDtos) {
+                UserRoleResponse urrTemp = new UserRoleResponse();
+                RoleDto roleDto = roleService.obtenerRolePorId(ur.getId());
+                urrTemp.setId(roleDto.getId());
+                urrTemp.setName(roleDto.getName());
+                listRolTmp.add(urrTemp);
+            }
+            response.setRoles(listRolTmp);
 
-        return ResponseEntity.ok(response);
+            return new ResponseEntity(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/auth/userinfo")
@@ -81,7 +111,7 @@ public class AuthenticationController {
         userInfo.setLastName(userObj.getUsername());
         //userInfo.setRoles(userObj.getAuthorities().toArray());
 
-        return ResponseEntity.ok(userInfo);
+        return new ResponseEntity(userInfo, HttpStatus.OK);
     }
 
     private Authentication authenticate(String username, String password) throws Exception {

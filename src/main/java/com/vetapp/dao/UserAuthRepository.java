@@ -8,6 +8,6 @@ import com.vetapp.model.UserAuth;
 @Repository
 public interface UserAuthRepository extends JpaRepository<UserAuth, Long> {
 
-    UserAuth findByUsername(String userName);
+    UserAuth findByEmail(String username);
 
 }

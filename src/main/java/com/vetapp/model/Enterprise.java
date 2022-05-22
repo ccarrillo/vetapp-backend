@@ -1,7 +1,6 @@
 package com.vetapp.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Table(name = "enterprise")
 @Entity

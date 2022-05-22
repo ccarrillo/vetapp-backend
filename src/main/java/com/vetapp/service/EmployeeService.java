@@ -1,25 +1,43 @@
 package com.vetapp.service;
 
+import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.EmployeeRepository;
+import com.vetapp.dao.UserAuthRepository;
 import com.vetapp.dto.EmployeeDto;
 import com.vetapp.model.Employee;
+import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
 
     @Autowired
+    private IAuthenticationFacade authenticationFacade;
+    @Autowired
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    UserAuthRepository userAuthRepository;
 
     ModelMapper modelMapper = new ModelMapper();
 
     public EmployeeDto guardarEmpleado(EmployeeDto employeeDto) {
+        Authentication auth = authenticationFacade.getAuthentication();
+        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+        System.out.println("-----------------");
+        System.out.println(auth.getName());
+        System.out.println(user.getId());
+        System.out.println("-----------------");
+        employeeDto.setUserCreation(user.getId());
+        employeeDto.setCreatedAt(Calendar.getInstance().getTime());
         Employee obj = employeeRepository.save(convertDtoToEntity(employeeDto));
         return convertEntityToDto(obj);
     }
@@ -37,9 +55,15 @@ public class EmployeeService {
     }
 
     public EmployeeDto actualizarEmpleado(EmployeeDto employeeDto, Long id) {
+        Authentication auth = authenticationFacade.getAuthentication();
+        UserAuth user = userAuthRepository.findByEmail(auth.getName());
         Employee objTemp = employeeRepository.findById(id).orElse(null);
         if (objTemp != null) {
             employeeDto.setId(objTemp.getId());
+            employeeDto.setUserCreation(objTemp.getUserCreation());
+            employeeDto.setCreatedAt(objTemp.getCreatedAt());
+            employeeDto.setUserUpdated(user.getId());
+            employeeDto.setModifiedAt(Calendar.getInstance().getTime());
             Employee obj = employeeRepository.save(convertDtoToEntity(employeeDto));
             return convertEntityToDto(obj);
         } else {
@@ -65,7 +89,6 @@ public class EmployeeService {
         } else {
             return null;
         }
-
     }
 
     private Employee convertDtoToEntity(EmployeeDto employeeDto) {
@@ -77,6 +100,5 @@ public class EmployeeService {
         } else {
             return null;
         }
-
     }
 }

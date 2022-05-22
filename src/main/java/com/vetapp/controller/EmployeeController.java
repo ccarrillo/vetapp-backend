@@ -24,7 +24,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping("")
-    @Operation(summary = "Create Employees", responses = {
+    @Operation(summary = "Create Employee", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDto.class)))})
     public ResponseEntity<?> guardarEmpleado(@RequestBody EmployeeDto employeeDto) {
         try {
@@ -67,7 +67,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update Employees", responses = {
+    @Operation(summary = "Update Employee", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDto.class)))})
     public ResponseEntity<?> actualizarEmpleado(@RequestBody EmployeeDto employeeDto, @PathVariable("id") Long id) {
         try {
@@ -83,7 +83,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete Employees", responses = {
+    @Operation(summary = "Delete Employee", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDto.class)))})
     public ResponseEntity<EmployeeDto> eliminarEmpleado(@PathVariable("id") Long id) {
         try {

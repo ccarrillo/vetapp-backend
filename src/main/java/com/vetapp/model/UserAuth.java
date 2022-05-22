@@ -1,13 +1,6 @@
 package com.vetapp.model;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "user")
 @Entity
@@ -31,6 +24,9 @@ public class UserAuth extends BaseModel {
 
     @Column(name = "enterprise_id")
     private Long enterpriseId;
+
+    //@OneToMany(mappedBy = "userAuth", fetch = FetchType.EAGER)
+    //private Set<UserRole> userRole;
 
     public Long getId() {
         return id;
@@ -79,4 +75,12 @@ public class UserAuth extends BaseModel {
     public void setEnterpriseId(Long enterpriseId) {
         this.enterpriseId = enterpriseId;
     }
+
+    /*public Set<UserRole> getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(Set<UserRole> userRole) {
+        this.userRole = userRole;
+    }*/
 }

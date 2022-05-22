@@ -15,6 +15,9 @@ public class UserRole extends BaseModel {
 
     @Column(name = "user_id")
     private Long userId;
+    //@ManyToOne
+    //@JoinColumn(name = "user_id")
+    //private UserAuth userAuth;
 
     public Long getId() {
         return id;
@@ -31,6 +34,14 @@ public class UserRole extends BaseModel {
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
+
+    /*public UserAuth getUserAuth() {
+        return userAuth;
+    }
+
+    public void setUserAuth(UserAuth userAuth) {
+        this.userAuth = userAuth;
+    }*/
 
     public Long getUserId() {
         return userId;

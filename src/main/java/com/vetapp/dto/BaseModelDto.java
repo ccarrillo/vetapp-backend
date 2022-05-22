@@ -6,9 +6,9 @@ public class BaseModelDto {
 
     private boolean isActive = true;
     private Date createdAt;
-    private Integer userCreation;
+    private Long userCreation;
     private Date modifiedAt;
-    private Integer userUpdated;
+    private Long userUpdated;
 
     public boolean isActive() {
         return isActive;
@@ -26,11 +26,11 @@ public class BaseModelDto {
         this.createdAt = createdAt;
     }
 
-    public Integer getUserCreation() {
+    public Long getUserCreation() {
         return userCreation;
     }
 
-    public void setUserCreation(Integer userCreation) {
+    public void setUserCreation(Long userCreation) {
         this.userCreation = userCreation;
     }
 
@@ -42,11 +42,11 @@ public class BaseModelDto {
         this.modifiedAt = modifiedAt;
     }
 
-    public Integer getUserUpdated() {
+    public Long getUserUpdated() {
         return userUpdated;
     }
 
-    public void setUserUpdated(Integer userUpdated) {
+    public void setUserUpdated(Long userUpdated) {
         this.userUpdated = userUpdated;
     }
 }

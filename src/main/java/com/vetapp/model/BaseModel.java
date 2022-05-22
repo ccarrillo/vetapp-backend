@@ -20,13 +20,13 @@ public class BaseModel implements Serializable {
     private Date createdAt;
 
     @Column(name = "user_creation")
-    private Integer userCreation;
+    private Long userCreation;
 
     @Column(name = "modified_at")
     private Date modifiedAt;
 
     @Column(name = "user_updated")
-    private Integer userUpdated;
+    private Long userUpdated;
 
     public boolean isActive() {
         return isActive;
@@ -44,11 +44,11 @@ public class BaseModel implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Integer getUserCreation() {
+    public Long getUserCreation() {
         return userCreation;
     }
 
-    public void setUserCreation(Integer userCreation) {
+    public void setUserCreation(Long userCreation) {
         this.userCreation = userCreation;
     }
 
@@ -60,11 +60,11 @@ public class BaseModel implements Serializable {
         this.modifiedAt = modifiedAt;
     }
 
-    public Integer getUserUpdated() {
+    public Long getUserUpdated() {
         return userUpdated;
     }
 
-    public void setUserUpdated(Integer userUpdated) {
+    public void setUserUpdated(Long userUpdated) {
         this.userUpdated = userUpdated;
     }
 }
