@@ -67,8 +67,8 @@ public class AuthenticationController {
     @PostMapping("/token")
     @Operation(summary = "Login For Access Token", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponse.class)))})
-    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) {
-        try {
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+
             //final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 
             Authentication authentication = this.authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -79,7 +79,7 @@ public class AuthenticationController {
             String jwtToken = jWTTokenHelper.generateToken(user.getUsername());//El username es el Email a nivel de login
 
             LoginResponse response = new LoginResponse();
-            response.setAccess_token(jwtToken);
+            response.setToken(jwtToken);
             response.setToken_type("Bearer");
 
             UserAuth userAuth = userAuthRepository.findByEmail(user.getUsername());
@@ -87,7 +87,7 @@ public class AuthenticationController {
             List<UserRoleResponse> listRolTmp = new ArrayList<>();
             for (UserRoleDto ur: userRoleDtos) {
                 UserRoleResponse urrTemp = new UserRoleResponse();
-                RoleDto roleDto = roleService.obtenerRolePorId(ur.getId());
+                RoleDto roleDto = roleService.obtenerRolePorId(ur.getRoleId());
                 urrTemp.setId(roleDto.getId());
                 urrTemp.setName(roleDto.getName());
                 listRolTmp.add(urrTemp);
@@ -95,9 +95,7 @@ public class AuthenticationController {
             response.setRoles(listRolTmp);
 
             return new ResponseEntity(response, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
     }
 
     @GetMapping("/auth/userinfo")
@@ -118,9 +116,9 @@ public class AuthenticationController {
         try {
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
+            throw new Exception("Usuario Desactivado");
         } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+            throw new Exception("Credenciales Invalidas");
         }
     }
 }

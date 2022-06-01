@@ -26,6 +26,7 @@ public class UserAuthController {
     UserAuthService userAuthService;
 
     @PostMapping("")
+    @PreAuthorize("hasAuthority('SUPERUSUARIO')")
     @Operation(summary = "Create UserAuth", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserAuthDto.class)))})
     public ResponseEntity<?> guardarUserAuth(@RequestBody UserAuthDto userAuthDto) {

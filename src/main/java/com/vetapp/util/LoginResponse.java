@@ -4,16 +4,16 @@ import java.util.List;
 
 public class LoginResponse {
 
-    private String access_token;
+    private String token;
     private String token_type;
     private List<UserRoleResponse> roles ;
 
-    public String getAccess_token() {
-        return access_token;
+    public String getToken() {
+        return token;
     }
 
-    public void setAccess_token(String access_token) {
-        this.access_token = access_token;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getToken_type() {
