@@ -20,6 +20,8 @@ public class EnterpriseDto extends BaseModelDto {
 
     private Float igv;
 
+    private String currency_symbol;
+
     public Long getId() {
         return id;
     }
@@ -90,5 +92,13 @@ public class EnterpriseDto extends BaseModelDto {
 
     public void setIgv(Float igv) {
         this.igv = igv;
+    }
+
+    public String getCurrency_symbol() {
+        return currency_symbol;
+    }
+
+    public void setCurrency_symbol(String currency_symbol) {
+        this.currency_symbol = currency_symbol;
     }
 }

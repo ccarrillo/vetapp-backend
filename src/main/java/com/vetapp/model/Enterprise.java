@@ -34,6 +34,9 @@ public class Enterprise extends BaseModel {
     @Column(name = "igv")
     private Float igv;
 
+    @Column(name = "currency_symbol", length = 10)
+    private String currency_symbol;
+
     public Long getId() {
         return id;
     }
@@ -104,5 +107,13 @@ public class Enterprise extends BaseModel {
 
     public void setIgv(Float igv) {
         this.igv = igv;
+    }
+
+    public String getCurrency_symbol() {
+        return currency_symbol;
+    }
+
+    public void setCurrency_symbol(String currency_symbol) {
+        this.currency_symbol = currency_symbol;
     }
 }
