@@ -3,12 +3,18 @@ package com.vetapp.model;
 import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "employee")
+@Table(name = "employee",schema="vet")
 @Entity
 public class Employee extends BaseModel {
 
-    @Id
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
     private Long id;
 
     @Column(name = "first_name", length = 70)

@@ -1,16 +1,17 @@
 package com.vetapp.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "animal")
+@Table(name = "animal",schema="vet")
 @Entity
 public class Animal extends BaseModel {
 
-    @Id
+	 private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
     private Long id;
 
     @Column(name = "categoriaid")
@@ -37,8 +38,8 @@ public class Animal extends BaseModel {
     @Column(name = "estadoreproductivoid")
     private Long estadoreproductivoId;
 
-    @Column(name = "estadoprodutivoid")
-    private Long estadoprodutivoId;
+    @Column(name = "estadoproductivoid")
+    private Long estadoproductivoId;
 
     @Column(name = "corralid")
     private Long corralId;
@@ -59,11 +60,11 @@ public class Animal extends BaseModel {
     private double precio;
 
     @Column(name = "muerto")
-    private Integer muerto;
+    private boolean muerto;
 
     @Column(name = "venta")
-    private Integer venta;
-
+    private boolean venta;
+    
     public Long getId() {
         return id;
     }
@@ -136,12 +137,12 @@ public class Animal extends BaseModel {
         this.estadoreproductivoId = estadoreproductivoId;
     }
 
-    public Long getEstadoprodutivoId() {
-        return estadoprodutivoId;
+    public Long getEstadoproductivoId() {
+        return estadoproductivoId;
     }
 
-    public void setEstadoprodutivoId(Long estadoprodutivoId) {
-        this.estadoprodutivoId = estadoprodutivoId;
+    public void setEstadoproductivoId(Long estadoproductivoId) {
+        this.estadoproductivoId = estadoproductivoId;
     }
 
     public Long getCorralId() {
@@ -192,20 +193,22 @@ public class Animal extends BaseModel {
         this.precio = precio;
     }
 
-    public Integer getMuerto() {
+    public boolean getMuerto() {
         return muerto;
     }
 
-    public void setMuerto(Integer muerto) {
+    public void setMuerto(boolean muerto) {
         this.muerto = muerto;
     }
 
-    public Integer getVenta() {
+    public boolean getVenta() {
         return venta;
     }
 
-    public void setVenta(Integer venta) {
+    public void setVenta(boolean venta) {
         this.venta = venta;
     }
 
+
+   
 }

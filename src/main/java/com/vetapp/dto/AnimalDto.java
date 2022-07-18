@@ -22,7 +22,7 @@ public class AnimalDto extends BaseModelDto {
 
     private Long estadoreproductivoId;
 
-    private Long estadoprodutivoId;
+    private Long estadoproductivoId;
 
     private Long corralId;
 
@@ -36,9 +36,9 @@ public class AnimalDto extends BaseModelDto {
 
     private double precio;
 
-    private Integer muerto;
+    private boolean muerto;
 
-    private Integer venta;
+    private boolean venta;
 
     public Long getId() {
         return id;
@@ -112,12 +112,12 @@ public class AnimalDto extends BaseModelDto {
         this.estadoreproductivoId = estadoreproductivoId;
     }
 
-    public Long getEstadoprodutivoId() {
-        return estadoprodutivoId;
+    public Long getEstadoproductivoId() {
+        return estadoproductivoId;
     }
 
-    public void setEstadoprodutivoId(Long estadoprodutivoId) {
-        this.estadoprodutivoId = estadoprodutivoId;
+    public void setEstadoproductivoId(Long estadoproductivoId) {
+        this.estadoproductivoId = estadoproductivoId;
     }
 
     public Long getCorralId() {
@@ -168,19 +168,19 @@ public class AnimalDto extends BaseModelDto {
         this.precio = precio;
     }
 
-    public Integer getMuerto() {
+    public boolean getMuerto() {
         return muerto;
     }
 
-    public void setMuerto(Integer muerto) {
+    public void setMuerto(boolean muerto) {
         this.muerto = muerto;
     }
 
-    public Integer getVenta() {
+    public boolean getVenta() {
         return venta;
     }
 
-    public void setVenta(Integer venta) {
+    public void setVenta(boolean venta) {
         this.venta = venta;
     }
 

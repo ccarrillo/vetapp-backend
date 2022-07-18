@@ -49,6 +49,21 @@ public class AnimalController {
             return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @GetMapping("sexo/{sexo}")
+    @Operation(summary = "Read Animals Sexes", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AnimalDto.class)))})
+    public ResponseEntity<?> obtenerAnimalsBySex(@PathVariable("sexo") String sexo) {
+        try {
+            List<AnimalDto> obj = animalService.obtenerAnimalBySexes(sexo);
+            if (obj.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity(obj, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping("/{id}")
     @Operation(summary = "Read Animal", responses = {

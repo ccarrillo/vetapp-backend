@@ -1,9 +1,5 @@
 package com.vetapp.dto;
 
-import com.vetapp.model.BaseModel;
-
-import javax.persistence.*;
-
 public class ParVetDto extends BaseModelDto {
 
     private Long id;

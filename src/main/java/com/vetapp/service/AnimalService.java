@@ -45,6 +45,12 @@ public class AnimalService {
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
+    public ArrayList<AnimalDto> obtenerAnimalBySexes(String sexo) {
+        return (ArrayList<AnimalDto>) animalRepository.obtenerAnimalBySexes(sexo)
+                .stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
 
     public AnimalDto obtenerAnimalPorId(Long id) {
         Animal obj = animalRepository.findById(id).orElse(null);

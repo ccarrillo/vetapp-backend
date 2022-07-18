@@ -232,7 +232,7 @@ public class EmployeeDto extends BaseModelDto {
         return afpCode;
     }
 
-    public void setAfpCode(String afp_code) {
+    public void setAfpCode(String afpCode) {
         this.afpCode = afpCode;
     }
 

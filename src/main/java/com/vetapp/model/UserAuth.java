@@ -2,12 +2,21 @@ package com.vetapp.model;
 
 import javax.persistence.*;
 
-@Table(name = "user")
+
 @Entity
+@Table(name = "user", schema="vet")
 public class UserAuth extends BaseModel {
 
-    @Id
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
     private Long id;
 
     @Column(name = "username", unique = true)

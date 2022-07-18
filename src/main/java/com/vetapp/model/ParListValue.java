@@ -3,11 +3,19 @@ package com.vetapp.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "parlistvalue")
+@Table(name = "parlistvalue",schema="vet")
 public class ParListValue extends BaseModel {
 
-    @Id
+ 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
 
     @Column(name = "name", length = 70)

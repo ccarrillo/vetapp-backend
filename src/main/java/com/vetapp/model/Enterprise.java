@@ -2,12 +2,19 @@ package com.vetapp.model;
 
 import javax.persistence.*;
 
-@Table(name = "enterprise")
+@Table(name = "enterprise",schema="vet")
 @Entity
 public class Enterprise extends BaseModel {
 
-    @Id
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
     private Long id;
 
     @Column(name = "name", length = 100)
@@ -26,10 +33,10 @@ public class Enterprise extends BaseModel {
     private String address;
 
     @Column(name = "phone")
-    private Integer phone;
+    private String phone;
 
     @Column(name = "mobile")
-    private Integer mobile;
+    private String mobile;
 
     @Column(name = "igv")
     private Float igv;
@@ -85,19 +92,19 @@ public class Enterprise extends BaseModel {
         this.address = address;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public Integer getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(Integer mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 

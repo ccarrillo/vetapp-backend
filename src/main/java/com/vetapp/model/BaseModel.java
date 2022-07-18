@@ -9,9 +9,14 @@ import java.util.Date;
 public class BaseModel implements Serializable {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      *
      */
-    private static final long serialVersionUID = 1L;
+   
 
     @Column(name = "is_active")
     private boolean isActive = true;
