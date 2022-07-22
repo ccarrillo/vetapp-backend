@@ -10,105 +10,103 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "detalletipoeventoanimal", schema="vet")
-public class DetalleTipoEventoAnimal extends BaseModel{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@Table(name = "detalletipoeventoanimal", schema = "vet")
+public class DetalleTipoEventoAnimal extends BaseModel {
 
-	@Id
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+    @Column(name = "id")
     private Long id;
-	
-	@Column(name="iddetalletipoevento")
+
+    @Column(name = "iddetalletipoevento")
     private Long idDetalleTipoEvento;
-	
-	@Column(name = "detallestipoevento", length = 300)
-	private String detallesTipoEvento;
-	
-    @Column(name="fechadetalle")
+
+    @Column(name = "detallestipoevento", length = 300)
+    private String detallesTipoEvento;
+
+    @Column(name = "fechadetalle")
     private Date fechaDetalle;
-    
-    @Column(name="idempleado")
+
+    @Column(name = "idempleado")
     private Long idEmpleado;
-    
-    @Column(name="estadorecordatorio")
+
+    @Column(name = "estadorecordatorio")
     private Long estadoRecordatorio;
-    
-    @Column(name="fecharecordatorio")
+
+    @Column(name = "fecharecordatorio")
     private Date fechaRecordatorio;
-    
-	@Column(name = "observaciones", length = 200)
-	private String observaciones;
 
-	public String getDetallesTipoEvento() {
-		return detallesTipoEvento;
-	}
+    @Column(name = "observaciones", length = 200)
+    private String observaciones;
 
-	public void setDetallesTipoEvento(String detallesTipoEvento) {
-		this.detallesTipoEvento = detallesTipoEvento;
-	}
+    public String getDetallesTipoEvento() {
+        return detallesTipoEvento;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setDetallesTipoEvento(String detallesTipoEvento) {
+        this.detallesTipoEvento = detallesTipoEvento;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Long getIdDetalleTipoEvento() {
-		return idDetalleTipoEvento;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setIdDetalleTipoEvento(Long idDetalleTipoEvento) {
-		this.idDetalleTipoEvento = idDetalleTipoEvento;
-	}
+    public Long getIdDetalleTipoEvento() {
+        return idDetalleTipoEvento;
+    }
 
-	public Date getFechaDetalle() {
-		return fechaDetalle;
-	}
+    public void setIdDetalleTipoEvento(Long idDetalleTipoEvento) {
+        this.idDetalleTipoEvento = idDetalleTipoEvento;
+    }
 
-	public void setFechaDetalle(Date fechaDetalle) {
-		this.fechaDetalle = fechaDetalle;
-	}
+    public Date getFechaDetalle() {
+        return fechaDetalle;
+    }
 
-	public Long getIdEmpleado() {
-		return idEmpleado;
-	}
+    public void setFechaDetalle(Date fechaDetalle) {
+        this.fechaDetalle = fechaDetalle;
+    }
 
-	public void setIdEmpleado(Long idEmpleado) {
-		this.idEmpleado = idEmpleado;
-	}
+    public Long getIdEmpleado() {
+        return idEmpleado;
+    }
 
-	public Long getEstadoRecordatorio() {
-		return estadoRecordatorio;
-	}
+    public void setIdEmpleado(Long idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
 
-	public void setEstadoRecordatorio(Long estadoRecordatorio) {
-		this.estadoRecordatorio = estadoRecordatorio;
-	}
+    public Long getEstadoRecordatorio() {
+        return estadoRecordatorio;
+    }
 
-	public Date getFechaRecordatorio() {
-		return fechaRecordatorio;
-	}
+    public void setEstadoRecordatorio(Long estadoRecordatorio) {
+        this.estadoRecordatorio = estadoRecordatorio;
+    }
 
-	public void setFechaRecordatorio(Date fechaRecordatorio) {
-		this.fechaRecordatorio = fechaRecordatorio;
-	}
+    public Date getFechaRecordatorio() {
+        return fechaRecordatorio;
+    }
 
-	public String getObservaciones() {
-		return observaciones;
-	}
+    public void setFechaRecordatorio(Date fechaRecordatorio) {
+        this.fechaRecordatorio = fechaRecordatorio;
+    }
 
-	public void setObservaciones(String observaciones) {
-		this.observaciones = observaciones;
-	}
-	
-	
-    
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
 
 }

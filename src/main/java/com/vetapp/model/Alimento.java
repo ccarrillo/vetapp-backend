@@ -7,42 +7,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "alimento",schema="vet")
+@Table(name = "alimento", schema = "vet")
 @Entity
-public class Alimento extends BaseModel{
-	
-	
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Alimento extends BaseModel {
 
-	@Id
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+    @Column(name = "id")
     private Long id;
-	
+
     @Column(name = "nombre", length = 50)
-	private String nombre;
+    private String nombre;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-    
-    
-    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
 
 }

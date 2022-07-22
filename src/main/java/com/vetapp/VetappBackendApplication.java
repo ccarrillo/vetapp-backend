@@ -14,6 +14,8 @@ import com.vetapp.dao.UserAuthRepository;
 import com.vetapp.model.Role;
 import com.vetapp.model.UserAuth;
 
+import javax.annotation.PostConstruct;
+
 @SpringBootApplication
 public class VetappBackendApplication {
 
@@ -33,7 +35,7 @@ public class VetappBackendApplication {
         SpringApplication.run(VetappBackendApplication.class, args);
     }
 
-  /* @PostConstruct
+    /*@PostConstruct
     protected void init() {
         createRoles("SUPERUSUARIO");
         createRoles("ADMINISTADOR");

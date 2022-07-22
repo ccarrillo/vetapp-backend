@@ -2,20 +2,19 @@ package com.vetapp.model;
 
 import javax.persistence.*;
 
-@Table(name = "userrole",schema="vet")
+@Table(name = "userrole", schema = "vet")
 @Entity
 public class UserRole extends BaseModel {
 
-  
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "role_id")

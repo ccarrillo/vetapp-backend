@@ -8,160 +8,158 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "inventariosemen", schema="vet")
+@Table(name = "inventariosemen", schema = "vet")
 public class InventarioSemen extends BaseModel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+    @Column(name = "id")
     private Long id;
-	
-	@Column(name = "nombre", length = 50)
-	private String nombre;
-	
-	@Column(name = "reproductornumero", length = 50)
-	private String reproductorNumero;
-	
-	@Column(name = "numeroregistro", length = 50)
-	private String numeroRegistro;
-	
-	@Column(name = "nombrenum", length = 50)
-	private String nombreNum;
-	
-	@Column(name = "otro", length = 50)
-	private String otro;
-	
-	@Column(name = "codigo", length = 50)
-	private String codigo;
-	
-    @Column(name="idraza")
+
+    @Column(name = "nombre", length = 50)
+    private String nombre;
+
+    @Column(name = "reproductornumero", length = 50)
+    private String reproductorNumero;
+
+    @Column(name = "numeroregistro", length = 50)
+    private String numeroRegistro;
+
+    @Column(name = "nombrenum", length = 50)
+    private String nombreNum;
+
+    @Column(name = "otro", length = 50)
+    private String otro;
+
+    @Column(name = "codigo", length = 50)
+    private String codigo;
+
+    @Column(name = "idraza")
     private Long idraza;
-    
-    @Column(name="numpajuelasdisponibles")
+
+    @Column(name = "numpajuelasdisponibles")
     private Integer numPajuelasDisponibles;
-    
-    @Column(name="precio")
+
+    @Column(name = "precio")
     private double precio;
-    
-    @Column(name="idpadre")
+
+    @Column(name = "idpadre")
     private Long idPadre;
-    
-    @Column(name="idmadre")
+
+    @Column(name = "idmadre")
     private Long idMadre;
-    
-	@Column(name = "observacion", length = 150)
-	private String observacion;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(name = "observacion", length = 150)
+    private String observacion;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getReproductorNumero() {
-		return reproductorNumero;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setReproductorNumero(String reproductorNumero) {
-		this.reproductorNumero = reproductorNumero;
-	}
+    public String getReproductorNumero() {
+        return reproductorNumero;
+    }
 
-	public String getNumeroRegistro() {
-		return numeroRegistro;
-	}
+    public void setReproductorNumero(String reproductorNumero) {
+        this.reproductorNumero = reproductorNumero;
+    }
 
-	public void setNumeroRegistro(String numeroRegistro) {
-		this.numeroRegistro = numeroRegistro;
-	}
+    public String getNumeroRegistro() {
+        return numeroRegistro;
+    }
 
-	public String getNombreNum() {
-		return nombreNum;
-	}
+    public void setNumeroRegistro(String numeroRegistro) {
+        this.numeroRegistro = numeroRegistro;
+    }
 
-	public void setNombreNum(String nombreNum) {
-		this.nombreNum = nombreNum;
-	}
+    public String getNombreNum() {
+        return nombreNum;
+    }
 
-	public String getOtro() {
-		return otro;
-	}
+    public void setNombreNum(String nombreNum) {
+        this.nombreNum = nombreNum;
+    }
 
-	public void setOtro(String otro) {
-		this.otro = otro;
-	}
+    public String getOtro() {
+        return otro;
+    }
 
-	public String getCodigo() {
-		return codigo;
-	}
+    public void setOtro(String otro) {
+        this.otro = otro;
+    }
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
+    public String getCodigo() {
+        return codigo;
+    }
 
-	public Long getIdraza() {
-		return idraza;
-	}
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
-	public void setIdraza(Long idraza) {
-		this.idraza = idraza;
-	}
+    public Long getIdraza() {
+        return idraza;
+    }
 
-	public Integer getNumPajuelasDisponibles() {
-		return numPajuelasDisponibles;
-	}
+    public void setIdraza(Long idraza) {
+        this.idraza = idraza;
+    }
 
-	public void setNumPajuelasDisponibles(Integer numPajuelasDisponibles) {
-		this.numPajuelasDisponibles = numPajuelasDisponibles;
-	}
+    public Integer getNumPajuelasDisponibles() {
+        return numPajuelasDisponibles;
+    }
 
-	public double getPrecio() {
-		return precio;
-	}
+    public void setNumPajuelasDisponibles(Integer numPajuelasDisponibles) {
+        this.numPajuelasDisponibles = numPajuelasDisponibles;
+    }
 
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
+    public double getPrecio() {
+        return precio;
+    }
 
-	public Long getIdPadre() {
-		return idPadre;
-	}
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
 
-	public void setIdPadre(Long idPadre) {
-		this.idPadre = idPadre;
-	}
+    public Long getIdPadre() {
+        return idPadre;
+    }
 
-	public Long getIdMadre() {
-		return idMadre;
-	}
+    public void setIdPadre(Long idPadre) {
+        this.idPadre = idPadre;
+    }
 
-	public void setIdMadre(Long idMadre) {
-		this.idMadre = idMadre;
-	}
+    public Long getIdMadre() {
+        return idMadre;
+    }
 
-	public String getObservacion() {
-		return observacion;
-	}
+    public void setIdMadre(Long idMadre) {
+        this.idMadre = idMadre;
+    }
 
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
-	}
-    
-	
-	
-	
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
+
 }

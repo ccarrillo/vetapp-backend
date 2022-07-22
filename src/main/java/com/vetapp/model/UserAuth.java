@@ -4,19 +4,18 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "user", schema="vet")
+@Table(name = "user", schema = "vet")
 public class UserAuth extends BaseModel {
 
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "username", unique = true)

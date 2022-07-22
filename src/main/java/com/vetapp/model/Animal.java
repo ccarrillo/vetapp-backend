@@ -3,15 +3,15 @@ package com.vetapp.model;
 import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "animal",schema="vet")
+@Table(name = "animal", schema = "vet")
 @Entity
 public class Animal extends BaseModel {
 
-	 private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "categoriaid")
@@ -29,11 +29,11 @@ public class Animal extends BaseModel {
     @Column(name = "origenid")
     private Long origenId;
 
-    @Column(name="fechanacimiento")
+    @Column(name = "fechanacimiento")
     private Date fechanacimiento;
 
-    @Column(name="fechaultimoparto")
-    private Date  fechaultimoparto;
+    @Column(name = "fechaultimoparto")
+    private Date fechaultimoparto;
 
     @Column(name = "estadoreproductivoid")
     private Long estadoreproductivoId;
@@ -64,7 +64,7 @@ public class Animal extends BaseModel {
 
     @Column(name = "venta")
     private boolean venta;
-    
+
     public Long getId() {
         return id;
     }
@@ -210,5 +210,4 @@ public class Animal extends BaseModel {
     }
 
 
-   
 }
