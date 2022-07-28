@@ -14,9 +14,12 @@ public class Animal extends BaseModel {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "categoriaid")
-    private Long categoriaId;
-
+    @Column(name = "categoriareproduccionid")
+    private Long categoriaReproduccionId;
+    
+    @Column(name = "categoriaproduccionid")
+    private Long categoriaProduccionId;
+    
     @Column(name = "arete", length = 50)
     private String arete;
 
@@ -73,15 +76,25 @@ public class Animal extends BaseModel {
         this.id = id;
     }
 
-    public Long getCategoriaId() {
-        return categoriaId;
-    }
+   
 
-    public void setCategoriaId(Long categoriaId) {
-        this.categoriaId = categoriaId;
-    }
+    public Long getCategoriaReproduccionId() {
+		return categoriaReproduccionId;
+	}
 
-    public String getArete() {
+	public void setCategoriaReproduccionId(Long categoriaReproduccionId) {
+		this.categoriaReproduccionId = categoriaReproduccionId;
+	}
+
+	public Long getCategoriaProduccionId() {
+		return categoriaProduccionId;
+	}
+
+	public void setCategoriaProduccionId(Long categoriaProduccionId) {
+		this.categoriaProduccionId = categoriaProduccionId;
+	}
+
+	public String getArete() {
         return arete;
     }
 

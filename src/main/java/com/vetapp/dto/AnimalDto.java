@@ -6,7 +6,9 @@ public class AnimalDto extends BaseModelDto {
 
     private Long id;
 
-    private Long categoriaId;
+    private Long categoriaReproduccionId;
+
+    private Long categoriaProduccionId;
 
     private String arete;
 
@@ -48,15 +50,23 @@ public class AnimalDto extends BaseModelDto {
         this.id = id;
     }
 
-    public Long getCategoriaId() {
-        return categoriaId;
-    }
+    public Long getCategoriaReproduccionId() {
+		return categoriaReproduccionId;
+	}
 
-    public void setCategoriaId(Long categoriaId) {
-        this.categoriaId = categoriaId;
-    }
+	public void setCategoriaReproduccionId(Long categoriaReproduccionId) {
+		this.categoriaReproduccionId = categoriaReproduccionId;
+	}
 
-    public String getArete() {
+	public Long getCategoriaProduccionId() {
+		return categoriaProduccionId;
+	}
+
+	public void setCategoriaProduccionId(Long categoriaProduccionId) {
+		this.categoriaProduccionId = categoriaProduccionId;
+	}
+
+	public String getArete() {
         return arete;
     }
 
