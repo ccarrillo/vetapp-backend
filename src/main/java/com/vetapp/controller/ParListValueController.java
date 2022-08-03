@@ -37,7 +37,7 @@ public class ParListValueController {
 
     @GetMapping("")
     @Operation(summary = "Read ParListValues", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
+    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
     public ResponseEntity<?> obtenerParListValues() {
         try {
             List<ParListValueDto> obj = parListValueService.obtenerParListValues();
@@ -52,7 +52,7 @@ public class ParListValueController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read ParListValue", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
+    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
     public ResponseEntity<?> obtenerParListValuePorId(@PathVariable("id") Long id) {
         try {
             ParListValueDto obj = parListValueService.obtenerParListValuePorId(id);
@@ -65,10 +65,12 @@ public class ParListValueController {
             return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+ 
 
     @PutMapping("/{id}")
     @Operation(summary = "Update ParListValue", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
+    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
     public ResponseEntity<?> actualizarParListValue(@RequestBody ParListValueDto parListValueDto, @PathVariable("id") Long id) {
         try {
             ParListValueDto obj = parListValueService.actualizarParListValue(parListValueDto, id);
@@ -84,7 +86,7 @@ public class ParListValueController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete ParListValue", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
+    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
     public ResponseEntity<ParListValueDto> eliminarParListValue(@PathVariable("id") Long id) {
         try {
             Boolean obj = parListValueService.eliminarParListValue(id);

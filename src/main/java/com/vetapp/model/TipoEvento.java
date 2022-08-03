@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +19,8 @@ public class TipoEvento extends BaseModel {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name="vet.tipoevento_id_seq",sequenceName="vet.tipoevento_id_seq",allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vet.tipoevento_id_seq")
     @Column(name = "id")
     private Long id;
 

@@ -14,8 +14,7 @@ import com.vetapp.model.ParVetValue;
 
 @Service
 public class ParVetValueService {
-	
-	//sdsds
+
     @Autowired
     ParVetValueRepository parVetValueRepository;
     
