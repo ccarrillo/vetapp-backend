@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.PesadoLecheDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.PesadoLecheDto;
+import com.vetapp.dto.PesadoLecheDTO;
 import com.vetapp.model.PesadoLeche;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class PesadoLecheServiceImpl implements PesadoLecheService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public PesadoLecheDto guardarPesadoLeche(PesadoLecheDto pesadoLecheDto) {
+    public PesadoLecheDTO guardarPesadoLeche(PesadoLecheDTO pesadoLecheDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -45,19 +45,19 @@ public class PesadoLecheServiceImpl implements PesadoLecheService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<PesadoLecheDto> obtenerPesadoLeches() {
-        return (ArrayList<PesadoLecheDto>) pesadoLecheDao.buscarTodos(new PesadoLeche())
+    public ArrayList<PesadoLecheDTO> obtenerPesadoLeches() {
+        return (ArrayList<PesadoLecheDTO>) pesadoLecheDao.buscarTodos(new PesadoLeche())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public PesadoLecheDto obtenerPesadoLechePorId(Long id) {
+    public PesadoLecheDTO obtenerPesadoLechePorId(Long id) {
         PesadoLeche obj = pesadoLecheDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public PesadoLecheDto actualizarPesadoLeche(PesadoLecheDto pesadoLecheDto, Long id) {
+    public PesadoLecheDTO actualizarPesadoLeche(PesadoLecheDTO pesadoLecheDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         PesadoLeche objTemp = pesadoLecheDao.buscarPorId(id);
@@ -83,18 +83,18 @@ public class PesadoLecheServiceImpl implements PesadoLecheService {
         }
     }
 
-    private PesadoLecheDto convertEntityToDto(PesadoLeche pesadoLeche) {
+    private PesadoLecheDTO convertEntityToDto(PesadoLeche pesadoLeche) {
         if (pesadoLeche != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            PesadoLecheDto pesadoLecheDto = new PesadoLecheDto();
-            pesadoLecheDto = modelMapper.map(pesadoLeche, PesadoLecheDto.class);
+            PesadoLecheDTO pesadoLecheDto = new PesadoLecheDTO();
+            pesadoLecheDto = modelMapper.map(pesadoLeche, PesadoLecheDTO.class);
             return pesadoLecheDto;
         } else {
             return null;
         }
     }
 
-    private PesadoLeche convertDtoToEntity(PesadoLecheDto pesadoLecheDto) {
+    private PesadoLeche convertDtoToEntity(PesadoLecheDTO pesadoLecheDto) {
         if (pesadoLecheDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             PesadoLeche pesadoLeche = new PesadoLeche();

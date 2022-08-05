@@ -1,18 +1,18 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.ParVetDto;
+import com.vetapp.dto.ParVetDTO;
 
 import java.util.ArrayList;
 
 public interface PartVetService {
 
-    ParVetDto guardarParVet(ParVetDto parVetDto);
+    ParVetDTO guardarParVet(ParVetDTO parVetDto);
 
-    ArrayList<ParVetDto> obtenerParVet();
+    ArrayList<ParVetDTO> obtenerParVet();
 
-    ParVetDto obtenerParVetPorId(Long id);
+    ParVetDTO obtenerParVetPorId(Long id);
 
-    ParVetDto actualizarParVet(ParVetDto parVetDto, Long id);
+    ParVetDTO actualizarParVet(ParVetDTO parVetDto, Long id);
 
     boolean eliminarParVet(Long id);
 

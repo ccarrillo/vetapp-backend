@@ -1,18 +1,18 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.SubsidiaryDto;
+import com.vetapp.dto.SubsidiaryDTO;
 
 import java.util.ArrayList;
 
 public interface SubsidiaryService {
 
-    SubsidiaryDto guardarSubsidiary(SubsidiaryDto subsidiaryDto);
+    SubsidiaryDTO guardarSubsidiary(SubsidiaryDTO subsidiaryDto);
 
-    ArrayList<SubsidiaryDto> obtenerSubsidiarys();
+    ArrayList<SubsidiaryDTO> obtenerSubsidiarys();
 
-    SubsidiaryDto obtenerSubsidiaryPorId(Long id);
+    SubsidiaryDTO obtenerSubsidiaryPorId(Long id);
 
-    SubsidiaryDto actualizarSubsidiary(SubsidiaryDto subsidiaryDto, Long id);
+    SubsidiaryDTO actualizarSubsidiary(SubsidiaryDTO subsidiaryDto, Long id);
 
     boolean eliminarSubsidiary(Long id);
 }

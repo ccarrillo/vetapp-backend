@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.RoleRepository;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.RoleDto;
+import com.vetapp.dto.RoleDTO;
 import com.vetapp.model.Role;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -30,7 +30,7 @@ public class RoleService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public RoleDto guardarRole(RoleDto roleDto) {
+    public RoleDTO guardarRole(RoleDTO roleDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         roleDto.setUserCreation(user.getId());
@@ -39,19 +39,19 @@ public class RoleService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<RoleDto> obtenerRoles() {
-        return (ArrayList<RoleDto>) roleRepository.findAll()
+    public ArrayList<RoleDTO> obtenerRoles() {
+        return (ArrayList<RoleDTO>) roleRepository.findAll()
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public RoleDto obtenerRolePorId(Long id) {
+    public RoleDTO obtenerRolePorId(Long id) {
         Role obj = roleRepository.findById(id).orElse(null);
         return convertEntityToDto(obj);
     }
 
-    public RoleDto actualizarRole(RoleDto roleDto, Long id) {
+    public RoleDTO actualizarRole(RoleDTO roleDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         Role objTemp = roleRepository.findById(id).orElse(null);
@@ -77,18 +77,18 @@ public class RoleService {
         }
     }
 
-    private RoleDto convertEntityToDto(Role role) {
+    private RoleDTO convertEntityToDto(Role role) {
         if (role != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            RoleDto roleDto = new RoleDto();
-            roleDto = modelMapper.map(role, RoleDto.class);
+            RoleDTO roleDto = new RoleDTO();
+            roleDto = modelMapper.map(role, RoleDTO.class);
             return roleDto;
         } else {
             return null;
         }
     }
 
-    private Role convertDtoToEntity(RoleDto roleDto) {
+    private Role convertDtoToEntity(RoleDTO roleDto) {
         if (roleDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             Role role = new Role();

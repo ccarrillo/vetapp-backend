@@ -1,17 +1,17 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.ProduccionLecheDto;
+import com.vetapp.dto.ProduccionLecheDTO;
 
 import java.util.ArrayList;
 
 public interface ProduccionLecheService {
-    ProduccionLecheDto guardarProduccionLeche(ProduccionLecheDto produccionLecheDto);
+    ProduccionLecheDTO guardarProduccionLeche(ProduccionLecheDTO produccionLecheDto);
 
-    ArrayList<ProduccionLecheDto> obtenerProduccionLeches();
+    ArrayList<ProduccionLecheDTO> obtenerProduccionLeches();
 
-    ProduccionLecheDto obtenerProduccionLechePorId(Long id);
+    ProduccionLecheDTO obtenerProduccionLechePorId(Long id);
 
-    ProduccionLecheDto actualizarProduccionLeche(ProduccionLecheDto produccionLecheDto, Long id);
+    ProduccionLecheDTO actualizarProduccionLeche(ProduccionLecheDTO produccionLecheDto, Long id);
 
     boolean eliminarProduccionLeche(Long id);
 }

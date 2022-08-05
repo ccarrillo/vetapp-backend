@@ -1,7 +1,7 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.EmployeeDto;
-import com.vetapp.dto.UserAuthDto;
+import com.vetapp.dto.EmployeeDTO;
+import com.vetapp.dto.UserAuthDTO;
 import com.vetapp.service.UserAuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -28,10 +28,10 @@ public class UserAuthController {
     @PostMapping("")
     @PreAuthorize("hasAuthority('SUPERUSUARIO')")
     @Operation(summary = "Create UserAuth", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserAuthDto.class)))})
-    public ResponseEntity<?> guardarUserAuth(@RequestBody UserAuthDto userAuthDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserAuthDTO.class)))})
+    public ResponseEntity<?> guardarUserAuth(@RequestBody UserAuthDTO userAuthDto) {
         try {
-            UserAuthDto obj = userAuthService.guardarUserAuth(userAuthDto);
+            UserAuthDTO obj = userAuthService.guardarUserAuth(userAuthDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -41,10 +41,10 @@ public class UserAuthController {
     @GetMapping("")
     @PreAuthorize("hasAuthority('SUPERUSUARIO')")
     @Operation(summary = "Read UserAuths", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserAuthDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserAuthDTO.class)))})
     public ResponseEntity<?> obtenerUserAuths() {
         try {
-            List<UserAuthDto> obj = userAuthService.obtenerUserAuths();
+            List<UserAuthDTO> obj = userAuthService.obtenerUserAuths();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -57,10 +57,10 @@ public class UserAuthController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('SUPERUSUARIO')")
     @Operation(summary = "Read UserAuth", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserAuthDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserAuthDTO.class)))})
     public ResponseEntity<?> obtenerUserAuthPorId(@PathVariable("id") Long id) {
         try {
-            UserAuthDto obj = userAuthService.obtenerUserAuthPorId(id);
+            UserAuthDTO obj = userAuthService.obtenerUserAuthPorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -74,10 +74,10 @@ public class UserAuthController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('SUPERUSUARIO')")
     @Operation(summary = "Update UserAuth", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserAuthDto.class)))})
-    public ResponseEntity<?> actualizarUserAuth(@RequestBody UserAuthDto userAuthDto, @PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserAuthDTO.class)))})
+    public ResponseEntity<?> actualizarUserAuth(@RequestBody UserAuthDTO userAuthDto, @PathVariable("id") Long id) {
         try {
-            UserAuthDto obj = userAuthService.actualizarUserAuth(userAuthDto, id);
+            UserAuthDTO obj = userAuthService.actualizarUserAuth(userAuthDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -91,8 +91,8 @@ public class UserAuthController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('SUPERUSUARIO')")
     @Operation(summary = "Delete UserAuth", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserAuthDto.class)))})
-    public ResponseEntity<EmployeeDto> eliminarUserAuth(@PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserAuthDTO.class)))})
+    public ResponseEntity<EmployeeDTO> eliminarUserAuth(@PathVariable("id") Long id) {
         try {
             Boolean obj = userAuthService.eliminarUserAuth(id);
             if (obj) {

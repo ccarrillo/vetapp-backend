@@ -1,7 +1,7 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.EnterpriseDto;
-import com.vetapp.service.EnterpriseServiceImpl;
+import com.vetapp.dto.EnterpriseDTO;
+import com.vetapp.service.EnterpriseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,14 +25,14 @@ public class EnterpriseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private EnterpriseServiceImpl enterpriseService;
+    private EnterpriseService enterpriseService;
 
     @PostMapping("")
     @Operation(summary = "Create Enterprise", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EnterpriseDto.class)))})
-    public ResponseEntity<?> guardarEmpresa(@RequestBody EnterpriseDto enterpriseDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EnterpriseDTO.class)))})
+    public ResponseEntity<?> guardarEmpresa(@RequestBody EnterpriseDTO enterpriseDto) {
         try {
-            EnterpriseDto obj = enterpriseService.guardarEmpresa(enterpriseDto);
+            EnterpriseDTO obj = enterpriseService.guardarEmpresa(enterpriseDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
@@ -42,10 +42,10 @@ public class EnterpriseController {
 
     @GetMapping("")
     @Operation(summary = "Read Enterprises", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EnterpriseDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EnterpriseDTO.class)))})
     public ResponseEntity<?> obtenerEmpresas() {
         try {
-            List<EnterpriseDto> obj = enterpriseService.obtenerEmpresas();
+            List<EnterpriseDTO> obj = enterpriseService.obtenerEmpresas();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -58,10 +58,10 @@ public class EnterpriseController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read Enterprise", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EnterpriseDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EnterpriseDTO.class)))})
     public ResponseEntity<?> obtenerEmpresaPorId(@PathVariable("id") Long id) {
         try {
-            EnterpriseDto obj = enterpriseService.obtenerEmpresaPorId(id);
+            EnterpriseDTO obj = enterpriseService.obtenerEmpresaPorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -75,10 +75,10 @@ public class EnterpriseController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update Enterprise", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EnterpriseDto.class)))})
-    public ResponseEntity<?> actualizarEmpresa(@RequestBody EnterpriseDto enterpriseDto, @PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EnterpriseDTO.class)))})
+    public ResponseEntity<?> actualizarEmpresa(@RequestBody EnterpriseDTO enterpriseDto, @PathVariable("id") Long id) {
         try {
-            EnterpriseDto obj = enterpriseService.actualizarEmpresa(enterpriseDto, id);
+            EnterpriseDTO obj = enterpriseService.actualizarEmpresa(enterpriseDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -92,8 +92,8 @@ public class EnterpriseController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Enterprise", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EnterpriseDto.class)))})
-    public ResponseEntity<EnterpriseDto> eliminarEmpresa(@PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EnterpriseDTO.class)))})
+    public ResponseEntity<EnterpriseDTO> eliminarEmpresa(@PathVariable("id") Long id) {
         try {
             Boolean obj = enterpriseService.eliminarEmpresa(id);
             if (obj) {

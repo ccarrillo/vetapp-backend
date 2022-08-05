@@ -1,18 +1,18 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.PesadoLecheDto;
+import com.vetapp.dto.PesadoLecheDTO;
 
 import java.util.ArrayList;
 
 public interface PesadoLecheService {
 
-    PesadoLecheDto guardarPesadoLeche(PesadoLecheDto pesadoLecheDto);
+    PesadoLecheDTO guardarPesadoLeche(PesadoLecheDTO pesadoLecheDto);
 
-    ArrayList<PesadoLecheDto> obtenerPesadoLeches();
+    ArrayList<PesadoLecheDTO> obtenerPesadoLeches();
 
-    PesadoLecheDto obtenerPesadoLechePorId(Long id);
+    PesadoLecheDTO obtenerPesadoLechePorId(Long id);
 
-    PesadoLecheDto actualizarPesadoLeche(PesadoLecheDto pesadoLecheDto, Long id);
+    PesadoLecheDTO actualizarPesadoLeche(PesadoLecheDTO pesadoLecheDto, Long id);
 
     boolean eliminarPesadoLeche(Long id);
 }

@@ -1,7 +1,7 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.RecordatorioEventoDto;
-import com.vetapp.service.RecordatorioEventoServiceImpl;
+import com.vetapp.dto.RecordatorioEventoDTO;
+import com.vetapp.service.RecordatorioEventoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,14 +25,14 @@ public class RecordatorioEventoController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private RecordatorioEventoServiceImpl recordatorioEventoService;
+    private RecordatorioEventoService recordatorioEventoService;
 
     @PostMapping("")
     @Operation(summary = "Create RecordatorioEvento", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDto.class)))})
-    public ResponseEntity<?> guardarRecordatorioEvento(@RequestBody RecordatorioEventoDto recordatorioEventoDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDTO.class)))})
+    public ResponseEntity<?> guardarRecordatorioEvento(@RequestBody RecordatorioEventoDTO recordatorioEventoDto) {
         try {
-            RecordatorioEventoDto obj = recordatorioEventoService.guardarRecordatorioEvento(recordatorioEventoDto);
+            RecordatorioEventoDTO obj = recordatorioEventoService.guardarRecordatorioEvento(recordatorioEventoDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
@@ -42,10 +42,10 @@ public class RecordatorioEventoController {
 
     @GetMapping("")
     @Operation(summary = "Read RecordatorioEventos", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDTO.class)))})
     public ResponseEntity<?> obtenerRecordatorioEventos() {
         try {
-            List<RecordatorioEventoDto> obj = recordatorioEventoService.obtenerRecordatorioEventos();
+            List<RecordatorioEventoDTO> obj = recordatorioEventoService.obtenerRecordatorioEventos();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -58,10 +58,10 @@ public class RecordatorioEventoController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read RecordatorioEvento", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDTO.class)))})
     public ResponseEntity<?> obtenerRecordatorioEventoPorId(@PathVariable("id") Long id) {
         try {
-            RecordatorioEventoDto obj = recordatorioEventoService.obtenerRecordatorioEventoPorId(id);
+            RecordatorioEventoDTO obj = recordatorioEventoService.obtenerRecordatorioEventoPorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -75,10 +75,10 @@ public class RecordatorioEventoController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update RecordatorioEvento", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDto.class)))})
-    public ResponseEntity<?> actualizarRecordatorioEvento(@RequestBody RecordatorioEventoDto recordatorioEventoDto, @PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDTO.class)))})
+    public ResponseEntity<?> actualizarRecordatorioEvento(@RequestBody RecordatorioEventoDTO recordatorioEventoDto, @PathVariable("id") Long id) {
         try {
-            RecordatorioEventoDto obj = recordatorioEventoService.actualizarRecordatorioEvento(recordatorioEventoDto, id);
+            RecordatorioEventoDTO obj = recordatorioEventoService.actualizarRecordatorioEvento(recordatorioEventoDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -92,8 +92,8 @@ public class RecordatorioEventoController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete RecordatorioEvento", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDto.class)))})
-    public ResponseEntity<RecordatorioEventoDto> eliminarRecordatorioEvento(@PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDTO.class)))})
+    public ResponseEntity<RecordatorioEventoDTO> eliminarRecordatorioEvento(@PathVariable("id") Long id) {
         try {
             Boolean obj = recordatorioEventoService.eliminarRecordatorioEvento(id);
             if (obj) {

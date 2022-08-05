@@ -2,7 +2,7 @@ package com.vetapp.dto;
 
 import java.util.Calendar;
 
-public class PesadoLecheDto extends BaseModelDto {
+public class PesadoLecheDTO extends BaseModelDTO {
 
     private Long id;
 

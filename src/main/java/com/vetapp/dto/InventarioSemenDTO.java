@@ -1,6 +1,6 @@
 package com.vetapp.dto;
 
-public class InventarioSemenDto extends BaseModelDto {
+public class InventarioSemenDTO extends BaseModelDTO {
 
     private Long id;
 

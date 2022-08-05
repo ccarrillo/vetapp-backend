@@ -1,7 +1,7 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.InventarioSemenDto;
-import com.vetapp.service.InventarioSemenServiceImpl;
+import com.vetapp.dto.InventarioSemenDTO;
+import com.vetapp.service.InventarioSemenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,14 +25,14 @@ public class InventarioSemenController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private InventarioSemenServiceImpl inventarioSemenService;
+    private InventarioSemenService inventarioSemenService;
 
     @PostMapping("")
     @Operation(summary = "Create InventarioSemen", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InventarioSemenDto.class)))})
-    public ResponseEntity<?> guardarInventarioSemen(@RequestBody InventarioSemenDto inventarioSemenDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InventarioSemenDTO.class)))})
+    public ResponseEntity<?> guardarInventarioSemen(@RequestBody InventarioSemenDTO inventarioSemenDto) {
         try {
-            InventarioSemenDto obj = inventarioSemenService.guardarInventarioSemen(inventarioSemenDto);
+            InventarioSemenDTO obj = inventarioSemenService.guardarInventarioSemen(inventarioSemenDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
@@ -42,10 +42,10 @@ public class InventarioSemenController {
 
     @GetMapping("")
     @Operation(summary = "Read InventarioSemens", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InventarioSemenDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InventarioSemenDTO.class)))})
     public ResponseEntity<?> obtenerInventarioSemens() {
         try {
-            List<InventarioSemenDto> obj = inventarioSemenService.obtenerInventarioSemens();
+            List<InventarioSemenDTO> obj = inventarioSemenService.obtenerInventarioSemens();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -58,10 +58,10 @@ public class InventarioSemenController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read InventarioSemen", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InventarioSemenDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InventarioSemenDTO.class)))})
     public ResponseEntity<?> obtenerInventarioSemenPorId(@PathVariable("id") Long id) {
         try {
-            InventarioSemenDto obj = inventarioSemenService.obtenerInventarioSemenPorId(id);
+            InventarioSemenDTO obj = inventarioSemenService.obtenerInventarioSemenPorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -75,10 +75,10 @@ public class InventarioSemenController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update InventarioSemen", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InventarioSemenDto.class)))})
-    public ResponseEntity<?> actualizarInventarioSemen(@RequestBody InventarioSemenDto inventarioSemenDto, @PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InventarioSemenDTO.class)))})
+    public ResponseEntity<?> actualizarInventarioSemen(@RequestBody InventarioSemenDTO inventarioSemenDto, @PathVariable("id") Long id) {
         try {
-            InventarioSemenDto obj = inventarioSemenService.actualizarInventarioSemen(inventarioSemenDto, id);
+            InventarioSemenDTO obj = inventarioSemenService.actualizarInventarioSemen(inventarioSemenDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -92,8 +92,8 @@ public class InventarioSemenController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete InventarioSemen", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InventarioSemenDto.class)))})
-    public ResponseEntity<InventarioSemenDto> eliminarInventarioSemen(@PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InventarioSemenDTO.class)))})
+    public ResponseEntity<InventarioSemenDTO> eliminarInventarioSemen(@PathVariable("id") Long id) {
         try {
             Boolean obj = inventarioSemenService.eliminarInventarioSemen(id);
             if (obj) {

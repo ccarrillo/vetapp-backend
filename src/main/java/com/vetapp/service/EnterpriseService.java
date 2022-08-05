@@ -1,18 +1,18 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.EnterpriseDto;
+import com.vetapp.dto.EnterpriseDTO;
 
 import java.util.ArrayList;
 
 public interface EnterpriseService {
 
-    EnterpriseDto guardarEmpresa(EnterpriseDto enterpriseDto);
+    EnterpriseDTO guardarEmpresa(EnterpriseDTO enterpriseDto);
 
-    ArrayList<EnterpriseDto> obtenerEmpresas();
+    ArrayList<EnterpriseDTO> obtenerEmpresas();
 
-    EnterpriseDto obtenerEmpresaPorId(Long id);
+    EnterpriseDTO obtenerEmpresaPorId(Long id);
 
-    EnterpriseDto actualizarEmpresa(EnterpriseDto employeeDto, Long id);
+    EnterpriseDTO actualizarEmpresa(EnterpriseDTO employeeDto, Long id);
 
     boolean eliminarEmpresa(Long id);
 

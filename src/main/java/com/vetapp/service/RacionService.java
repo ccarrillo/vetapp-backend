@@ -1,18 +1,18 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.RacionDto;
+import com.vetapp.dto.RacionDTO;
 
 import java.util.ArrayList;
 
 public interface RacionService {
 
-    RacionDto guardarRacion(RacionDto racionDto);
+    RacionDTO guardarRacion(RacionDTO racionDto);
 
-    ArrayList<RacionDto> obtenerRacions();
+    ArrayList<RacionDTO> obtenerRacions();
 
-    RacionDto obtenerRacionPorId(Long id);
+    RacionDTO obtenerRacionPorId(Long id);
 
-    RacionDto actualizarRacion(RacionDto racionDto, Long id);
+    RacionDTO actualizarRacion(RacionDTO racionDto, Long id);
 
     boolean eliminarRacion(Long id);
 

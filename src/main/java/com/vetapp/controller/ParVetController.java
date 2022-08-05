@@ -1,6 +1,6 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.ParVetDto;
+import com.vetapp.dto.ParVetDTO;
 import com.vetapp.service.PartVetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -28,10 +28,10 @@ public class ParVetController {
 
     @PostMapping("")
     @Operation(summary = "Create ParListValue", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDto.class)))})
-    public ResponseEntity<?> guardarParVet(@RequestBody ParVetDto parVetDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDTO.class)))})
+    public ResponseEntity<?> guardarParVet(@RequestBody ParVetDTO parVetDto) {
         try {
-            ParVetDto obj = parVetService.guardarParVet(parVetDto);
+            ParVetDTO obj = parVetService.guardarParVet(parVetDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
@@ -41,10 +41,10 @@ public class ParVetController {
 
     @GetMapping("")
     @Operation(summary = "Read ParListValues", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDTO.class)))})
     public ResponseEntity<?> obtenerParVet() {
         try {
-            List<ParVetDto> obj = parVetService.obtenerParVet();
+            List<ParVetDTO> obj = parVetService.obtenerParVet();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -57,10 +57,10 @@ public class ParVetController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read ParListValue", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDTO.class)))})
     public ResponseEntity<?> obtenerParVetPorId(@PathVariable("id") Long id) {
         try {
-            ParVetDto obj = parVetService.obtenerParVetPorId(id);
+            ParVetDTO obj = parVetService.obtenerParVetPorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -75,10 +75,10 @@ public class ParVetController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update ParListValue", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDto.class)))})
-    public ResponseEntity<?> actualizarParVet(@RequestBody ParVetDto parVetDto, @PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDTO.class)))})
+    public ResponseEntity<?> actualizarParVet(@RequestBody ParVetDTO parVetDto, @PathVariable("id") Long id) {
         try {
-            ParVetDto obj = parVetService.actualizarParVet(parVetDto, id);
+            ParVetDTO obj = parVetService.actualizarParVet(parVetDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -92,8 +92,8 @@ public class ParVetController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete ParListValue", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDto.class)))})
-    public ResponseEntity<ParVetDto> eliminarParVet(@PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDTO.class)))})
+    public ResponseEntity<ParVetDTO> eliminarParVet(@PathVariable("id") Long id) {
         try {
             Boolean obj = parVetService.eliminarParVet(id);
             if (obj) {

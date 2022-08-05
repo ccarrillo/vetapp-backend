@@ -1,7 +1,7 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.DetalleTipoEventoAnimalDto;
-import com.vetapp.service.DetalleTipoEventoAnimalServiceImpl;
+import com.vetapp.dto.DetalleTipoEventoAnimalDTO;
+import com.vetapp.service.DetalleTipoEventoAnimalService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,14 +25,14 @@ public class DetalleTipoEventoAnimalController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private DetalleTipoEventoAnimalServiceImpl detalleTipoEventoAnimalService;
+    private DetalleTipoEventoAnimalService detalleTipoEventoAnimalService;
 
     @PostMapping("")
     @Operation(summary = "Create DetalleTipoEventoAnimal", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetalleTipoEventoAnimalDto.class)))})
-    public ResponseEntity<?> guardarDetalleTipoEventoAnimal(@RequestBody DetalleTipoEventoAnimalDto detalleTipoEventoAnimalDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetalleTipoEventoAnimalDTO.class)))})
+    public ResponseEntity<?> guardarDetalleTipoEventoAnimal(@RequestBody DetalleTipoEventoAnimalDTO detalleTipoEventoAnimalDto) {
         try {
-            DetalleTipoEventoAnimalDto obj = detalleTipoEventoAnimalService.guardarDetalleTipoEventoAnimal(detalleTipoEventoAnimalDto);
+            DetalleTipoEventoAnimalDTO obj = detalleTipoEventoAnimalService.guardarDetalleTipoEventoAnimal(detalleTipoEventoAnimalDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
@@ -42,10 +42,10 @@ public class DetalleTipoEventoAnimalController {
 
     @GetMapping("")
     @Operation(summary = "Read DetalleTipoEventoAnimals", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetalleTipoEventoAnimalDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetalleTipoEventoAnimalDTO.class)))})
     public ResponseEntity<?> obtenerDetalleTipoEventoAnimals() {
         try {
-            List<DetalleTipoEventoAnimalDto> obj = detalleTipoEventoAnimalService.obtenerDetalleTipoEventoAnimals();
+            List<DetalleTipoEventoAnimalDTO> obj = detalleTipoEventoAnimalService.obtenerDetalleTipoEventoAnimals();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -58,10 +58,10 @@ public class DetalleTipoEventoAnimalController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read DetalleTipoEventoAnimal", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetalleTipoEventoAnimalDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetalleTipoEventoAnimalDTO.class)))})
     public ResponseEntity<?> obtenerDetalleTipoEventoAnimalPorId(@PathVariable("id") Long id) {
         try {
-            DetalleTipoEventoAnimalDto obj = detalleTipoEventoAnimalService.obtenerDetalleTipoEventoAnimalPorId(id);
+            DetalleTipoEventoAnimalDTO obj = detalleTipoEventoAnimalService.obtenerDetalleTipoEventoAnimalPorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -75,10 +75,10 @@ public class DetalleTipoEventoAnimalController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update DetalleTipoEventoAnimal", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetalleTipoEventoAnimalDto.class)))})
-    public ResponseEntity<?> actualizarDetalleTipoEventoAnimal(@RequestBody DetalleTipoEventoAnimalDto detalleTipoEventoAnimalDto, @PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetalleTipoEventoAnimalDTO.class)))})
+    public ResponseEntity<?> actualizarDetalleTipoEventoAnimal(@RequestBody DetalleTipoEventoAnimalDTO detalleTipoEventoAnimalDto, @PathVariable("id") Long id) {
         try {
-            DetalleTipoEventoAnimalDto obj = detalleTipoEventoAnimalService.actualizarDetalleTipoEventoAnimal(detalleTipoEventoAnimalDto, id);
+            DetalleTipoEventoAnimalDTO obj = detalleTipoEventoAnimalService.actualizarDetalleTipoEventoAnimal(detalleTipoEventoAnimalDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -92,8 +92,8 @@ public class DetalleTipoEventoAnimalController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete DetalleTipoEventoAnimal", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetalleTipoEventoAnimalDto.class)))})
-    public ResponseEntity<DetalleTipoEventoAnimalDto> eliminarDetalleTipoEventoAnimal(@PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetalleTipoEventoAnimalDTO.class)))})
+    public ResponseEntity<DetalleTipoEventoAnimalDTO> eliminarDetalleTipoEventoAnimal(@PathVariable("id") Long id) {
         try {
             Boolean obj = detalleTipoEventoAnimalService.eliminarDetalleTipoEventoAnimal(id);
             if (obj) {

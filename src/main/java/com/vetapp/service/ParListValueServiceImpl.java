@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.ParListValueDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.ParListValueDto;
+import com.vetapp.dto.ParListValueDTO;
 import com.vetapp.model.ParListValue;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class ParListValueServiceImpl implements ParListValueService{
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public ParListValueDto guardarParListValue(ParListValueDto parListValueDto) {
+    public ParListValueDTO guardarParListValue(ParListValueDTO parListValueDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -45,19 +45,19 @@ public class ParListValueServiceImpl implements ParListValueService{
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<ParListValueDto> obtenerParListValues() {
-        return (ArrayList<ParListValueDto>) parListValueDao.buscarTodos(new ParListValue())
+    public ArrayList<ParListValueDTO> obtenerParListValues() {
+        return (ArrayList<ParListValueDTO>) parListValueDao.buscarTodos(new ParListValue())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public ParListValueDto obtenerParListValuePorId(Long id) {
+    public ParListValueDTO obtenerParListValuePorId(Long id) {
         ParListValue obj = parListValueDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public ParListValueDto actualizarParListValue(ParListValueDto parListValueDto, Long id) {
+    public ParListValueDTO actualizarParListValue(ParListValueDTO parListValueDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         ParListValue objTemp = parListValueDao.buscarPorId(id);
@@ -84,18 +84,18 @@ public class ParListValueServiceImpl implements ParListValueService{
         }
     }
 
-    private ParListValueDto convertEntityToDto(ParListValue parListValue) {
+    private ParListValueDTO convertEntityToDto(ParListValue parListValue) {
         if (parListValue != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            ParListValueDto parListValueDto = new ParListValueDto();
-            parListValueDto = modelMapper.map(parListValue, ParListValueDto.class);
+            ParListValueDTO parListValueDto = new ParListValueDTO();
+            parListValueDto = modelMapper.map(parListValue, ParListValueDTO.class);
             return parListValueDto;
         } else {
             return null;
         }
     }
 
-    private ParListValue convertDtoToEntity(ParListValueDto parListValueDto) {
+    private ParListValue convertDtoToEntity(ParListValueDTO parListValueDto) {
         if (parListValueDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             ParListValue parListValue = new ParListValue();

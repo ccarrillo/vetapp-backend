@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.EnterpriseDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.EnterpriseDto;
+import com.vetapp.dto.EnterpriseDTO;
 import com.vetapp.model.Enterprise;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public EnterpriseDto guardarEmpresa(EnterpriseDto enterpriseDto) {
+    public EnterpriseDTO guardarEmpresa(EnterpriseDTO enterpriseDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -45,19 +45,19 @@ public class EnterpriseServiceImpl implements EnterpriseService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<EnterpriseDto> obtenerEmpresas() {
-        return (ArrayList<EnterpriseDto>) enterpriseDao.buscarTodos(new Enterprise())
+    public ArrayList<EnterpriseDTO> obtenerEmpresas() {
+        return (ArrayList<EnterpriseDTO>) enterpriseDao.buscarTodos(new Enterprise())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public EnterpriseDto obtenerEmpresaPorId(Long id) {
+    public EnterpriseDTO obtenerEmpresaPorId(Long id) {
         Enterprise obj = enterpriseDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public EnterpriseDto actualizarEmpresa(EnterpriseDto employeeDto, Long id) {
+    public EnterpriseDTO actualizarEmpresa(EnterpriseDTO employeeDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         Enterprise objTemp = enterpriseDao.buscarPorId(id);
@@ -83,18 +83,18 @@ public class EnterpriseServiceImpl implements EnterpriseService {
         }
     }
 
-    private EnterpriseDto convertEntityToDto(Enterprise enterprise) {
+    private EnterpriseDTO convertEntityToDto(Enterprise enterprise) {
         if (enterprise != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            EnterpriseDto enterpriseDto = new EnterpriseDto();
-            enterpriseDto = modelMapper.map(enterprise, EnterpriseDto.class);
+            EnterpriseDTO enterpriseDto = new EnterpriseDTO();
+            enterpriseDto = modelMapper.map(enterprise, EnterpriseDTO.class);
             return enterpriseDto;
         } else {
             return null;
         }
     }
 
-    private Enterprise convertDtoToEntity(EnterpriseDto enterpriseDto) {
+    private Enterprise convertDtoToEntity(EnterpriseDTO enterpriseDto) {
         if (enterpriseDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             Enterprise enterprise = new Enterprise();

@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.RecordatorioEventoDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.RecordatorioEventoDto;
+import com.vetapp.dto.RecordatorioEventoDTO;
 import com.vetapp.model.RecordatorioEvento;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class RecordatorioEventoServiceImpl implements RecordatorioEventoService 
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public RecordatorioEventoDto guardarRecordatorioEvento(RecordatorioEventoDto recordatorioEventoDto) {
+    public RecordatorioEventoDTO guardarRecordatorioEvento(RecordatorioEventoDTO recordatorioEventoDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -45,19 +45,19 @@ public class RecordatorioEventoServiceImpl implements RecordatorioEventoService 
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<RecordatorioEventoDto> obtenerRecordatorioEventos() {
-        return (ArrayList<RecordatorioEventoDto>) recordatorioEventoDao.buscarTodos(new RecordatorioEvento())
+    public ArrayList<RecordatorioEventoDTO> obtenerRecordatorioEventos() {
+        return (ArrayList<RecordatorioEventoDTO>) recordatorioEventoDao.buscarTodos(new RecordatorioEvento())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public RecordatorioEventoDto obtenerRecordatorioEventoPorId(Long id) {
+    public RecordatorioEventoDTO obtenerRecordatorioEventoPorId(Long id) {
         RecordatorioEvento obj = recordatorioEventoDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public RecordatorioEventoDto actualizarRecordatorioEvento(RecordatorioEventoDto recordatorioEventoDto, Long id) {
+    public RecordatorioEventoDTO actualizarRecordatorioEvento(RecordatorioEventoDTO recordatorioEventoDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         RecordatorioEvento objTemp = recordatorioEventoDao.buscarPorId(id);
@@ -83,18 +83,18 @@ public class RecordatorioEventoServiceImpl implements RecordatorioEventoService 
         }
     }
 
-    private RecordatorioEventoDto convertEntityToDto(RecordatorioEvento recordatorioEvento) {
+    private RecordatorioEventoDTO convertEntityToDto(RecordatorioEvento recordatorioEvento) {
         if (recordatorioEvento != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            RecordatorioEventoDto recordatorioEventoDto = new RecordatorioEventoDto();
-            recordatorioEventoDto = modelMapper.map(recordatorioEvento, RecordatorioEventoDto.class);
+            RecordatorioEventoDTO recordatorioEventoDto = new RecordatorioEventoDTO();
+            recordatorioEventoDto = modelMapper.map(recordatorioEvento, RecordatorioEventoDTO.class);
             return recordatorioEventoDto;
         } else {
             return null;
         }
     }
 
-    private RecordatorioEvento convertDtoToEntity(RecordatorioEventoDto recordatorioEventoDto) {
+    private RecordatorioEvento convertDtoToEntity(RecordatorioEventoDTO recordatorioEventoDto) {
         if (recordatorioEventoDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             RecordatorioEvento recordatorioEvento = new RecordatorioEvento();

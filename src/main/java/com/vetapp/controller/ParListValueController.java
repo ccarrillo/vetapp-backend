@@ -1,7 +1,7 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.ParListValueDto;
-import com.vetapp.service.ParListValueServiceImpl;
+import com.vetapp.dto.ParListValueDTO;
+import com.vetapp.service.ParListValueService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,14 +25,14 @@ public class ParListValueController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private ParListValueServiceImpl parListValueService;
+    private ParListValueService parListValueService;
 
     @PostMapping("")
     @Operation(summary = "Create ParListValue", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
-    public ResponseEntity<?> guardarParListValue(@RequestBody ParListValueDto parListValueDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDTO.class)))})
+    public ResponseEntity<?> guardarParListValue(@RequestBody ParListValueDTO parListValueDto) {
         try {
-            ParListValueDto obj = parListValueService.guardarParListValue(parListValueDto);
+            ParListValueDTO obj = parListValueService.guardarParListValue(parListValueDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
@@ -42,10 +42,10 @@ public class ParListValueController {
 
     @GetMapping("")
     @Operation(summary = "Read ParListValues", responses = {
-    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
+    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDTO.class)))})
     public ResponseEntity<?> obtenerParListValues() {
         try {
-            List<ParListValueDto> obj = parListValueService.obtenerParListValues();
+            List<ParListValueDTO> obj = parListValueService.obtenerParListValues();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -58,10 +58,10 @@ public class ParListValueController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read ParListValue", responses = {
-    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
+    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDTO.class)))})
     public ResponseEntity<?> obtenerParListValuePorId(@PathVariable("id") Long id) {
         try {
-            ParListValueDto obj = parListValueService.obtenerParListValuePorId(id);
+            ParListValueDTO obj = parListValueService.obtenerParListValuePorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -77,10 +77,10 @@ public class ParListValueController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update ParListValue", responses = {
-    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
-    public ResponseEntity<?> actualizarParListValue(@RequestBody ParListValueDto parListValueDto, @PathVariable("id") Long id) {
+    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDTO.class)))})
+    public ResponseEntity<?> actualizarParListValue(@RequestBody ParListValueDTO parListValueDto, @PathVariable("id") Long id) {
         try {
-            ParListValueDto obj = parListValueService.actualizarParListValue(parListValueDto, id);
+            ParListValueDTO obj = parListValueService.actualizarParListValue(parListValueDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -94,8 +94,8 @@ public class ParListValueController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete ParListValue", responses = {
-    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDto.class)))})
-    public ResponseEntity<ParListValueDto> eliminarParListValue(@PathVariable("id") Long id) {
+    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParListValueDTO.class)))})
+    public ResponseEntity<ParListValueDTO> eliminarParListValue(@PathVariable("id") Long id) {
         try {
             Boolean obj = parListValueService.eliminarParListValue(id);
             if (obj) {

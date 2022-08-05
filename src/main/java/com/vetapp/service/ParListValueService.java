@@ -1,18 +1,18 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.ParListValueDto;
+import com.vetapp.dto.ParListValueDTO;
 
 import java.util.ArrayList;
 
 public interface ParListValueService {
 
-    ParListValueDto guardarParListValue(ParListValueDto parListValueDto);
+    ParListValueDTO guardarParListValue(ParListValueDTO parListValueDto);
 
-    ArrayList<ParListValueDto> obtenerParListValues();
+    ArrayList<ParListValueDTO> obtenerParListValues();
 
-    ParListValueDto obtenerParListValuePorId(Long id);
+    ParListValueDTO obtenerParListValuePorId(Long id);
 
-    ParListValueDto actualizarParListValue(ParListValueDto parListValueDto, Long id);
+    ParListValueDTO actualizarParListValue(ParListValueDTO parListValueDto, Long id);
 
     boolean eliminarParListValue(Long id);
 

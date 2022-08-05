@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.AnimalDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.AnimalDto;
+import com.vetapp.dto.AnimalDTO;
 import com.vetapp.model.Animal;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class AnimalServiceImpl implements AnimalService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public AnimalDto guardarAnimal(AnimalDto animalDto) {
+    public AnimalDTO guardarAnimal(AnimalDTO animalDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         animalDto.setUserCreation(user.getId());
@@ -41,25 +41,25 @@ public class AnimalServiceImpl implements AnimalService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<AnimalDto> obtenerAnimals() {
-        return (ArrayList<AnimalDto>) animalDao.buscarTodos(new Animal())
+    public ArrayList<AnimalDTO> obtenerAnimals() {
+        return (ArrayList<AnimalDTO>) animalDao.buscarTodos(new Animal())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
-    public ArrayList<AnimalDto> obtenerAnimalBySexes(String sexo) {
-        return (ArrayList<AnimalDto>) animalDao.obtenerAnimalBySexes(sexo)
+    public ArrayList<AnimalDTO> obtenerAnimalBySexes(String sexo) {
+        return (ArrayList<AnimalDTO>) animalDao.obtenerAnimalBySexes(sexo)
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public AnimalDto obtenerAnimalPorId(Long id) {
+    public AnimalDTO obtenerAnimalPorId(Long id) {
         Animal obj = animalDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public AnimalDto actualizarAnimal(AnimalDto employeeDto, Long id) {
+    public AnimalDTO actualizarAnimal(AnimalDTO employeeDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         Animal objTemp = animalDao.buscarPorId(id);
@@ -85,18 +85,18 @@ public class AnimalServiceImpl implements AnimalService {
         }
     }
 
-    private AnimalDto convertEntityToDto(Animal animal) {
+    private AnimalDTO convertEntityToDto(Animal animal) {
         if (animal != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            AnimalDto animalDto = new AnimalDto();
-            animalDto = modelMapper.map(animal, AnimalDto.class);
+            AnimalDTO animalDto = new AnimalDTO();
+            animalDto = modelMapper.map(animal, AnimalDTO.class);
             return animalDto;
         } else {
             return null;
         }
     }
 
-    private Animal convertDtoToEntity(AnimalDto animalDto) {
+    private Animal convertDtoToEntity(AnimalDTO animalDto) {
         if (animalDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             Animal animal = new Animal();

@@ -1,6 +1,6 @@
 package com.vetapp.dto;
 
-public class SubsidiaryDto extends BaseModelDto {
+public class SubsidiaryDTO extends BaseModelDTO {
 
     private Long id;
 

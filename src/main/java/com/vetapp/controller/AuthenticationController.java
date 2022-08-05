@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.RoleDto;
-import com.vetapp.dto.UserRoleDto;
+import com.vetapp.dto.RoleDTO;
+import com.vetapp.dto.UserRoleDTO;
 import com.vetapp.service.RoleService;
 import com.vetapp.service.UserRoleService;
 import com.vetapp.util.UserRoleResponse;
@@ -83,11 +83,11 @@ public class AuthenticationController {
             response.setToken_type("Bearer");
 
             UserAuth userAuth = userAuthRepository.findByEmail(user.getUsername());
-            List<UserRoleDto> userRoleDtos = userRoleService.obtenerUserRolePorUserId(userAuth.getId());
+            List<UserRoleDTO> userRoleDtos = userRoleService.obtenerUserRolePorUserId(userAuth.getId());
             List<UserRoleResponse> listRolTmp = new ArrayList<>();
-            for (UserRoleDto ur: userRoleDtos) {
+            for (UserRoleDTO ur: userRoleDtos) {
                 UserRoleResponse urrTemp = new UserRoleResponse();
-                RoleDto roleDto = roleService.obtenerRolePorId(ur.getRoleId());
+                RoleDTO roleDto = roleService.obtenerRolePorId(ur.getRoleId());
                 urrTemp.setId(roleDto.getId());
                 urrTemp.setName(roleDto.getName());
                 listRolTmp.add(urrTemp);

@@ -1,7 +1,7 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.ProduccionLecheDto;
-import com.vetapp.service.ProduccionLecheServiceImpl;
+import com.vetapp.dto.ProduccionLecheDTO;
+import com.vetapp.service.ProduccionLecheService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,14 +25,14 @@ public class ProduccionLecheController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private ProduccionLecheServiceImpl produccionLecheService;
+    private ProduccionLecheService produccionLecheService;
 
     @PostMapping("")
     @Operation(summary = "Create ProduccionLeche", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProduccionLecheDto.class)))})
-    public ResponseEntity<?> guardarProduccionLeche(@RequestBody ProduccionLecheDto produccionLecheDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProduccionLecheDTO.class)))})
+    public ResponseEntity<?> guardarProduccionLeche(@RequestBody ProduccionLecheDTO produccionLecheDto) {
         try {
-            ProduccionLecheDto obj = produccionLecheService.guardarProduccionLeche(produccionLecheDto);
+            ProduccionLecheDTO obj = produccionLecheService.guardarProduccionLeche(produccionLecheDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
@@ -42,10 +42,10 @@ public class ProduccionLecheController {
 
     @GetMapping("")
     @Operation(summary = "Read ProduccionLeches", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProduccionLecheDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProduccionLecheDTO.class)))})
     public ResponseEntity<?> obtenerProduccionLeches() {
         try {
-            List<ProduccionLecheDto> obj = produccionLecheService.obtenerProduccionLeches();
+            List<ProduccionLecheDTO> obj = produccionLecheService.obtenerProduccionLeches();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -58,10 +58,10 @@ public class ProduccionLecheController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read ProduccionLeche", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProduccionLecheDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProduccionLecheDTO.class)))})
     public ResponseEntity<?> obtenerProduccionLechePorId(@PathVariable("id") Long id) {
         try {
-            ProduccionLecheDto obj = produccionLecheService.obtenerProduccionLechePorId(id);
+            ProduccionLecheDTO obj = produccionLecheService.obtenerProduccionLechePorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -75,10 +75,10 @@ public class ProduccionLecheController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update ProduccionLeche", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProduccionLecheDto.class)))})
-    public ResponseEntity<?> actualizarProduccionLeche(@RequestBody ProduccionLecheDto produccionLecheDto, @PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProduccionLecheDTO.class)))})
+    public ResponseEntity<?> actualizarProduccionLeche(@RequestBody ProduccionLecheDTO produccionLecheDto, @PathVariable("id") Long id) {
         try {
-            ProduccionLecheDto obj = produccionLecheService.actualizarProduccionLeche(produccionLecheDto, id);
+            ProduccionLecheDTO obj = produccionLecheService.actualizarProduccionLeche(produccionLecheDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -92,8 +92,8 @@ public class ProduccionLecheController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete ProduccionLeche", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProduccionLecheDto.class)))})
-    public ResponseEntity<ProduccionLecheDto> eliminarProduccionLeche(@PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProduccionLecheDTO.class)))})
+    public ResponseEntity<ProduccionLecheDTO> eliminarProduccionLeche(@PathVariable("id") Long id) {
         try {
             Boolean obj = produccionLecheService.eliminarProduccionLeche(id);
             if (obj) {

@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.SubsidiaryDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.SubsidiaryDto;
+import com.vetapp.dto.SubsidiaryDTO;
 import com.vetapp.model.Subsidiary;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class SubsidiaryServiceImpl implements SubsidiaryService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public SubsidiaryDto guardarSubsidiary(SubsidiaryDto subsidiaryDto) {
+    public SubsidiaryDTO guardarSubsidiary(SubsidiaryDTO subsidiaryDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -45,19 +45,19 @@ public class SubsidiaryServiceImpl implements SubsidiaryService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<SubsidiaryDto> obtenerSubsidiarys() {
-        return (ArrayList<SubsidiaryDto>) subsidiaryDao.buscarTodos(new Subsidiary())
+    public ArrayList<SubsidiaryDTO> obtenerSubsidiarys() {
+        return (ArrayList<SubsidiaryDTO>) subsidiaryDao.buscarTodos(new Subsidiary())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public SubsidiaryDto obtenerSubsidiaryPorId(Long id) {
+    public SubsidiaryDTO obtenerSubsidiaryPorId(Long id) {
         Subsidiary obj = subsidiaryDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public SubsidiaryDto actualizarSubsidiary(SubsidiaryDto subsidiaryDto, Long id) {
+    public SubsidiaryDTO actualizarSubsidiary(SubsidiaryDTO subsidiaryDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         Subsidiary objTemp = subsidiaryDao.buscarPorId(id);
@@ -83,18 +83,18 @@ public class SubsidiaryServiceImpl implements SubsidiaryService {
         }
     }
 
-    private SubsidiaryDto convertEntityToDto(Subsidiary subsidiary) {
+    private SubsidiaryDTO convertEntityToDto(Subsidiary subsidiary) {
         if (subsidiary != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            SubsidiaryDto subsidiaryDto = new SubsidiaryDto();
-            subsidiaryDto = modelMapper.map(subsidiary, SubsidiaryDto.class);
+            SubsidiaryDTO subsidiaryDto = new SubsidiaryDTO();
+            subsidiaryDto = modelMapper.map(subsidiary, SubsidiaryDTO.class);
             return subsidiaryDto;
         } else {
             return null;
         }
     }
 
-    private Subsidiary convertDtoToEntity(SubsidiaryDto subsidiaryDto) {
+    private Subsidiary convertDtoToEntity(SubsidiaryDTO subsidiaryDto) {
         if (subsidiaryDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             Subsidiary subsidiary = new Subsidiary();

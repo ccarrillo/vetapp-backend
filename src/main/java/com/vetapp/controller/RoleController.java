@@ -1,6 +1,6 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.RoleDto;
+import com.vetapp.dto.RoleDTO;
 import com.vetapp.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -29,10 +29,10 @@ public class RoleController {
 
     @PostMapping("")
     @Operation(summary = "Create Role", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDto.class)))})
-    public ResponseEntity<?> guardarRole(@RequestBody RoleDto roleDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class)))})
+    public ResponseEntity<?> guardarRole(@RequestBody RoleDTO roleDto) {
         try {
-            RoleDto obj = roleService.guardarRole(roleDto);
+            RoleDTO obj = roleService.guardarRole(roleDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
@@ -42,10 +42,10 @@ public class RoleController {
 
     @GetMapping("")
     @Operation(summary = "Read Roles", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class)))})
     public ResponseEntity<?> obtenerRoles() {
         try {
-            List<RoleDto> obj = roleService.obtenerRoles();
+            List<RoleDTO> obj = roleService.obtenerRoles();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -58,10 +58,10 @@ public class RoleController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read Role", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class)))})
     public ResponseEntity<?> obtenerRolePorId(@PathVariable("id") Long id) {
         try {
-            RoleDto obj = roleService.obtenerRolePorId(id);
+            RoleDTO obj = roleService.obtenerRolePorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -75,10 +75,10 @@ public class RoleController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update Role", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDto.class)))})
-    public ResponseEntity<?> actualizarRole(@RequestBody RoleDto roleDto, @PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class)))})
+    public ResponseEntity<?> actualizarRole(@RequestBody RoleDTO roleDto, @PathVariable("id") Long id) {
         try {
-            RoleDto obj = roleService.actualizarRole(roleDto, id);
+            RoleDTO obj = roleService.actualizarRole(roleDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -92,8 +92,8 @@ public class RoleController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Role", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDto.class)))})
-    public ResponseEntity<RoleDto> eliminarRole(@PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class)))})
+    public ResponseEntity<RoleDTO> eliminarRole(@PathVariable("id") Long id) {
         try {
             Boolean obj = roleService.eliminarRole(id);
             if (obj) {

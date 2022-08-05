@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.RacionDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.RacionDto;
+import com.vetapp.dto.RacionDTO;
 import com.vetapp.model.Racion;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class RacionServiceImpl implements RacionService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public RacionDto guardarRacion(RacionDto racionDto) {
+    public RacionDTO guardarRacion(RacionDTO racionDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -45,19 +45,19 @@ public class RacionServiceImpl implements RacionService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<RacionDto> obtenerRacions() {
-        return (ArrayList<RacionDto>) racionDao.buscarTodos(new Racion())
+    public ArrayList<RacionDTO> obtenerRacions() {
+        return (ArrayList<RacionDTO>) racionDao.buscarTodos(new Racion())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public RacionDto obtenerRacionPorId(Long id) {
+    public RacionDTO obtenerRacionPorId(Long id) {
         Racion obj = racionDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public RacionDto actualizarRacion(RacionDto racionDto, Long id) {
+    public RacionDTO actualizarRacion(RacionDTO racionDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         Racion objTemp = racionDao.buscarPorId(id);
@@ -83,18 +83,18 @@ public class RacionServiceImpl implements RacionService {
         }
     }
 
-    private RacionDto convertEntityToDto(Racion racion) {
+    private RacionDTO convertEntityToDto(Racion racion) {
         if (racion != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            RacionDto racionDto = new RacionDto();
-            racionDto = modelMapper.map(racion, RacionDto.class);
+            RacionDTO racionDto = new RacionDTO();
+            racionDto = modelMapper.map(racion, RacionDTO.class);
             return racionDto;
         } else {
             return null;
         }
     }
 
-    private Racion convertDtoToEntity(RacionDto racionDto) {
+    private Racion convertDtoToEntity(RacionDTO racionDto) {
         if (racionDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             Racion racion = new Racion();

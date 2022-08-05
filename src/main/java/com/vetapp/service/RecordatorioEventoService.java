@@ -1,18 +1,18 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.RecordatorioEventoDto;
+import com.vetapp.dto.RecordatorioEventoDTO;
 
 import java.util.ArrayList;
 
 public interface RecordatorioEventoService {
 
-    RecordatorioEventoDto guardarRecordatorioEvento(RecordatorioEventoDto recordatorioEventoDto);
+    RecordatorioEventoDTO guardarRecordatorioEvento(RecordatorioEventoDTO recordatorioEventoDto);
 
-    ArrayList<RecordatorioEventoDto> obtenerRecordatorioEventos();
+    ArrayList<RecordatorioEventoDTO> obtenerRecordatorioEventos();
 
-    RecordatorioEventoDto obtenerRecordatorioEventoPorId(Long id);
+    RecordatorioEventoDTO obtenerRecordatorioEventoPorId(Long id);
 
-    RecordatorioEventoDto actualizarRecordatorioEvento(RecordatorioEventoDto recordatorioEventoDto, Long id);
+    RecordatorioEventoDTO actualizarRecordatorioEvento(RecordatorioEventoDTO recordatorioEventoDto, Long id);
 
     boolean eliminarRecordatorioEvento(Long id);
 }

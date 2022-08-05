@@ -1,7 +1,7 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.EmployeeDto;
-import com.vetapp.service.EmployeeServiceImpl;
+import com.vetapp.dto.EmployeeDTO;
+import com.vetapp.service.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,14 +25,14 @@ public class EmployeeController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private EmployeeServiceImpl employeeService;
+    private EmployeeService employeeService;
 
     @PostMapping("")
     @Operation(summary = "Create Employee", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDto.class)))})
-    public ResponseEntity<?> guardarEmpleado(@RequestBody EmployeeDto employeeDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDTO.class)))})
+    public ResponseEntity<?> guardarEmpleado(@RequestBody EmployeeDTO employeeDto) {
         try {
-            EmployeeDto obj = employeeService.guardarEmpleado(employeeDto);
+            EmployeeDTO obj = employeeService.guardarEmpleado(employeeDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
@@ -42,10 +42,10 @@ public class EmployeeController {
 
     @GetMapping("")
     @Operation(summary = "Read Employees", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDTO.class)))})
     public ResponseEntity<?> obtenerEmpleados() {
         try {
-            List<EmployeeDto> obj = employeeService.obtenerEmpleados();
+            List<EmployeeDTO> obj = employeeService.obtenerEmpleados();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -58,10 +58,10 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read Employee", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDTO.class)))})
     public ResponseEntity<?> obtenerEmpleadoPorId(@PathVariable("id") Long id) {
         try {
-            EmployeeDto obj = employeeService.obtenerEmpleadoPorId(id);
+            EmployeeDTO obj = employeeService.obtenerEmpleadoPorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -75,10 +75,10 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update Employee", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDto.class)))})
-    public ResponseEntity<?> actualizarEmpleado(@RequestBody EmployeeDto employeeDto, @PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDTO.class)))})
+    public ResponseEntity<?> actualizarEmpleado(@RequestBody EmployeeDTO employeeDto, @PathVariable("id") Long id) {
         try {
-            EmployeeDto obj = employeeService.actualizarEmpleado(employeeDto, id);
+            EmployeeDTO obj = employeeService.actualizarEmpleado(employeeDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -92,8 +92,8 @@ public class EmployeeController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Employee", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDto.class)))})
-    public ResponseEntity<EmployeeDto> eliminarEmpleado(@PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDTO.class)))})
+    public ResponseEntity<EmployeeDTO> eliminarEmpleado(@PathVariable("id") Long id) {
         try {
             Boolean obj = employeeService.eliminarEmpleado(id);
             if (obj) {

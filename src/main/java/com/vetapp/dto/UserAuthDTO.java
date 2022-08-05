@@ -1,6 +1,6 @@
 package com.vetapp.dto;
 
-public class UserAuthDto extends BaseModelDto {
+public class UserAuthDTO extends BaseModelDTO {
 
     private Long id;
 

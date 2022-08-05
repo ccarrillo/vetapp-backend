@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.EmployeeDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.EmployeeDto;
+import com.vetapp.dto.EmployeeDTO;
 import com.vetapp.model.Employee;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public EmployeeDto guardarEmpleado(EmployeeDto employeeDto) {
+    public EmployeeDTO guardarEmpleado(EmployeeDTO employeeDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -44,19 +44,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<EmployeeDto> obtenerEmpleados() {
-        return (ArrayList<EmployeeDto>) employeeDao.buscarTodos(new Employee())
+    public ArrayList<EmployeeDTO> obtenerEmpleados() {
+        return (ArrayList<EmployeeDTO>) employeeDao.buscarTodos(new Employee())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public EmployeeDto obtenerEmpleadoPorId(Long id) {
+    public EmployeeDTO obtenerEmpleadoPorId(Long id) {
         Employee obj = employeeDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public EmployeeDto actualizarEmpleado(EmployeeDto employeeDto, Long id) {
+    public EmployeeDTO actualizarEmpleado(EmployeeDTO employeeDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         Employee objTemp = employeeDao.buscarPorId(id);
@@ -82,18 +82,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
-    private EmployeeDto convertEntityToDto(Employee employee) {
+    private EmployeeDTO convertEntityToDto(Employee employee) {
         if (employee != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            EmployeeDto employeeDto = new EmployeeDto();
-            employeeDto = modelMapper.map(employee, EmployeeDto.class);
+            EmployeeDTO employeeDto = new EmployeeDTO();
+            employeeDto = modelMapper.map(employee, EmployeeDTO.class);
             return employeeDto;
         } else {
             return null;
         }
     }
 
-    private Employee convertDtoToEntity(EmployeeDto employeeDto) {
+    private Employee convertDtoToEntity(EmployeeDTO employeeDto) {
         if (employeeDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             Employee employee = new Employee();

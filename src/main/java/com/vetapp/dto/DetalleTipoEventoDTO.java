@@ -1,6 +1,6 @@
 package com.vetapp.dto;
 
-public class DetalleTipoEventoDto extends BaseModelDto {
+public class DetalleTipoEventoDTO extends BaseModelDTO {
 
 
     private Long id;

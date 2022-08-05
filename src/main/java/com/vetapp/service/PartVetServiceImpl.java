@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.ParVetDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.ParVetDto;
+import com.vetapp.dto.ParVetDTO;
 import com.vetapp.model.ParVet;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class PartVetServiceImpl implements PartVetService {
 
 	    ModelMapper modelMapper = new ModelMapper();
 
-	    public ParVetDto guardarParVet(ParVetDto parVetDto) {
+	    public ParVetDTO guardarParVet(ParVetDTO parVetDto) {
 	        Authentication auth = authenticationFacade.getAuthentication();
 	        UserAuth user = userAuthRepository.findByEmail(auth.getName());
 	        System.out.println("-----------------");
@@ -46,21 +46,21 @@ public class PartVetServiceImpl implements PartVetService {
 	        return convertEntityToDto(obj);
 	    }
 
-	    public ArrayList<ParVetDto> obtenerParVet() {
+	    public ArrayList<ParVetDTO> obtenerParVet() {
 	        //return (ArrayList<ParVetDto>) parVetDao.findAll().stream().map(this::convertEntityToDto).collect(Collectors.toList());
 
 			//return (ArrayList<ParVetDto>) parVetDao.buscarTodos(new ParVet()).stream().map(this::convertEntityToDto).collect(Collectors.toList());
 			//return (ArrayList<ParVetDto>) parVetDao.buscarActivos(new ParVet()).stream().map(this::convertEntityToDto).collect(Collectors.toList());
-			return (ArrayList<ParVetDto>) parVetDao.buscarInactivos(true).stream().map(this::convertEntityToDto).collect(Collectors.toList());
+			return (ArrayList<ParVetDTO>) parVetDao.buscarInactivos(true).stream().map(this::convertEntityToDto).collect(Collectors.toList());
 	    }
 
-	    public ParVetDto obtenerParVetPorId(Long id) {
+	    public ParVetDTO obtenerParVetPorId(Long id) {
 	        //ParVet obj = parVetDao.findById(id).orElse(null);
 			ParVet obj = parVetDao.buscarPorId(id);
 	        return convertEntityToDto(obj);
 	    }
 
-	    public ParVetDto actualizarParVet(ParVetDto parVetDto, Long id) {
+	    public ParVetDTO actualizarParVet(ParVetDTO parVetDto, Long id) {
 	        Authentication auth = authenticationFacade.getAuthentication();
 	        UserAuth user = userAuthRepository.findByEmail(auth.getName());
 	        //ParVet objTemp = parVetDao.findById(id).orElse(null);
@@ -90,18 +90,18 @@ public class PartVetServiceImpl implements PartVetService {
 	        }
 	    }
 
-	    private ParVetDto convertEntityToDto(ParVet parVet) {
+	    private ParVetDTO convertEntityToDto(ParVet parVet) {
 	        if (parVet != null) {
 	            modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-	            ParVetDto parVetDto = new ParVetDto();
-	            parVetDto = modelMapper.map(parVet, ParVetDto.class);
+	            ParVetDTO parVetDto = new ParVetDTO();
+	            parVetDto = modelMapper.map(parVet, ParVetDTO.class);
 	            return parVetDto;
 	        } else {
 	            return null;
 	        }
 	    }
 
-	    private ParVet convertDtoToEntity(ParVetDto parVetDto) {
+	    private ParVet convertDtoToEntity(ParVetDTO parVetDto) {
 	        if (parVetDto != null) {
 	            modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
 	            ParVet parVet = new ParVet();

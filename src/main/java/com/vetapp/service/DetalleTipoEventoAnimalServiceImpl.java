@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.DetalleTipoEventoAnimalDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.DetalleTipoEventoAnimalDto;
+import com.vetapp.dto.DetalleTipoEventoAnimalDTO;
 import com.vetapp.model.DetalleTipoEventoAnimal;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class DetalleTipoEventoAnimalServiceImpl implements DetalleTipoEventoAnim
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public DetalleTipoEventoAnimalDto guardarDetalleTipoEventoAnimal(DetalleTipoEventoAnimalDto detalleTipoEventoAnimalDto) {
+    public DetalleTipoEventoAnimalDTO guardarDetalleTipoEventoAnimal(DetalleTipoEventoAnimalDTO detalleTipoEventoAnimalDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -45,19 +45,19 @@ public class DetalleTipoEventoAnimalServiceImpl implements DetalleTipoEventoAnim
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<DetalleTipoEventoAnimalDto> obtenerDetalleTipoEventoAnimals() {
-        return (ArrayList<DetalleTipoEventoAnimalDto>) detalleTipoEventoAnimalDao.buscarTodos(new DetalleTipoEventoAnimal())
+    public ArrayList<DetalleTipoEventoAnimalDTO> obtenerDetalleTipoEventoAnimals() {
+        return (ArrayList<DetalleTipoEventoAnimalDTO>) detalleTipoEventoAnimalDao.buscarTodos(new DetalleTipoEventoAnimal())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public DetalleTipoEventoAnimalDto obtenerDetalleTipoEventoAnimalPorId(Long id) {
+    public DetalleTipoEventoAnimalDTO obtenerDetalleTipoEventoAnimalPorId(Long id) {
         DetalleTipoEventoAnimal obj = detalleTipoEventoAnimalDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public DetalleTipoEventoAnimalDto actualizarDetalleTipoEventoAnimal(DetalleTipoEventoAnimalDto detalleTipoEventoAnimalDto, Long id) {
+    public DetalleTipoEventoAnimalDTO actualizarDetalleTipoEventoAnimal(DetalleTipoEventoAnimalDTO detalleTipoEventoAnimalDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         DetalleTipoEventoAnimal objTemp = detalleTipoEventoAnimalDao.buscarPorId(id);
@@ -83,18 +83,18 @@ public class DetalleTipoEventoAnimalServiceImpl implements DetalleTipoEventoAnim
         }
     }
 
-    private DetalleTipoEventoAnimalDto convertEntityToDto(DetalleTipoEventoAnimal detalleTipoEventoAnimal) {
+    private DetalleTipoEventoAnimalDTO convertEntityToDto(DetalleTipoEventoAnimal detalleTipoEventoAnimal) {
         if (detalleTipoEventoAnimal != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            DetalleTipoEventoAnimalDto detalleTipoEventoAnimalDto = new DetalleTipoEventoAnimalDto();
-            detalleTipoEventoAnimalDto = modelMapper.map(detalleTipoEventoAnimal, DetalleTipoEventoAnimalDto.class);
+            DetalleTipoEventoAnimalDTO detalleTipoEventoAnimalDto = new DetalleTipoEventoAnimalDTO();
+            detalleTipoEventoAnimalDto = modelMapper.map(detalleTipoEventoAnimal, DetalleTipoEventoAnimalDTO.class);
             return detalleTipoEventoAnimalDto;
         } else {
             return null;
         }
     }
 
-    private DetalleTipoEventoAnimal convertDtoToEntity(DetalleTipoEventoAnimalDto detalleTipoEventoAnimalDto) {
+    private DetalleTipoEventoAnimal convertDtoToEntity(DetalleTipoEventoAnimalDTO detalleTipoEventoAnimalDto) {
         if (detalleTipoEventoAnimalDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             DetalleTipoEventoAnimal detalleTipoEventoAnimal = new DetalleTipoEventoAnimal();

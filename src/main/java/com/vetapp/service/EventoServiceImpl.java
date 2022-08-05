@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.EventoDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.EventoDto;
+import com.vetapp.dto.EventoDTO;
 import com.vetapp.model.Evento;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class EventoServiceImpl implements EventoService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public EventoDto guardarEvento(EventoDto eventoDto) {
+    public EventoDTO guardarEvento(EventoDTO eventoDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -45,19 +45,19 @@ public class EventoServiceImpl implements EventoService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<EventoDto> obtenerEventos() {
-        return (ArrayList<EventoDto>) eventoDao.buscarTodos(new Evento())
+    public ArrayList<EventoDTO> obtenerEventos() {
+        return (ArrayList<EventoDTO>) eventoDao.buscarTodos(new Evento())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public EventoDto obtenerEventoPorId(Long id) {
+    public EventoDTO obtenerEventoPorId(Long id) {
         Evento obj = eventoDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public EventoDto actualizarEvento(EventoDto eventoDto, Long id) {
+    public EventoDTO actualizarEvento(EventoDTO eventoDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         Evento objTemp = eventoDao.buscarPorId(id);
@@ -83,18 +83,18 @@ public class EventoServiceImpl implements EventoService {
         }
     }
 
-    private EventoDto convertEntityToDto(Evento evento) {
+    private EventoDTO convertEntityToDto(Evento evento) {
         if (evento != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            EventoDto eventoDto = new EventoDto();
-            eventoDto = modelMapper.map(evento, EventoDto.class);
+            EventoDTO eventoDto = new EventoDTO();
+            eventoDto = modelMapper.map(evento, EventoDTO.class);
             return eventoDto;
         } else {
             return null;
         }
     }
 
-    private Evento convertDtoToEntity(EventoDto eventoDto) {
+    private Evento convertDtoToEntity(EventoDTO eventoDto) {
         if (eventoDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             Evento evento = new Evento();

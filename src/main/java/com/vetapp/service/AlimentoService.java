@@ -1,18 +1,18 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.AlimentoDto;
+import com.vetapp.dto.AlimentoDTO;
 
 import java.util.ArrayList;
 
 public interface AlimentoService {
 
-    AlimentoDto guardarAlimento(AlimentoDto alimentoDto);
+    AlimentoDTO guardarAlimento(AlimentoDTO alimentoDto);
 
-    ArrayList<AlimentoDto> obtenerAlimentos();
+    ArrayList<AlimentoDTO> obtenerAlimentos();
 
-    AlimentoDto obtenerAlimentoPorId(Long id);
+    AlimentoDTO obtenerAlimentoPorId(Long id);
 
-    AlimentoDto actualizarAlimento(AlimentoDto alimentoDto, Long id);
+    AlimentoDTO actualizarAlimento(AlimentoDTO alimentoDto, Long id);
 
     boolean eliminarAlimento(Long id);
 }

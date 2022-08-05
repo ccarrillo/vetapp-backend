@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.ProduccionLecheDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.ProduccionLecheDto;
+import com.vetapp.dto.ProduccionLecheDTO;
 import com.vetapp.model.ProduccionLeche;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class ProduccionLecheServiceImpl implements ProduccionLecheService{
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public ProduccionLecheDto guardarProduccionLeche(ProduccionLecheDto produccionLecheDto) {
+    public ProduccionLecheDTO guardarProduccionLeche(ProduccionLecheDTO produccionLecheDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -45,19 +45,19 @@ public class ProduccionLecheServiceImpl implements ProduccionLecheService{
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<ProduccionLecheDto> obtenerProduccionLeches() {
-        return (ArrayList<ProduccionLecheDto>) produccionLecheDao.buscarTodos(new ProduccionLeche())
+    public ArrayList<ProduccionLecheDTO> obtenerProduccionLeches() {
+        return (ArrayList<ProduccionLecheDTO>) produccionLecheDao.buscarTodos(new ProduccionLeche())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public ProduccionLecheDto obtenerProduccionLechePorId(Long id) {
+    public ProduccionLecheDTO obtenerProduccionLechePorId(Long id) {
         ProduccionLeche obj = produccionLecheDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public ProduccionLecheDto actualizarProduccionLeche(ProduccionLecheDto produccionLecheDto, Long id) {
+    public ProduccionLecheDTO actualizarProduccionLeche(ProduccionLecheDTO produccionLecheDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         ProduccionLeche objTemp = produccionLecheDao.buscarPorId(id);
@@ -83,18 +83,18 @@ public class ProduccionLecheServiceImpl implements ProduccionLecheService{
         }
     }
 
-    private ProduccionLecheDto convertEntityToDto(ProduccionLeche produccionLeche) {
+    private ProduccionLecheDTO convertEntityToDto(ProduccionLeche produccionLeche) {
         if (produccionLeche != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            ProduccionLecheDto produccionLecheDto = new ProduccionLecheDto();
-            produccionLecheDto = modelMapper.map(produccionLeche, ProduccionLecheDto.class);
+            ProduccionLecheDTO produccionLecheDto = new ProduccionLecheDTO();
+            produccionLecheDto = modelMapper.map(produccionLeche, ProduccionLecheDTO.class);
             return produccionLecheDto;
         } else {
             return null;
         }
     }
 
-    private ProduccionLeche convertDtoToEntity(ProduccionLecheDto produccionLecheDto) {
+    private ProduccionLeche convertDtoToEntity(ProduccionLecheDTO produccionLecheDto) {
         if (produccionLecheDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             ProduccionLeche produccionLeche = new ProduccionLeche();

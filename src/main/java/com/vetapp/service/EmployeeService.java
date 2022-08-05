@@ -1,18 +1,18 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.EmployeeDto;
+import com.vetapp.dto.EmployeeDTO;
 
 import java.util.ArrayList;
 
 public interface EmployeeService {
 
-    EmployeeDto guardarEmpleado(EmployeeDto employeeDto);
+    EmployeeDTO guardarEmpleado(EmployeeDTO employeeDto);
 
-    ArrayList<EmployeeDto> obtenerEmpleados();
+    ArrayList<EmployeeDTO> obtenerEmpleados();
 
-    EmployeeDto obtenerEmpleadoPorId(Long id);
+    EmployeeDTO obtenerEmpleadoPorId(Long id);
 
-    EmployeeDto actualizarEmpleado(EmployeeDto employeeDto, Long id);
+    EmployeeDTO actualizarEmpleado(EmployeeDTO employeeDto, Long id);
 
     boolean eliminarEmpleado(Long id);
 

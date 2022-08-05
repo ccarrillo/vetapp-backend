@@ -1,7 +1,7 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.RacionDto;
-import com.vetapp.service.RacionServiceImpl;
+import com.vetapp.dto.RacionDTO;
+import com.vetapp.service.RacionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,14 +25,14 @@ public class RacionController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private RacionServiceImpl racionService;
+    private RacionService racionService;
 
     @PostMapping("")
     @Operation(summary = "Create Racion", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RacionDto.class)))})
-    public ResponseEntity<?> guardarRacion(@RequestBody RacionDto racionDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RacionDTO.class)))})
+    public ResponseEntity<?> guardarRacion(@RequestBody RacionDTO racionDto) {
         try {
-            RacionDto obj = racionService.guardarRacion(racionDto);
+            RacionDTO obj = racionService.guardarRacion(racionDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
@@ -42,10 +42,10 @@ public class RacionController {
 
     @GetMapping("")
     @Operation(summary = "Read Racions", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RacionDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RacionDTO.class)))})
     public ResponseEntity<?> obtenerRacions() {
         try {
-            List<RacionDto> obj = racionService.obtenerRacions();
+            List<RacionDTO> obj = racionService.obtenerRacions();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -58,10 +58,10 @@ public class RacionController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read Racion", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RacionDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RacionDTO.class)))})
     public ResponseEntity<?> obtenerRacionPorId(@PathVariable("id") Long id) {
         try {
-            RacionDto obj = racionService.obtenerRacionPorId(id);
+            RacionDTO obj = racionService.obtenerRacionPorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -75,10 +75,10 @@ public class RacionController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update Racion", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RacionDto.class)))})
-    public ResponseEntity<?> actualizarRacion(@RequestBody RacionDto racionDto, @PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RacionDTO.class)))})
+    public ResponseEntity<?> actualizarRacion(@RequestBody RacionDTO racionDto, @PathVariable("id") Long id) {
         try {
-            RacionDto obj = racionService.actualizarRacion(racionDto, id);
+            RacionDTO obj = racionService.actualizarRacion(racionDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -92,8 +92,8 @@ public class RacionController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Racion", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RacionDto.class)))})
-    public ResponseEntity<RacionDto> eliminarRacion(@PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RacionDTO.class)))})
+    public ResponseEntity<RacionDTO> eliminarRacion(@PathVariable("id") Long id) {
         try {
             Boolean obj = racionService.eliminarRacion(id);
             if (obj) {

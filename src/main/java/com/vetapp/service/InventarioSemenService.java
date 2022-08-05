@@ -1,18 +1,18 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.InventarioSemenDto;
+import com.vetapp.dto.InventarioSemenDTO;
 
 import java.util.ArrayList;
 
 public interface InventarioSemenService {
 
-    InventarioSemenDto guardarInventarioSemen(InventarioSemenDto inventarioSemenDto);
+    InventarioSemenDTO guardarInventarioSemen(InventarioSemenDTO inventarioSemenDto);
 
-    ArrayList<InventarioSemenDto> obtenerInventarioSemens();
+    ArrayList<InventarioSemenDTO> obtenerInventarioSemens();
 
-    InventarioSemenDto obtenerInventarioSemenPorId(Long id);
+    InventarioSemenDTO obtenerInventarioSemenPorId(Long id);
 
-    InventarioSemenDto actualizarInventarioSemen(InventarioSemenDto inventarioSemenDto, Long id);
+    InventarioSemenDTO actualizarInventarioSemen(InventarioSemenDTO inventarioSemenDto, Long id);
 
     boolean eliminarInventarioSemen(Long id);
 

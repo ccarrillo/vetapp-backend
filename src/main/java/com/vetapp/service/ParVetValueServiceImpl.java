@@ -1,7 +1,7 @@
 package com.vetapp.service;
 
 import com.vetapp.dao.ParVetValueDAO;
-import com.vetapp.dto.ParVetValueDto;
+import com.vetapp.dto.ParVetValueDTO;
 import com.vetapp.model.ParVetValue;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -21,25 +21,25 @@ public class ParVetValueServiceImpl implements ParVetValueService {
     
     ModelMapper modelMapper = new ModelMapper();
 
-    public ArrayList<ParVetValueDto> obtenerParVetValues(Long idParVet) {
-        return (ArrayList<ParVetValueDto>) parVetValueDao.findParVetValueByParvetId(idParVet)
+    public ArrayList<ParVetValueDTO> obtenerParVetValues(Long idParVet) {
+        return (ArrayList<ParVetValueDTO>) parVetValueDao.findParVetValueByParvetId(idParVet)
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    private ParVetValueDto convertEntityToDto(ParVetValue parvetvalue) {
+    private ParVetValueDTO convertEntityToDto(ParVetValue parvetvalue) {
         if (parvetvalue != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            ParVetValueDto parvetvalueDto = new ParVetValueDto();
-            parvetvalueDto = modelMapper.map(parvetvalue, ParVetValueDto.class);
+            ParVetValueDTO parvetvalueDto = new ParVetValueDTO();
+            parvetvalueDto = modelMapper.map(parvetvalue, ParVetValueDTO.class);
             return parvetvalueDto;
         } else {
             return null;
         }
     }
 
-    private ParVetValue convertDtoToEntity(ParVetValueDto parVetValueDto) {
+    private ParVetValue convertDtoToEntity(ParVetValueDTO parVetValueDto) {
         if (parVetValueDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             ParVetValue parVetValue = new ParVetValue();

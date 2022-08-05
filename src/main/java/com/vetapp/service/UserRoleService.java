@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.UserAuthRepository;
 import com.vetapp.dao.UserRoleRepository;
-import com.vetapp.dto.UserRoleDto;
+import com.vetapp.dto.UserRoleDTO;
 import com.vetapp.model.UserAuth;
 import com.vetapp.model.UserRole;
 import org.modelmapper.ModelMapper;
@@ -30,7 +30,7 @@ public class UserRoleService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public UserRoleDto guardaUserRole(UserRoleDto userRoleDto) {
+    public UserRoleDTO guardaUserRole(UserRoleDTO userRoleDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         userRoleDto.setUserCreation(user.getId());
@@ -39,19 +39,19 @@ public class UserRoleService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<UserRoleDto> obtenerUserRoles() {
-        return (ArrayList<UserRoleDto>) userRoleRepository.findAll()
+    public ArrayList<UserRoleDTO> obtenerUserRoles() {
+        return (ArrayList<UserRoleDTO>) userRoleRepository.findAll()
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public UserRoleDto obtenerUserRolePorId(Long id) {
+    public UserRoleDTO obtenerUserRolePorId(Long id) {
         UserRole obj = userRoleRepository.findById(id).orElse(null);
         return convertEntityToDto(obj);
     }
 
-    public UserRoleDto actualizarUserRole(UserRoleDto userRoleDto, Long id) {
+    public UserRoleDTO actualizarUserRole(UserRoleDTO userRoleDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         UserRole objTemp = userRoleRepository.findById(id).orElse(null);
@@ -77,25 +77,25 @@ public class UserRoleService {
         }
     }
 
-    public ArrayList<UserRoleDto> obtenerUserRolePorUserId(Long id) {
-        return (ArrayList<UserRoleDto>) userRoleRepository.findByUserId(id)
+    public ArrayList<UserRoleDTO> obtenerUserRolePorUserId(Long id) {
+        return (ArrayList<UserRoleDTO>) userRoleRepository.findByUserId(id)
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    private UserRoleDto convertEntityToDto(UserRole userRole) {
+    private UserRoleDTO convertEntityToDto(UserRole userRole) {
         if (userRole != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            UserRoleDto userRoleDto = new UserRoleDto();
-            userRoleDto = modelMapper.map(userRole, UserRoleDto.class);
+            UserRoleDTO userRoleDto = new UserRoleDTO();
+            userRoleDto = modelMapper.map(userRole, UserRoleDTO.class);
             return userRoleDto;
         } else {
             return null;
         }
     }
 
-    private UserRole convertDtoToEntity(UserRoleDto userRoleDto) {
+    private UserRole convertDtoToEntity(UserRoleDTO userRoleDto) {
         if (userRoleDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             UserRole userRole = new UserRole();

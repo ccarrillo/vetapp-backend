@@ -1,10 +1,10 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.ParVetValueDto;
+import com.vetapp.dto.ParVetValueDTO;
 
 import java.util.ArrayList;
 
 public interface ParVetValueService {
 
-    ArrayList<ParVetValueDto> obtenerParVetValues(Long idParVet);
+    ArrayList<ParVetValueDTO> obtenerParVetValues(Long idParVet);
 }

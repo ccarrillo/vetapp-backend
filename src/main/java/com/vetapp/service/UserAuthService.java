@@ -2,7 +2,7 @@ package com.vetapp.service;
 
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.UserAuthDto;
+import com.vetapp.dto.UserAuthDTO;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -28,7 +28,7 @@ public class UserAuthService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public UserAuthDto guardarUserAuth(UserAuthDto userAuthDto) {
+    public UserAuthDTO guardarUserAuth(UserAuthDTO userAuthDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         String passTmp = userAuthDto.getPassword();
@@ -39,19 +39,19 @@ public class UserAuthService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<UserAuthDto> obtenerUserAuths() {
-        return (ArrayList<UserAuthDto>) userAuthRepository.findAll()
+    public ArrayList<UserAuthDTO> obtenerUserAuths() {
+        return (ArrayList<UserAuthDTO>) userAuthRepository.findAll()
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public UserAuthDto obtenerUserAuthPorId(Long id) {
+    public UserAuthDTO obtenerUserAuthPorId(Long id) {
         UserAuth obj = userAuthRepository.findById(id).orElse(null);
         return convertEntityToDto(obj);
     }
 
-    public UserAuthDto actualizarUserAuth(UserAuthDto userAuthDto, Long id) {
+    public UserAuthDTO actualizarUserAuth(UserAuthDTO userAuthDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         UserAuth objTemp = userAuthRepository.findById(id).orElse(null);
@@ -77,18 +77,18 @@ public class UserAuthService {
         }
     }
 
-    private UserAuthDto convertEntityToDto(UserAuth userAuth) {
+    private UserAuthDTO convertEntityToDto(UserAuth userAuth) {
         if (userAuth != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            UserAuthDto userAuthDto = new UserAuthDto();
-            userAuthDto = modelMapper.map(userAuth, UserAuthDto.class);
+            UserAuthDTO userAuthDto = new UserAuthDTO();
+            userAuthDto = modelMapper.map(userAuth, UserAuthDTO.class);
             return userAuthDto;
         } else {
             return null;
         }
     }
 
-    private UserAuth convertDtoToEntity(UserAuthDto userAuthDto) {
+    private UserAuth convertDtoToEntity(UserAuthDTO userAuthDto) {
         if (userAuthDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             UserAuth userAuth = new UserAuth();

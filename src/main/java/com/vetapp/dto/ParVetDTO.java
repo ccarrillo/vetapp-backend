@@ -1,12 +1,10 @@
 package com.vetapp.dto;
 
-public class ParListValueDto extends BaseModelDto {
+public class ParVetDTO extends BaseModelDTO {
 
     private Long id;
 
     private String name;
-
-    private Long parlistId;
 
     public Long getId() {
         return id;
@@ -22,13 +20,5 @@ public class ParListValueDto extends BaseModelDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getParlistId() {
-        return parlistId;
-    }
-
-    public void setParlistId(Long parlistId) {
-        this.parlistId = parlistId;
     }
 }

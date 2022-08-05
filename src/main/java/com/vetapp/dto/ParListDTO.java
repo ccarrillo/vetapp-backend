@@ -1,6 +1,6 @@
 package com.vetapp.dto;
 
-public class ParListDto extends BaseModelDto {
+public class ParListDTO extends BaseModelDTO {
 
     private Long id;
 

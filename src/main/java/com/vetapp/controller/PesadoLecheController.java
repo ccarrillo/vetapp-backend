@@ -1,7 +1,7 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.PesadoLecheDto;
-import com.vetapp.service.PesadoLecheServiceImpl;
+import com.vetapp.dto.PesadoLecheDTO;
+import com.vetapp.service.PesadoLecheService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,14 +25,14 @@ public class PesadoLecheController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private PesadoLecheServiceImpl pesadoLecheService;
+    private PesadoLecheService pesadoLecheService;
 
     @PostMapping("")
     @Operation(summary = "Create PesadoLeche", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PesadoLecheDto.class)))})
-    public ResponseEntity<?> guardarPesadoLeche(@RequestBody PesadoLecheDto pesadoLecheDto) {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PesadoLecheDTO.class)))})
+    public ResponseEntity<?> guardarPesadoLeche(@RequestBody PesadoLecheDTO pesadoLecheDto) {
         try {
-            PesadoLecheDto obj = pesadoLecheService.guardarPesadoLeche(pesadoLecheDto);
+            PesadoLecheDTO obj = pesadoLecheService.guardarPesadoLeche(pesadoLecheDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
@@ -42,10 +42,10 @@ public class PesadoLecheController {
 
     @GetMapping("")
     @Operation(summary = "Read PesadoLeches", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PesadoLecheDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PesadoLecheDTO.class)))})
     public ResponseEntity<?> obtenerPesadoLeches() {
         try {
-            List<PesadoLecheDto> obj = pesadoLecheService.obtenerPesadoLeches();
+            List<PesadoLecheDTO> obj = pesadoLecheService.obtenerPesadoLeches();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -58,10 +58,10 @@ public class PesadoLecheController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Read PesadoLeche", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PesadoLecheDto.class)))})
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PesadoLecheDTO.class)))})
     public ResponseEntity<?> obtenerPesadoLechePorId(@PathVariable("id") Long id) {
         try {
-            PesadoLecheDto obj = pesadoLecheService.obtenerPesadoLechePorId(id);
+            PesadoLecheDTO obj = pesadoLecheService.obtenerPesadoLechePorId(id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -75,10 +75,10 @@ public class PesadoLecheController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update PesadoLeche", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PesadoLecheDto.class)))})
-    public ResponseEntity<?> actualizarPesadoLeche(@RequestBody PesadoLecheDto pesadoLecheDto, @PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PesadoLecheDTO.class)))})
+    public ResponseEntity<?> actualizarPesadoLeche(@RequestBody PesadoLecheDTO pesadoLecheDto, @PathVariable("id") Long id) {
         try {
-            PesadoLecheDto obj = pesadoLecheService.actualizarPesadoLeche(pesadoLecheDto, id);
+            PesadoLecheDTO obj = pesadoLecheService.actualizarPesadoLeche(pesadoLecheDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
@@ -92,8 +92,8 @@ public class PesadoLecheController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete PesadoLeche", responses = {
-            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PesadoLecheDto.class)))})
-    public ResponseEntity<PesadoLecheDto> eliminarPesadoLeche(@PathVariable("id") Long id) {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PesadoLecheDTO.class)))})
+    public ResponseEntity<PesadoLecheDTO> eliminarPesadoLeche(@PathVariable("id") Long id) {
         try {
             Boolean obj = pesadoLecheService.eliminarPesadoLeche(id);
             if (obj) {

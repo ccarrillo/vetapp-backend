@@ -1,18 +1,18 @@
 package com.vetapp.service;
 
-import com.vetapp.dto.TipoEventoDto;
+import com.vetapp.dto.TipoEventoDTO;
 
 import java.util.ArrayList;
 
 public interface TipoEventoService {
 
-    TipoEventoDto guardarTipoEvento(TipoEventoDto tipoEventoDto);
+    TipoEventoDTO guardarTipoEvento(TipoEventoDTO tipoEventoDto);
 
-    ArrayList<TipoEventoDto> obtenerTipoEventos();
+    ArrayList<TipoEventoDTO> obtenerTipoEventos();
 
-    TipoEventoDto obtenerTipoEventoPorId(Long id);
+    TipoEventoDTO obtenerTipoEventoPorId(Long id);
 
-    TipoEventoDto actualizarTipoEvento(TipoEventoDto tipoEventoDto, Long id);
+    TipoEventoDTO actualizarTipoEvento(TipoEventoDTO tipoEventoDto, Long id);
 
     boolean eliminarTipoEvento(Long id);
 }

@@ -1,6 +1,6 @@
 package com.vetapp.dto;
 
-public class RecordatorioEventoDto extends BaseModelDto {
+public class RecordatorioEventoDTO extends BaseModelDTO {
 
     private Long id;
 

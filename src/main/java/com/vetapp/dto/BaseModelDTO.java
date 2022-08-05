@@ -2,7 +2,7 @@ package com.vetapp.dto;
 
 import java.util.Date;
 
-public class BaseModelDto {
+public class BaseModelDTO {
 
     private boolean isActive = true;
     private Date createdAt;

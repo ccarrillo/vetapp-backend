@@ -1,6 +1,6 @@
 package com.vetapp.dto;
 
-public class AnimalDetalleDto {
+public class AnimalDetalleDTO {
 	
 	 private Long id;
 

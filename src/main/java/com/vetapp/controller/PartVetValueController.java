@@ -1,7 +1,7 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.ParVetValueDto;
-import com.vetapp.service.ParVetValueServiceImpl;
+import com.vetapp.dto.ParVetValueDTO;
+import com.vetapp.service.ParVetValueService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,15 +25,15 @@ public class PartVetValueController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private ParVetValueServiceImpl partVetValueService;
+	private ParVetValueService partVetValueService;
 	   
 
 	@GetMapping("/{idParVet}")
 	@Operation(summary = "Read ParVetValues", responses = {
-	@ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetValueDto.class)))})
+	@ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetValueDTO.class)))})
 	public ResponseEntity<?> obtenerParVetValuesPorId(@PathVariable("idParVet") Long idParVet) {
 		try {
-	    	List<ParVetValueDto> obj = partVetValueService.obtenerParVetValues(idParVet);
+	    	List<ParVetValueDTO> obj = partVetValueService.obtenerParVetValues(idParVet);
 	        if (obj.isEmpty()) {
 	        	return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}

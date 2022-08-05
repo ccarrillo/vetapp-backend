@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.InventarioSemenDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.InventarioSemenDto;
+import com.vetapp.dto.InventarioSemenDTO;
 import com.vetapp.model.InventarioSemen;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class InventarioSemenServiceImpl implements InventarioSemenService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public InventarioSemenDto guardarInventarioSemen(InventarioSemenDto inventarioSemenDto) {
+    public InventarioSemenDTO guardarInventarioSemen(InventarioSemenDTO inventarioSemenDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -45,19 +45,19 @@ public class InventarioSemenServiceImpl implements InventarioSemenService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<InventarioSemenDto> obtenerInventarioSemens() {
-        return (ArrayList<InventarioSemenDto>) inventarioSemenDao.buscarTodos(new InventarioSemen())
+    public ArrayList<InventarioSemenDTO> obtenerInventarioSemens() {
+        return (ArrayList<InventarioSemenDTO>) inventarioSemenDao.buscarTodos(new InventarioSemen())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public InventarioSemenDto obtenerInventarioSemenPorId(Long id) {
+    public InventarioSemenDTO obtenerInventarioSemenPorId(Long id) {
         InventarioSemen obj = inventarioSemenDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public InventarioSemenDto actualizarInventarioSemen(InventarioSemenDto inventarioSemenDto, Long id) {
+    public InventarioSemenDTO actualizarInventarioSemen(InventarioSemenDTO inventarioSemenDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         InventarioSemen objTemp = inventarioSemenDao.buscarPorId(id);
@@ -83,18 +83,18 @@ public class InventarioSemenServiceImpl implements InventarioSemenService {
         }
     }
 
-    private InventarioSemenDto convertEntityToDto(InventarioSemen inventarioSemen) {
+    private InventarioSemenDTO convertEntityToDto(InventarioSemen inventarioSemen) {
         if (inventarioSemen != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            InventarioSemenDto inventarioSemenDto = new InventarioSemenDto();
-            inventarioSemenDto = modelMapper.map(inventarioSemen, InventarioSemenDto.class);
+            InventarioSemenDTO inventarioSemenDto = new InventarioSemenDTO();
+            inventarioSemenDto = modelMapper.map(inventarioSemen, InventarioSemenDTO.class);
             return inventarioSemenDto;
         } else {
             return null;
         }
     }
 
-    private InventarioSemen convertDtoToEntity(InventarioSemenDto inventarioSemenDto) {
+    private InventarioSemen convertDtoToEntity(InventarioSemenDTO inventarioSemenDto) {
         if (inventarioSemenDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             InventarioSemen inventarioSemen = new InventarioSemen();

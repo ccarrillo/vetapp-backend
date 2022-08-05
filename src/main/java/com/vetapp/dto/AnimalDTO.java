@@ -2,7 +2,7 @@ package com.vetapp.dto;
 
 import java.util.Date;
 
-public class AnimalDto extends BaseModelDto {
+public class AnimalDTO extends BaseModelDTO {
 
     private Long id;
 

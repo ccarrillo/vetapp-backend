@@ -3,7 +3,7 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.AlimentoDAO;
 import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.dto.AlimentoDto;
+import com.vetapp.dto.AlimentoDTO;
 import com.vetapp.model.Alimento;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -32,7 +32,7 @@ public class AlimentoServiceImpl implements AlimentoService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public AlimentoDto guardarAlimento(AlimentoDto alimentoDto) {
+    public AlimentoDTO guardarAlimento(AlimentoDTO alimentoDto) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         System.out.println("-----------------");
@@ -45,19 +45,19 @@ public class AlimentoServiceImpl implements AlimentoService {
         return convertEntityToDto(obj);
     }
 
-    public ArrayList<AlimentoDto> obtenerAlimentos() {
-        return (ArrayList<AlimentoDto>) alimentoDao.buscarTodos(new Alimento())
+    public ArrayList<AlimentoDTO> obtenerAlimentos() {
+        return (ArrayList<AlimentoDTO>) alimentoDao.buscarTodos(new Alimento())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    public AlimentoDto obtenerAlimentoPorId(Long id) {
+    public AlimentoDTO obtenerAlimentoPorId(Long id) {
         Alimento obj = alimentoDao.buscarPorId(id);
         return convertEntityToDto(obj);
     }
 
-    public AlimentoDto actualizarAlimento(AlimentoDto alimentoDto, Long id) {
+    public AlimentoDTO actualizarAlimento(AlimentoDTO alimentoDto, Long id) {
         Authentication auth = authenticationFacade.getAuthentication();
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         Alimento objTemp = alimentoDao.buscarPorId(id);
@@ -83,18 +83,18 @@ public class AlimentoServiceImpl implements AlimentoService {
         }
     }
 
-    private AlimentoDto convertEntityToDto(Alimento alimento) {
+    private AlimentoDTO convertEntityToDto(Alimento alimento) {
         if (alimento != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-            AlimentoDto alimentoDto = new AlimentoDto();
-            alimentoDto = modelMapper.map(alimento, AlimentoDto.class);
+            AlimentoDTO alimentoDto = new AlimentoDTO();
+            alimentoDto = modelMapper.map(alimento, AlimentoDTO.class);
             return alimentoDto;
         } else {
             return null;
         }
     }
 
-    private Alimento convertDtoToEntity(AlimentoDto alimentoDto) {
+    private Alimento convertDtoToEntity(AlimentoDTO alimentoDto) {
         if (alimentoDto != null) {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             Alimento alimento = new Alimento();
