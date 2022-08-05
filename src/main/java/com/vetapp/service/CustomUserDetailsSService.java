@@ -1,8 +1,10 @@
 package com.vetapp.service;
 
 import com.vetapp.dao.RoleRepository;
+import com.vetapp.dao.UserAuthRepository;
 import com.vetapp.dao.UserRoleRepository;
 import com.vetapp.model.Role;
+import com.vetapp.model.UserAuth;
 import com.vetapp.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,10 +14,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.model.UserAuth;
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class CustomUserDetailsSService implements UserDetailsService {
