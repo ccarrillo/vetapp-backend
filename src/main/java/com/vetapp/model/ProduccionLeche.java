@@ -1,6 +1,6 @@
 package com.vetapp.model;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "produccionleche", schema = "vet")
@@ -29,50 +25,60 @@ public class ProduccionLeche extends BaseModel {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "fechaproduccion")
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    @Temporal(TemporalType.DATE)
-    private Calendar fechaproduccion;
+    @Column(name = "fecha")
+    private Date fecha;
 
-    @Column(name = "racionternero")
+    @Column(name = "racionternero",precision= 12, scale= 2)
     private double racionternero;
 
-    @Column(name = "ventacontado")
+    @Column(name = "ventacontado",precision= 12, scale= 2)
     private double ventacontado;
 
-    @Column(name = "ventainterna")
+    @Column(name = "ventainterna",precision= 12, scale= 2)
     private double ventainterna;
+    
+    @Column(name = "antibmastitis",precision= 12, scale= 2)
+    private double antibmastitis;
 
-    @Column(name = "ventaexterna")
+    @Column(name = "ventaexterna",precision= 12, scale= 2)
     private double ventaexterna;
 
-    @Column(name = "precio")
+    @Column(name = "precio",precision= 12, scale= 2)
     private double precio;
+    
+    @Column(name = "diferencia",precision= 12, scale= 2)
+    private double diferencia;
+    
+    @Column(name = "totallitros",precision= 12, scale= 2)
+    private double totallitros;
+    
+    @Column(name = "ordeno")
+    private Integer ordeno;
+    
+    @Column(name = "establo")
+    private Integer establo;
 
+    @Column(name = "secas")
+    private Integer secas;
+    
+    @Column(name = "promordeno",precision= 12, scale= 2)
+    private double promordeno;
+    
+    @Column(name = "promestablo",precision= 12, scale= 2)
+    private double promestablo;
 
-    @Column(name = "grasa")
+    @Column(name = "grasa",precision= 12, scale= 2)
     private double grasa;
 
-    @Column(name = "proteina")
+    @Column(name = "proteina",precision= 12, scale= 2)
     private double proteina;
 
-    @Column(name = "ufc")
+    @Column(name = "ufc",precision= 12, scale= 2)
     private double ufc;
 
-    @Column(name = "ccss")
+    @Column(name = "ccss",precision= 12, scale= 2)
     private double ccss;
 
-    @Column(name = "totalvacas")    //Grasa, proteína, ufc, ccss
-    private Integer totalvacas;
-
-    @Column(name = "totalvacassecas")
-    private Integer totalvacassecas;
-
-    @Column(name = "promproduccion")
-    private double promproduccion;
-
-    @Column(name = "promhato")
-    private double promhato;
 
     public Long getId() {
         return id;
@@ -82,118 +88,150 @@ public class ProduccionLeche extends BaseModel {
         this.id = id;
     }
 
-    public Calendar getFechaproduccion() {
-        return fechaproduccion;
-    }
+	public Date getFecha() {
+		return fecha;
+	}
 
-    public void setFechaproduccion(Calendar fechaproduccion) {
-        this.fechaproduccion = fechaproduccion;
-    }
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 
-    public double getRacionternero() {
-        return racionternero;
-    }
+	public double getRacionternero() {
+		return racionternero;
+	}
 
-    public void setRacionternero(double racionternero) {
-        this.racionternero = racionternero;
-    }
+	public void setRacionternero(double racionternero) {
+		this.racionternero = racionternero;
+	}
 
-    public double getVentacontado() {
-        return ventacontado;
-    }
+	public double getVentacontado() {
+		return ventacontado;
+	}
 
-    public void setVentacontado(double ventacontado) {
-        this.ventacontado = ventacontado;
-    }
+	public void setVentacontado(double ventacontado) {
+		this.ventacontado = ventacontado;
+	}
 
-    public double getVentainterna() {
-        return ventainterna;
-    }
+	public double getVentainterna() {
+		return ventainterna;
+	}
 
-    public void setVentainterna(double ventainterna) {
-        this.ventainterna = ventainterna;
-    }
+	public void setVentainterna(double ventainterna) {
+		this.ventainterna = ventainterna;
+	}
 
-    public double getVentaexterna() {
-        return ventaexterna;
-    }
+	public double getAntibmastitis() {
+		return antibmastitis;
+	}
 
-    public void setVentaexterna(double ventaexterna) {
-        this.ventaexterna = ventaexterna;
-    }
+	public void setAntibmastitis(double antibmastitis) {
+		this.antibmastitis = antibmastitis;
+	}
 
-    public double getPrecio() {
-        return precio;
-    }
+	public double getVentaexterna() {
+		return ventaexterna;
+	}
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
+	public void setVentaexterna(double ventaexterna) {
+		this.ventaexterna = ventaexterna;
+	}
 
+	public double getPrecio() {
+		return precio;
+	}
 
-    public double getGrasa() {
-        return grasa;
-    }
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
 
-    public void setGrasa(double grasa) {
-        this.grasa = grasa;
-    }
+	public double getDiferencia() {
+		return diferencia;
+	}
 
-    public double getProteina() {
-        return proteina;
-    }
+	public void setDiferencia(double diferencia) {
+		this.diferencia = diferencia;
+	}
 
-    public void setProteina(double proteina) {
-        this.proteina = proteina;
-    }
+	public double getTotallitros() {
+		return totallitros;
+	}
 
-    public double getUfc() {
-        return ufc;
-    }
+	public void setTotallitros(double totallitros) {
+		this.totallitros = totallitros;
+	}
 
-    public void setUfc(double ufc) {
-        this.ufc = ufc;
-    }
+	public Integer getOrdeno() {
+		return ordeno;
+	}
 
-    public double getCcss() {
-        return ccss;
-    }
+	public void setOrdeno(Integer ordeno) {
+		this.ordeno = ordeno;
+	}
 
-    public void setCcss(double ccss) {
-        this.ccss = ccss;
-    }
+	public Integer getEstablo() {
+		return establo;
+	}
 
-    public Integer getTotalvacas() {
-        return totalvacas;
-    }
+	public void setEstablo(Integer establo) {
+		this.establo = establo;
+	}
 
-    public void setTotalvacas(Integer totalvacas) {
-        this.totalvacas = totalvacas;
-    }
+	public Integer getSecas() {
+		return secas;
+	}
 
-    public int getTotalvacassecas() {
-        return totalvacassecas;
-    }
+	public void setSecas(Integer secas) {
+		this.secas = secas;
+	}
 
-    public void setTotalvacassecas(Integer totalvacassecas) {
-        this.totalvacassecas = totalvacassecas;
-    }
+	public double getPromordeno() {
+		return promordeno;
+	}
 
-    public double getPromproduccion() {
-        return promproduccion;
-    }
+	public void setPromordeno(double promordeno) {
+		this.promordeno = promordeno;
+	}
 
-    public void setPromproduccion(double promproduccion) {
-        this.promproduccion = promproduccion;
-    }
+	public double getPromestablo() {
+		return promestablo;
+	}
 
-    public double getPromhato() {
-        return promhato;
-    }
+	public void setPromestablo(double promestablo) {
+		this.promestablo = promestablo;
+	}
 
-    public void setPromhato(double promhato) {
-        this.promhato = promhato;
-    }
+	public double getGrasa() {
+		return grasa;
+	}
+
+	public void setGrasa(double grasa) {
+		this.grasa = grasa;
+	}
+
+	public double getProteina() {
+		return proteina;
+	}
+
+	public void setProteina(double proteina) {
+		this.proteina = proteina;
+	}
+
+	public double getUfc() {
+		return ufc;
+	}
+
+	public void setUfc(double ufc) {
+		this.ufc = ufc;
+	}
+
+	public double getCcss() {
+		return ccss;
+	}
+
+	public void setCcss(double ccss) {
+		this.ccss = ccss;
+	}
+
 
 
 }
