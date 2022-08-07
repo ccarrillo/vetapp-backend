@@ -1,12 +1,12 @@
 package com.vetapp.dto;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class ProduccionLecheDTO extends BaseModelDTO {
 
     private Long id;
 
-    private Calendar fechaproduccion;
+    private Date fecha;
 
     private double racionternero;
 
@@ -14,9 +14,25 @@ public class ProduccionLecheDTO extends BaseModelDTO {
 
     private double ventainterna;
 
+    private double antibmastitis;
+
     private double ventaexterna;
 
     private double precio;
+
+    private double diferencia;
+
+    private double totallitros;
+
+    private Integer ordeno;
+
+    private Integer establo;
+
+    private Integer secas;
+
+    private double promordeno;
+
+    private double promestablo;
 
     private double grasa;
 
@@ -26,134 +42,158 @@ public class ProduccionLecheDTO extends BaseModelDTO {
 
     private double ccss;
 
-    private Integer totalvacas;
+	public Long getId() {
+		return id;
+	}
 
-    private Integer totalvacassecas;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    private double promproduccion;
+	public Date getFecha() {
+		return fecha;
+	}
 
-    private double promhato;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public double getRacionternero() {
+		return racionternero;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setRacionternero(double racionternero) {
+		this.racionternero = racionternero;
+	}
 
-    public Calendar getFechaproduccion() {
-        return fechaproduccion;
-    }
+	public double getVentacontado() {
+		return ventacontado;
+	}
 
-    public void setFechaproduccion(Calendar fechaproduccion) {
-        this.fechaproduccion = fechaproduccion;
-    }
+	public void setVentacontado(double ventacontado) {
+		this.ventacontado = ventacontado;
+	}
 
-    public double getRacionternero() {
-        return racionternero;
-    }
+	public double getVentainterna() {
+		return ventainterna;
+	}
 
-    public void setRacionternero(double racionternero) {
-        this.racionternero = racionternero;
-    }
+	public void setVentainterna(double ventainterna) {
+		this.ventainterna = ventainterna;
+	}
 
-    public double getVentacontado() {
-        return ventacontado;
-    }
+	public double getAntibmastitis() {
+		return antibmastitis;
+	}
 
-    public void setVentacontado(double ventacontado) {
-        this.ventacontado = ventacontado;
-    }
+	public void setAntibmastitis(double antibmastitis) {
+		this.antibmastitis = antibmastitis;
+	}
 
-    public double getVentainterna() {
-        return ventainterna;
-    }
+	public double getVentaexterna() {
+		return ventaexterna;
+	}
 
-    public void setVentainterna(double ventainterna) {
-        this.ventainterna = ventainterna;
-    }
+	public void setVentaexterna(double ventaexterna) {
+		this.ventaexterna = ventaexterna;
+	}
 
-    public double getVentaexterna() {
-        return ventaexterna;
-    }
+	public double getPrecio() {
+		return precio;
+	}
 
-    public void setVentaexterna(double ventaexterna) {
-        this.ventaexterna = ventaexterna;
-    }
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
 
-    public double getPrecio() {
-        return precio;
-    }
+	public double getDiferencia() {
+		return diferencia;
+	}
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
+	public void setDiferencia(double diferencia) {
+		this.diferencia = diferencia;
+	}
 
+	public double getTotallitros() {
+		return totallitros;
+	}
 
-    public double getGrasa() {
-        return grasa;
-    }
+	public void setTotallitros(double totallitros) {
+		this.totallitros = totallitros;
+	}
 
-    public void setGrasa(double grasa) {
-        this.grasa = grasa;
-    }
+	public Integer getOrdeno() {
+		return ordeno;
+	}
 
-    public double getProteina() {
-        return proteina;
-    }
+	public void setOrdeno(Integer ordeno) {
+		this.ordeno = ordeno;
+	}
 
-    public void setProteina(double proteina) {
-        this.proteina = proteina;
-    }
+	public Integer getEstablo() {
+		return establo;
+	}
 
-    public double getUfc() {
-        return ufc;
-    }
+	public void setEstablo(Integer establo) {
+		this.establo = establo;
+	}
 
-    public void setUfc(double ufc) {
-        this.ufc = ufc;
-    }
+	public Integer getSecas() {
+		return secas;
+	}
 
-    public double getCcss() {
-        return ccss;
-    }
+	public void setSecas(Integer secas) {
+		this.secas = secas;
+	}
 
-    public void setCcss(double ccss) {
-        this.ccss = ccss;
-    }
+	public double getPromordeno() {
+		return promordeno;
+	}
 
-    public Integer getTotalvacas() {
-        return totalvacas;
-    }
+	public void setPromordeno(double promordeno) {
+		this.promordeno = promordeno;
+	}
 
-    public void setTotalvacas(Integer totalvacas) {
-        this.totalvacas = totalvacas;
-    }
+	public double getPromestablo() {
+		return promestablo;
+	}
 
-    public int getTotalvacassecas() {
-        return totalvacassecas;
-    }
+	public void setPromestablo(double promestablo) {
+		this.promestablo = promestablo;
+	}
 
-    public void setTotalvacassecas(Integer totalvacassecas) {
-        this.totalvacassecas = totalvacassecas;
-    }
+	public double getGrasa() {
+		return grasa;
+	}
 
-    public double getPromproduccion() {
-        return promproduccion;
-    }
+	public void setGrasa(double grasa) {
+		this.grasa = grasa;
+	}
 
-    public void setPromproduccion(double promproduccion) {
-        this.promproduccion = promproduccion;
-    }
+	public double getProteina() {
+		return proteina;
+	}
 
-    public double getPromhato() {
-        return promhato;
-    }
+	public void setProteina(double proteina) {
+		this.proteina = proteina;
+	}
 
-    public void setPromhato(double promhato) {
-        this.promhato = promhato;
-    }
+	public double getUfc() {
+		return ufc;
+	}
 
+	public void setUfc(double ufc) {
+		this.ufc = ufc;
+	}
 
+	public double getCcss() {
+		return ccss;
+	}
+
+	public void setCcss(double ccss) {
+		this.ccss = ccss;
+	}
+     
+    
+    
 }
