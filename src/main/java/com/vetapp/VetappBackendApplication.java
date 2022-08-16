@@ -2,6 +2,7 @@ package com.vetapp;
 
 import java.util.Calendar;
 
+import com.vetapp.config.PropertiesConfig;
 import com.vetapp.dao.RoleRepository;
 import com.vetapp.dao.UserRoleRepository;
 import com.vetapp.model.UserRole;
@@ -32,6 +33,7 @@ public class VetappBackendApplication {
     private RoleRepository roleRepository;
 
     public static void main(String[] args) {
+        System.setProperty(PropertiesConfig.SPRING_CONFIG_LOCATION, PropertiesConfig.PATH_DATABASE_CONNECTION);
         SpringApplication.run(VetappBackendApplication.class, args);
     }
 

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "user", schema = "vet")
+@Table(name = "userauth", schema = "vet")
 public class UserAuth extends BaseModel {
 
 
