@@ -37,7 +37,7 @@ public class VetappBackendApplication {
         SpringApplication.run(VetappBackendApplication.class, args);
     }
 
-    /*@PostConstruct
+    @PostConstruct
     protected void init() {
         createRoles("SUPERUSUARIO");
         createRoles("ADMINISTADOR");
@@ -53,7 +53,7 @@ public class VetappBackendApplication {
         createUserRole(2L, 1L);
         createUserRole(2L, 2L);
 
-    }*/
+    }
 
     private void createRoles(String roleCode) {
         Role authority = new Role();
