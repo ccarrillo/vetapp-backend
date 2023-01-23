@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/parvetvalue")
 @CrossOrigin
-@Tag(name = "value")
+@Tag(name = "parvetvalue")
 public class PartVetValueController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -32,7 +32,7 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
         query.setParameter(1, true);
         return query.getResultList();*/
         //return this.em.createQuery("from " + type.getName() + " where is_active = " + true).getResultList();
-        return this.em.createQuery("from " + type.getName() + " where is_active = ?1").setParameter(1, true).getResultList();
+        return this.em.createQuery("from " + type.getName() + " where is_active = ?1 order by created_at desc").setParameter(1, true).getResultList();
     }
 
     @Override

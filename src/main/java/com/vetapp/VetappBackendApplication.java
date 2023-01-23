@@ -1,19 +1,15 @@
 package com.vetapp;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import com.vetapp.config.PropertiesConfig;
-import com.vetapp.dao.RoleRepository;
-import com.vetapp.dao.UserRoleRepository;
-import com.vetapp.model.UserRole;
+import com.vetapp.dao.*;
+import com.vetapp.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import com.vetapp.dao.UserAuthRepository;
-import com.vetapp.model.Role;
-import com.vetapp.model.UserAuth;
 
 import javax.annotation.PostConstruct;
 
@@ -32,6 +28,11 @@ public class VetappBackendApplication {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private ParVetDAO parVetDAO;
+
+    @Autowired
+    private ParVetValueDAO parVetValueDAO;
     public static void main(String[] args) {
         System.setProperty(PropertiesConfig.SPRING_CONFIG_LOCATION, PropertiesConfig.PATH_DATABASE_CONNECTION);
         SpringApplication.run(VetappBackendApplication.class, args);
@@ -52,6 +53,21 @@ public class VetappBackendApplication {
         createUserRole(1L, 1L);
         createUserRole(2L, 1L);
         createUserRole(2L, 2L);
+
+        //Carga de parametros de veterinaria
+        /*createParVet("CATEGORIA_FORMULA");
+        createParVetValue("Ruta 1", 1L);
+        createParVetValue("Ruta 2", 1L);
+        createParVetValue("Ruta 3", 1L);
+        createParVetValue("Ruta 4", 1L);
+        createParVetValue("Pre Parto", 1L);
+        createParVetValue("Secas", 1L);
+        createParVetValue("Machos", 1L);
+        createParVetValue("Cuna Destetado", 1L);
+        createParVetValue("3 A 6 (M) SJ", 1L);
+        createParVetValue("6 A 12 CH", 1L);
+        createParVetValue("12 a Mas CH", 1L);
+        createParVetValue("12 A Mas SJ", 1L);*/
 
     }
 
@@ -86,4 +102,22 @@ public class VetappBackendApplication {
         userRoleRepository.save(userRole);
     }
 
+    /*private void createParVet(String name) {
+        ParVet parVet = new ParVet();
+        parVet.setName(name);
+        parVet.setActive(true);
+        parVet.setUserCreation(0L);
+        parVet.setCreatedAt(Calendar.getInstance().getTime());
+        parVetDAO.insertar(parVet);
+    }
+
+    private void createParVetValue(String name, Long parVetId) {
+        ParVetValue parVetValue = new ParVetValue();
+        parVetValue.setName(name);
+        parVetValue.setParvetId(parVetId);
+        parVetValue.setActive(true);
+        parVetValue.setUserCreation(0L);
+        parVetValue.setCreatedAt(Calendar.getInstance().getTime());
+        parVetValueDAO.insertar(parVetValue);
+    }*/
 }
