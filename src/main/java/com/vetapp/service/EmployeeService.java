@@ -3,6 +3,7 @@ package com.vetapp.service;
 import com.vetapp.dto.EmployeeDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface EmployeeService {
 
@@ -15,5 +16,7 @@ public interface EmployeeService {
     EmployeeDTO actualizarEmpleado(EmployeeDTO employeeDto, Long id);
 
     boolean eliminarEmpleado(Long id);
+
+	List<EmployeeDTO> obtenerTipoEmpleados(Integer id);
 
 }

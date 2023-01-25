@@ -86,6 +86,9 @@ public class Employee extends BaseModel {
 
     @Column(name = "note", length = 300)
     private String note;
+    
+    @Column(name = "tipo_empleado")
+    private Integer tipoEmpleado;
 
     public Long getId() {
         return id;
@@ -278,4 +281,14 @@ public class Employee extends BaseModel {
     public void setNote(String note) {
         this.note = note;
     }
+
+	public int getTipoEmpleado() {
+		return tipoEmpleado;
+	}
+
+	public void setTipoEmpleado(int tipoEmpleado) {
+		this.tipoEmpleado = tipoEmpleado;
+	}
+    
+    
 }

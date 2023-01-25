@@ -33,8 +33,21 @@ public class TipoEvento extends BaseModel {
     @Column(name = "abreviacion", length = 7)
     private String abreviacion;
 
-    @Column(name = "eventoid")
-    private Long eventoId;
+    @Column(name = "grupoeventoid")
+    private Long grupoEventoId;
+    
+    @Column(name = "idgrupomover")
+    private Long idGrupoMover;
+    
+    @Column(name = "ideventorecordatorio")
+    private Long idEventoRecordatorio;
+    
+    @Column(name = "checkgrupoanimal")
+    private boolean checkgrupoanimal;
+    
+    @Column(name = "checktipoevento")
+    private boolean checktipoevento;
+    
 
     public Long getId() {
         return id;
@@ -68,13 +81,47 @@ public class TipoEvento extends BaseModel {
         this.abreviacion = abreviacion;
     }
 
-    public Long getEventoId() {
-        return eventoId;
-    }
+	public Long getGrupoEventoId() {
+		return grupoEventoId;
+	}
 
-    public void setEventoId(Long eventoId) {
-        this.eventoId = eventoId;
-    }
+	public void setGrupoEventoId(Long grupoEventoId) {
+		this.grupoEventoId = grupoEventoId;
+	}
+
+	public Long getIdGrupoMover() {
+		return idGrupoMover;
+	}
+
+	public void setIdGrupoMover(Long idGrupoMover) {
+		this.idGrupoMover = idGrupoMover;
+	}
+
+	public Long getIdEventoRecordatorio() {
+		return idEventoRecordatorio;
+	}
+
+	public void setIdEventoRecordatorio(Long idEventoRecordatorio) {
+		this.idEventoRecordatorio = idEventoRecordatorio;
+	}
+
+	public boolean isCheckgrupoanimal() {
+		return checkgrupoanimal;
+	}
+
+	public void setCheckgrupoanimal(boolean checkgrupoanimal) {
+		this.checkgrupoanimal = checkgrupoanimal;
+	}
+
+	public boolean isChecktipoevento() {
+		return checktipoevento;
+	}
+
+	public void setChecktipoevento(boolean checktipoevento) {
+		this.checktipoevento = checktipoevento;
+	}
+
+   
 
 
 }

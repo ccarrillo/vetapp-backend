@@ -7,6 +7,8 @@ public class ParVetValueDTO extends BaseModelDTO {
     private String name;
 
     private Long parvetId;
+    
+    private String nombreparvet;
 
     public Long getId() {
         return id;
@@ -31,4 +33,14 @@ public class ParVetValueDTO extends BaseModelDTO {
     public void setParvetId(Long parvetId) {
         this.parvetId = parvetId;
     }
+
+	public String getNombreparvet() {
+		return nombreparvet;
+	}
+
+	public void setNombreparvet(String nombreparvet) {
+		this.nombreparvet = nombreparvet;
+	}
+    
+    
 }

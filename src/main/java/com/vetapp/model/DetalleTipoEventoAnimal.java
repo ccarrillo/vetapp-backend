@@ -45,6 +45,9 @@ public class DetalleTipoEventoAnimal extends BaseModel {
 
     @Column(name = "observaciones", length = 200)
     private String observaciones;
+    
+    @Column(name = "idtipoevento")
+    private Long idtipoevento;
 
     public String getDetallesTipoEvento() {
         return detallesTipoEvento;

@@ -1,5 +1,9 @@
 package com.vetapp.dto;
 
+import java.util.List;
+
+
+
 public class TipoEventoDTO extends BaseModelDTO {
 
     private Long id;
@@ -10,7 +14,21 @@ public class TipoEventoDTO extends BaseModelDTO {
 
     private String abreviacion;
 
-    private Long eventoId;
+    private Long grupoEventoId;
+    
+    private Long idGrupoMover;
+    
+    private Long idEventoRecordatorio;
+    
+    private List<DetalleTipoEventoDTO> listaDetallleTipoEventoDTO;
+    
+    private List<RecordatorioEventoDTO> listaRecordatorioEventoDTO;
+    
+    private boolean checkgrupoanimal;
+    
+    private boolean checktipoevento;
+    
+    private String nombreGrupo;
 
     public Long getId() {
         return id;
@@ -44,13 +62,72 @@ public class TipoEventoDTO extends BaseModelDTO {
         this.abreviacion = abreviacion;
     }
 
-    public Long getEventoId() {
-        return eventoId;
-    }
+	public Long getGrupoEventoId() {
+		return grupoEventoId;
+	}
 
-    public void setEventoId(Long eventoId) {
-        this.eventoId = eventoId;
-    }
+	public void setGrupoEventoId(Long grupoEventoId) {
+		this.grupoEventoId = grupoEventoId;
+	}
 
+	public Long getIdGrupoMover() {
+		return idGrupoMover;
+	}
+
+	public void setIdGrupoMover(Long idGrupoMover) {
+		this.idGrupoMover = idGrupoMover;
+	}
+
+	public Long getIdEventoRecordatorio() {
+		return idEventoRecordatorio;
+	}
+
+	public void setIdEventoRecordatorio(Long idEventoRecordatorio) {
+		this.idEventoRecordatorio = idEventoRecordatorio;
+	}
+
+	public List<DetalleTipoEventoDTO> getListaDetallleTipoEventoDTO() {
+		return listaDetallleTipoEventoDTO;
+	}
+
+	public void setListaDetallleTipoEventoDTO(List<DetalleTipoEventoDTO> listaDetallleTipoEventoDTO) {
+		this.listaDetallleTipoEventoDTO = listaDetallleTipoEventoDTO;
+	}
+
+	public List<RecordatorioEventoDTO> getListaRecordatorioEventoDTO() {
+		return listaRecordatorioEventoDTO;
+	}
+
+	public void setListaRecordatorioEventoDTO(List<RecordatorioEventoDTO> listaRecordatorioEventoDTO) {
+		this.listaRecordatorioEventoDTO = listaRecordatorioEventoDTO;
+	}
+
+	public String getNombreGrupo() {
+		return nombreGrupo;
+	}
+
+	public void setNombreGrupo(String nombreGrupo) {
+		this.nombreGrupo = nombreGrupo;
+	}
+
+	public boolean isCheckgrupoanimal() {
+		return checkgrupoanimal;
+	}
+
+	public void setCheckgrupoanimal(boolean checkgrupoanimal) {
+		this.checkgrupoanimal = checkgrupoanimal;
+	}
+
+	public boolean isChecktipoevento() {
+		return checktipoevento;
+	}
+
+	public void setChecktipoevento(boolean checktipoevento) {
+		this.checktipoevento = checktipoevento;
+	}
+	
+	
+
+    
 
 }

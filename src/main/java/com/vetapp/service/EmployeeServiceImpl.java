@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -103,4 +104,14 @@ public class EmployeeServiceImpl implements EmployeeService {
             return null;
         }
     }
+
+	@Override
+	public List<EmployeeDTO> obtenerTipoEmpleados(Integer id) {
+		// TODO Auto-generated method stub
+		 return (ArrayList<EmployeeDTO>) employeeDao.obtenerTipoEmpleados(id)
+	                .stream()
+	                .map(this::convertEntityToDto)
+	                .collect(Collectors.toList());
+	        
+	}
 }

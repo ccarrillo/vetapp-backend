@@ -3,6 +3,8 @@ package com.vetapp.service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.TipoEventoDAO;
 import com.vetapp.dao.UserAuthRepository;
+import com.vetapp.dto.DetalleTipoEventoDTO;
+import com.vetapp.dto.RecordatorioEventoDTO;
 import com.vetapp.dto.TipoEventoDTO;
 import com.vetapp.model.TipoEvento;
 import com.vetapp.model.UserAuth;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +26,12 @@ public class TipoEventoServiceImpl implements TipoEventoService {
 
     @Autowired
     private IAuthenticationFacade authenticationFacade;
+    
+    @Autowired
+    private DetalleTipoEventoService detalleTipoEventoService;
+    
+    @Autowired
+    private RecordatorioEventoService recordatorioEventoService;
 
     @Autowired
     TipoEventoDAO tipoEventoDao;
@@ -46,7 +55,7 @@ public class TipoEventoServiceImpl implements TipoEventoService {
     }
 
     public ArrayList<TipoEventoDTO> obtenerTipoEventos() {
-        return (ArrayList<TipoEventoDTO>) tipoEventoDao.buscarTodos(new TipoEvento())
+        return (ArrayList<TipoEventoDTO>) tipoEventoDao.buscarActivos(new TipoEvento())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
@@ -54,7 +63,14 @@ public class TipoEventoServiceImpl implements TipoEventoService {
 
     public TipoEventoDTO obtenerTipoEventoPorId(Long id) {
         TipoEvento obj = tipoEventoDao.buscarPorId(id);
-        return convertEntityToDto(obj);
+        
+      TipoEventoDTO tipoEventoDTO=  convertEntityToDto(obj);
+      
+      List<DetalleTipoEventoDTO> listaDetallleTipoEventoDTO = detalleTipoEventoService.obtenerListaDetalleTipoEventoPorIdTipo(id);
+      List<RecordatorioEventoDTO> listaRecordatorioEventoDTO = recordatorioEventoService.obtenerRecordatorioEventoPorIdGrupo(id);
+        tipoEventoDTO.setListaDetallleTipoEventoDTO(listaDetallleTipoEventoDTO);
+        tipoEventoDTO.setListaRecordatorioEventoDTO(listaRecordatorioEventoDTO);
+        return tipoEventoDTO;
     }
 
     public TipoEventoDTO actualizarTipoEvento(TipoEventoDTO tipoEventoDto, Long id) {
@@ -104,4 +120,10 @@ public class TipoEventoServiceImpl implements TipoEventoService {
             return null;
         }
     }
+
+	@Override
+	public List<TipoEventoDTO> obtenerTipoEventosGrupos() {
+		// TODO Auto-generated method stub
+		return tipoEventoDao.obtenerTipoEventosGrupos();
+	}
 }

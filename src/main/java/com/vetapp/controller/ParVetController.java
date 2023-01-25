@@ -23,11 +23,12 @@ import java.util.List;
 public class ParVetController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
     @Autowired
     private PartVetService parVetService;
 
     @PostMapping("")
-    @Operation(summary = "Create ParListValue", responses = {
+    @Operation(summary = "Create ParVet", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDTO.class)))})
     public ResponseEntity<?> guardarParVet(@RequestBody ParVetDTO parVetDto) {
         try {
@@ -40,7 +41,7 @@ public class ParVetController {
     }
 
     @GetMapping("")
-    @Operation(summary = "Read ParListValues", responses = {
+    @Operation(summary = "Read ParVet", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDTO.class)))})
     public ResponseEntity<?> obtenerParVet() {
         try {
@@ -56,7 +57,7 @@ public class ParVetController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Read ParListValue", responses = {
+    @Operation(summary = "Read ParVet", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDTO.class)))})
     public ResponseEntity<?> obtenerParVetPorId(@PathVariable("id") Long id) {
         try {
@@ -74,7 +75,7 @@ public class ParVetController {
 
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update ParListValue", responses = {
+    @Operation(summary = "Update ParVet", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDTO.class)))})
     public ResponseEntity<?> actualizarParVet(@RequestBody ParVetDTO parVetDto, @PathVariable("id") Long id) {
         try {
@@ -91,7 +92,7 @@ public class ParVetController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete ParListValue", responses = {
+    @Operation(summary = "Delete ParVet", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetDTO.class)))})
     public ResponseEntity<ParVetDTO> eliminarParVet(@PathVariable("id") Long id) {
         try {

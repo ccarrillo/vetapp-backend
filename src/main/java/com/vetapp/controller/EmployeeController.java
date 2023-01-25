@@ -55,6 +55,24 @@ public class EmployeeController {
             return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    
+    @GetMapping("idtipoempleado/{id}")
+    @Operation(summary = "Read Employees", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = EmployeeDTO.class)))})
+    public ResponseEntity<?> obtenerEmpleados(@PathVariable("id") Integer id) {
+        try {
+            List<EmployeeDTO> obj = employeeService.obtenerTipoEmpleados(id);
+            if (obj.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity(obj, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
 
     @GetMapping("/{id}")
     @Operation(summary = "Read Employee", responses = {

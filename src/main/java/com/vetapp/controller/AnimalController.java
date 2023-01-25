@@ -1,7 +1,10 @@
 package com.vetapp.controller;
 
+import com.vetapp.dto.AnimalBusquedaDTO;
 import com.vetapp.dto.AnimalDTO;
 import com.vetapp.service.AnimalService;
+import com.vetapp.vo.AnimalVO;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,8 +35,11 @@ public class AnimalController {
             @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AnimalDTO.class)))})
     public ResponseEntity<?> guardarAnimal(@RequestBody AnimalDTO animalDto) {
         try {
-            AnimalDTO obj = animalService.guardarAnimal(animalDto);
-            return new ResponseEntity(obj, HttpStatus.CREATED);
+        	
+        		AnimalDTO obj = animalService.guardarAnimal(animalDto);
+                return new ResponseEntity(obj, HttpStatus.CREATED);
+        	
+            
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -56,12 +62,71 @@ public class AnimalController {
         }
     }
     
+    @GetMapping("existe/{aretenombre}")
+    @Operation(summary = "existencia Animals", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AnimalDTO.class)))})
+    public ResponseEntity<?> existenciaAnimal(@PathVariable("aretenombre") String aretenombre) {
+        try {
+            boolean respuesta = animalService.existenciaAnimal(aretenombre);
+            
+            return new ResponseEntity(respuesta, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @GetMapping("existe/{id}/{aretenombre}")
+    @Operation(summary = "existencia Animals", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AnimalDTO.class)))})
+    public ResponseEntity<?> existenciaAnimalArete(@PathVariable("id") Long id,@PathVariable("aretenombre") String aretenombre) {
+        try {
+        	boolean respuesta;
+        	AnimalDTO obj = animalService.obtenerAnimalPorId(id);
+        	if(obj.getArete().equals(aretenombre)) {
+        		respuesta= true;
+        	}
+        	else {
+        		if(animalService.existenciaAnimalDistintoId(id, aretenombre))
+        		{
+        			respuesta=false;
+        		}
+        		else {
+        			respuesta = true;
+        		}
+        		//respuesta = false;
+        	}
+            
+            return new ResponseEntity(respuesta, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    
     @GetMapping("sexo/{sexo}")
     @Operation(summary = "Read Animals Sexes", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AnimalDTO.class)))})
     public ResponseEntity<?> obtenerAnimalsBySex(@PathVariable("sexo") String sexo) {
         try {
             List<AnimalDTO> obj = animalService.obtenerAnimalBySexes(sexo);
+            if (obj.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity(obj, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @GetMapping("todosvo")
+    @Operation(summary = "Read Animals Sexes", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AnimalVO.class)))})
+    public ResponseEntity<?> obtenerAnimalesVO() {
+        try {
+            List<AnimalVO> obj = animalService.obtenerAnimalesVO();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -88,12 +153,31 @@ public class AnimalController {
             return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @GetMapping("busqueda/{id}")
+    @Operation(summary = "Read Animal", responses = {
+    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AnimalDTO.class)))})
+    public ResponseEntity<?> buscarAnimalPorId(@PathVariable("id") Long id) {
+        try {
+            AnimalDTO obj = animalService.buscarAnimalPorId(id);
+            if (obj != null) {
+            	
+                return new ResponseEntity(obj, HttpStatus.OK);
+            } else {
+                return new ResponseEntity(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update Animal", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AnimalDTO.class)))})
     public ResponseEntity<?> actualizarAnimal(@RequestBody AnimalDTO animalDto, @PathVariable("id") Long id) {
         try {
+        	
             AnimalDTO obj = animalService.actualizarAnimal(animalDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);
@@ -105,6 +189,7 @@ public class AnimalController {
             return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Animal", responses = {

@@ -28,6 +28,9 @@ public class RecordatorioEvento extends BaseModel {
 
     @Column(name = "numerodias")
     private Integer numerodias;
+    
+    @Column(name = "idtipoeventopadre")
+    private Long idtipoeventopadre;
 
     public Long getId() {
         return id;
@@ -53,5 +56,14 @@ public class RecordatorioEvento extends BaseModel {
         this.numerodias = numerodias;
     }
 
+	public Long getIdtipoeventopadre() {
+		return idtipoeventopadre;
+	}
+
+	public void setIdtipoeventopadre(Long idtipoeventopadre) {
+		this.idtipoeventopadre = idtipoeventopadre;
+	}
+     
+    
 
 }

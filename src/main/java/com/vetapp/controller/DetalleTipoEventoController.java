@@ -72,6 +72,23 @@ public class DetalleTipoEventoController {
             return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @GetMapping("lista/{id}")
+    @Operation(summary = "Read lista DetalleTipoEvento", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetalleTipoEventoDTO.class)))})
+    public ResponseEntity<?> obtenerListaDetalleTipoEventoPorIdTipo(@PathVariable("id") Long id) {
+        try {
+            List<DetalleTipoEventoDTO> obj = detalleTipoEventoService.obtenerListaDetalleTipoEventoPorIdTipo(id);
+            if (obj != null) {
+                return new ResponseEntity(obj, HttpStatus.OK);
+            } else {
+                return new ResponseEntity(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update DetalleTipoEvento", responses = {

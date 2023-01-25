@@ -45,7 +45,7 @@ public class InventarioSemenController {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InventarioSemenDTO.class)))})
     public ResponseEntity<?> obtenerInventarioSemens() {
         try {
-            List<InventarioSemenDTO> obj = inventarioSemenService.obtenerInventarioSemens();
+            List<InventarioSemenDTO> obj = inventarioSemenService.obtenerInventarioSemenGrupos();
             if (obj.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }

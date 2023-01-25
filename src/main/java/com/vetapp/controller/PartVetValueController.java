@@ -1,5 +1,4 @@
 package com.vetapp.controller;
-
 import com.vetapp.dto.ParVetValueDTO;
 import com.vetapp.service.ParVetValueService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,6 +26,35 @@ public class PartVetValueController {
 	@Autowired
 	private ParVetValueService partVetValueService;
 	   
+   
+	 @PostMapping("")
+	 @Operation(summary = "Create ParVetValue", responses = {
+	            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetValueDTO.class)))})
+	public ResponseEntity<?> guardarParVetValue(@RequestBody ParVetValueDTO parVetValueDto) {
+	        try {
+	            ParVetValueDTO obj = partVetValueService.guardarParVetValue(parVetValueDto);
+	            return new ResponseEntity(obj, HttpStatus.CREATED);
+	        } catch (Exception e) {
+				logger.error(e.getLocalizedMessage());
+	            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	 }
+	 
+	 @GetMapping("")
+	    @Operation(summary = "Read ParVetValue", responses = {
+	            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetValueDTO.class)))})
+	    public ResponseEntity<?> obtenerParVet() {
+	        try {
+	            List<ParVetValueDTO> obj = partVetValueService.obtenerParVetValuesTodos();
+	            if (obj.isEmpty()) {
+	                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	            }
+	            return new ResponseEntity(obj, HttpStatus.OK);
+	        } catch (Exception e) {
+				logger.error(e.getLocalizedMessage());
+	            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	    }
 
 	@GetMapping("/{idParVet}")
 	@Operation(summary = "Read ParVetValues", responses = {
@@ -43,5 +71,22 @@ public class PartVetValueController {
 	    	return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 	}
+	
+	@PutMapping("/{id}")
+	    @Operation(summary = "Update ParVetValue", responses = {
+	            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ParVetValueDTO.class)))})
+	    public ResponseEntity<?> actualizarParVetValue(@RequestBody ParVetValueDTO parVetDto, @PathVariable("id") Long id) {
+	        try {
+	            ParVetValueDTO obj = partVetValueService.actualizarParVetValue(parVetDto, id);
+	            if (obj != null) {
+	                return new ResponseEntity(obj, HttpStatus.OK);
+	            } else {
+	                return new ResponseEntity(HttpStatus.NOT_FOUND);
+	            }
+	        } catch (Exception e) {
+				logger.error(e.getLocalizedMessage());
+	            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	    }
 
 }

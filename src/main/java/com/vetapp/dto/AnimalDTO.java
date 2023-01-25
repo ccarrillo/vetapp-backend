@@ -2,6 +2,10 @@ package com.vetapp.dto;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+
+
+
 public class AnimalDTO extends BaseModelDTO {
 
     private Long id;
@@ -11,8 +15,8 @@ public class AnimalDTO extends BaseModelDTO {
     private Long categoriaProduccionId;
 
     private String arete;
-
-    private String nombre;
+    
+    private String otraIdentificacion;
 
     private Long razaId;
 
@@ -21,6 +25,10 @@ public class AnimalDTO extends BaseModelDTO {
     private Date fechanacimiento;
 
     private Date  fechaultimoparto;
+
+    private Date fechadestete;
+    
+    private Date fechacastracion;
 
     private Long estadoreproductivoId;
 
@@ -41,6 +49,33 @@ public class AnimalDTO extends BaseModelDTO {
     private boolean muerto;
 
     private boolean venta;
+    
+    private String marcaizquierda;
+
+    private String marcaderecha;
+
+    private String color;
+   
+    private String marcadistintiva;
+    
+    private String anotaciones;
+    
+    private Long propositoId;
+
+    private Integer pureza;
+    
+    private Long idGrupoAnimal;
+    
+    private boolean noservir;
+    
+    private String otraIdentificacionMadre;
+
+    private String otraIdentificacionPadre;
+
+    private String radioMadre;
+    
+    private String radioPadre;
+    
 
     public Long getId() {
         return id;
@@ -73,16 +108,18 @@ public class AnimalDTO extends BaseModelDTO {
     public void setArete(String arete) {
         this.arete = arete;
     }
+    
+    
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getOtraIdentificacion() {
+		return otraIdentificacion;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setOtraIdentificacion(String otraIdentificacion) {
+		this.otraIdentificacion = otraIdentificacion;
+	}
 
-    public Long getRazaId() {
+	public Long getRazaId() {
         return razaId;
     }
 
@@ -113,8 +150,26 @@ public class AnimalDTO extends BaseModelDTO {
     public void setFechaultimoparto(Date fechaultimoparto) {
         this.fechaultimoparto = fechaultimoparto;
     }
+    
+    
 
-    public Long getEstadoreproductivoId() {
+    public Date getFechadestete() {
+		return fechadestete;
+	}
+
+	public void setFechadestete(Date fechadestete) {
+		this.fechadestete = fechadestete;
+	}
+
+	public Date getFechacastracion() {
+		return fechacastracion;
+	}
+
+	public void setFechacastracion(Date fechacastracion) {
+		this.fechacastracion = fechacastracion;
+	}
+
+	public Long getEstadoreproductivoId() {
         return estadoreproductivoId;
     }
 
@@ -194,4 +249,110 @@ public class AnimalDTO extends BaseModelDTO {
         this.venta = venta;
     }
 
+	public String getMarcaizquierda() {
+		return marcaizquierda;
+	}
+
+	public void setMarcaizquierda(String marcaizquierda) {
+		this.marcaizquierda = marcaizquierda;
+	}
+
+	public String getMarcaderecha() {
+		return marcaderecha;
+	}
+
+	public void setMarcaderecha(String marcaderecha) {
+		this.marcaderecha = marcaderecha;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getMarcadistintiva() {
+		return marcadistintiva;
+	}
+
+	public void setMarcadistintiva(String marcadistintiva) {
+		this.marcadistintiva = marcadistintiva;
+	}
+
+	public String getAnotaciones() {
+		return anotaciones;
+	}
+
+	public void setAnotaciones(String anotaciones) {
+		this.anotaciones = anotaciones;
+	}
+
+	public Long getPropositoId() {
+		return propositoId;
+	}
+
+	public void setPropositoId(Long propositoId) {
+		this.propositoId = propositoId;
+	}
+
+	public Integer getPureza() {
+		return pureza;
+	}
+
+	public void setPureza(Integer pureza) {
+		this.pureza = pureza;
+	}
+
+	public Long getIdGrupoAnimal() {
+		return idGrupoAnimal;
+	}
+
+	public void setIdGrupoAnimal(Long idGrupoAnimal) {
+		this.idGrupoAnimal = idGrupoAnimal;
+	}
+
+	public boolean isNoservir() {
+		return noservir;
+	}
+
+	public void setNoservir(boolean noservir) {
+		this.noservir = noservir;
+	}
+
+	public String getOtraIdentificacionMadre() {
+		return otraIdentificacionMadre;
+	}
+
+	public void setOtraIdentificacionMadre(String otraIdentificacionMadre) {
+		this.otraIdentificacionMadre = otraIdentificacionMadre;
+	}
+
+	public String getOtraIdentificacionPadre() {
+		return otraIdentificacionPadre;
+	}
+
+	public void setOtraIdentificacionPadre(String otraIdentificacionPadre) {
+		this.otraIdentificacionPadre = otraIdentificacionPadre;
+	}
+
+	public String getRadioMadre() {
+		return radioMadre;
+	}
+
+	public void setRadioMadre(String radioMadre) {
+		this.radioMadre = radioMadre;
+	}
+
+	public String getRadioPadre() {
+		return radioPadre;
+	}
+
+	public void setRadioPadre(String radioPadre) {
+		this.radioPadre = radioPadre;
+	}
+   
+    
+    
 }

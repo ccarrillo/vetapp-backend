@@ -72,6 +72,41 @@ public class RecordatorioEventoController {
             return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @GetMapping("grupo/{id}")
+    @Operation(summary = "Read RecordatorioEvento", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDTO.class)))})
+    public ResponseEntity<?> obtenerRecordatorioEventoPorIdGrupo(@PathVariable("id") Long id) {
+        try {
+            List<RecordatorioEventoDTO> obj = recordatorioEventoService.obtenerRecordatorioEventoPorIdGrupo(id);
+            if (obj != null) {
+                return new ResponseEntity(obj, HttpStatus.OK);
+            } else {
+                return new ResponseEntity(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    
+    @GetMapping("lista/{id}")
+    @Operation(summary = "Read RecordatorioEvento", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecordatorioEventoDTO.class)))})
+    public ResponseEntity<?> obtenerRecordatorioEventoPorIdTipo(@PathVariable("id") Long id) {
+        try {
+            List<RecordatorioEventoDTO> obj = recordatorioEventoService.obtenerRecordatorioEventoPorIdTipo(id);
+            if (obj != null) {
+                return new ResponseEntity(obj, HttpStatus.OK);
+            } else {
+                return new ResponseEntity(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update RecordatorioEvento", responses = {

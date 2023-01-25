@@ -6,6 +6,8 @@ import com.vetapp.dao.UserAuthRepository;
 import com.vetapp.dto.AnimalDTO;
 import com.vetapp.model.Animal;
 import com.vetapp.model.UserAuth;
+import com.vetapp.vo.AnimalVO;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Autowired
     private IAuthenticationFacade authenticationFacade;
+    
+  
 
     @Autowired
     AnimalDAO animalDao;
@@ -106,4 +110,38 @@ public class AnimalServiceImpl implements AnimalService {
             return null;
         }
     }
+
+	@Override
+	public ArrayList<AnimalVO> obtenerAnimalesVO() {
+		// TODO Auto-generated method stub
+		return (ArrayList<AnimalVO>) animalDao.obtenerAnimalesVO(true);
+	}
+
+	@Override
+	public AnimalDTO buscarAnimalPorId(Long id) {
+		
+		 Animal animal =  animalDao.buscarPorId(id);
+		 
+	    return convertEntityToDto(animal);
+
+
+	}
+
+	@Override
+	public boolean existenciaAnimal(String areteNombre) {
+		// TODO Auto-generated method stub
+		return animalDao.existenciaAnimal(areteNombre);
+	}
+
+	@Override
+	public boolean existenciaAnimalDistintoId(Long id, String arete) {
+		// TODO Auto-generated method stub
+		return animalDao.existenciaAnimalDistintoId(id,arete);
+	}
+
+	
+
+	
+	
+	
 }

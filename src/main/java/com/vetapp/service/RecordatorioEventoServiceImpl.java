@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -104,4 +105,16 @@ public class RecordatorioEventoServiceImpl implements RecordatorioEventoService 
             return null;
         }
     }
+
+	@Override
+	public List<RecordatorioEventoDTO> obtenerRecordatorioEventoPorIdGrupo(Long id) {
+		// TODO Auto-generated method stub
+		return recordatorioEventoDao.obtenerRecordatorioEventoPorIdGrupo(id);
+	}
+
+	@Override
+	public List<RecordatorioEventoDTO> obtenerRecordatorioEventoPorIdTipo(Long id) {
+		// TODO Auto-generated method stub
+		return recordatorioEventoDao.obtenerRecordatorioEventoPorIdTipo(id);
+	}
 }

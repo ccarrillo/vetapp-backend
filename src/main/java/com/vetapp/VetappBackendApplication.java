@@ -40,7 +40,7 @@ public class VetappBackendApplication {
 
     @PostConstruct
     protected void init() {
-        createRoles("SUPERUSUARIO");
+       /* createRoles("SUPERUSUARIO");
         createRoles("ADMINISTADOR");
         createRoles("SUPERVISOR");
         createRoles("VENDEDOR");
@@ -52,7 +52,7 @@ public class VetappBackendApplication {
 
         createUserRole(1L, 1L);
         createUserRole(2L, 1L);
-        createUserRole(2L, 2L);
+        createUserRole(2L, 2L);*/
 
         //Carga de parametros de veterinaria
         /*createParVet("CATEGORIA_FORMULA");

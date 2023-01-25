@@ -25,6 +25,15 @@ public class Evento extends BaseModel {
 
     @Column(name = "nombre", length = 100)
     private String nombre;
+    
+    
+    @Column(name = "precio")
+    private double precio;
+
+    @Column(name = "abreviacion", length = 7)
+    private String abreviacion;
+
+    @Column(name = "eventoid")
 
     public Long getId() {
         return id;
@@ -41,6 +50,22 @@ public class Evento extends BaseModel {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public String getAbreviacion() {
+		return abreviacion;
+	}
+
+	public void setAbreviacion(String abreviacion) {
+		this.abreviacion = abreviacion;
+	}
 
 
 }
