@@ -119,4 +119,18 @@ public class DetalleProtocoloServiceImpl implements DetalleProtocoloService{
 		return null;
 	}
 
+	@Override
+	public List<DetalleProtocoloDTO> obtenerListaDetalleProtocolo(Long id) {
+		// TODO Auto-generated method stub
+		return detalleDao.obtenerListaDetalleProtocoloPorIdTipo( id);
+	}
+
+	@Override
+	public void eliminarDetalleProtocoloPorIdProtocolo(Long id) {
+		// TODO Auto-generated method stub
+	
+            detalleDao.eliminarDetalleProtocoloPorIdProtocolo(id);
+       
+	}
+
 }

@@ -15,10 +15,13 @@ import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.ProtocoloDAO;
 import com.vetapp.dao.UserAuthRepository;
 import com.vetapp.dto.DetalleProtocoloDTO;
+import com.vetapp.dto.DetalleTipoEventoDTO;
 import com.vetapp.dto.ProtocoloDTO;
+import com.vetapp.dto.RecordatorioEventoDTO;
 import com.vetapp.dto.TipoEventoDTO;
 import com.vetapp.model.DetalleProtocolo;
 import com.vetapp.model.Protocolo;
+import com.vetapp.model.TipoEvento;
 import com.vetapp.model.UserAuth;
 
 @Service
@@ -30,6 +33,9 @@ public class ProtocoloServiceImpl implements ProtocoloService {
 
     @Autowired
     ProtocoloDAO protocoloDao;
+    
+    @Autowired
+    private DetalleProtocoloService detalleProtocoloService;
 
     @Autowired
     UserAuthRepository userAuthRepository;
@@ -123,6 +129,19 @@ public class ProtocoloServiceImpl implements ProtocoloService {
 	public List<ProtocoloDTO> obtenerProtocoloGrupos() {
 		// TODO Auto-generated method stub
 		return protocoloDao.obtenerProtocoloGrupos();
+	}
+
+	@Override
+	public ProtocoloDTO obtenerDetalleProtocoloPorIdProtocolo(Long id) {
+		// TODO Auto-generated method stub
+		  Protocolo obj = protocoloDao.buscarPorId(id);
+	        
+	      ProtocoloDTO protocoloDTO=  convertEntityToDto(obj);
+	      
+	      List<DetalleProtocoloDTO> listaDetallleProtocoloDTO = detalleProtocoloService.obtenerListaDetalleProtocolo(id);
+	        protocoloDTO.setListaDetallleProtocoloDTO(listaDetallleProtocoloDTO);
+	        
+	        return protocoloDTO;
 	}
 
 }

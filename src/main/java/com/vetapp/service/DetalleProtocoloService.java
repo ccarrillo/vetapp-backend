@@ -17,7 +17,11 @@ public interface DetalleProtocoloService {
 	    DetalleProtocoloDTO actualizarDetalleProtocolo(DetalleProtocoloDTO detalleDto, Long id);
 
 	    boolean eliminarDetalleProtocolo(Long id);
+	    
+	    void eliminarDetalleProtocoloPorIdProtocolo(Long id);
 
 		List<DetalleProtocoloDTO> buscarDetalleProtocoloPorAnimal(Long id);
+
+		List<DetalleProtocoloDTO> obtenerListaDetalleProtocolo(Long id);
 
 }

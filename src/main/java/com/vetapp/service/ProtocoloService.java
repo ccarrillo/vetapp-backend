@@ -21,4 +21,6 @@ public interface ProtocoloService {
 
 	List<ProtocoloDTO> buscarProtocoloPorAnimal(Long id);
 
+	ProtocoloDTO obtenerDetalleProtocoloPorIdProtocolo(Long id);
+
 }

@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vetapp.dto.AnimalDTO;
+import com.vetapp.dto.DetalleProtocoloDTO;
+import com.vetapp.dto.DetalleTipoEventoDTO;
 import com.vetapp.dto.ProtocoloDTO;
-import com.vetapp.dto.TipoEventoDTO;
+import com.vetapp.service.DetalleProtocoloService;
+import com.vetapp.service.DetalleTipoEventoService;
 import com.vetapp.service.ProtocoloService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -38,6 +41,9 @@ public class ProtocoloController {
 
     @Autowired
     private ProtocoloService protocoloService;
+    
+    @Autowired
+    private DetalleProtocoloService detalleProtocoloService;
 
     @PostMapping("")
     @Operation(summary = "Create Protocolo", responses = {
@@ -45,6 +51,19 @@ public class ProtocoloController {
     public ResponseEntity<?> guardarProtocolo(@RequestBody ProtocoloDTO protocoloDto) {
         try {
             ProtocoloDTO obj = protocoloService.guardarProtocolo(protocoloDto);
+            if(protocoloDto.getListaDetallleProtocoloDTO().size()>0) {
+        		for(DetalleProtocoloDTO detalle:protocoloDto.getListaDetallleProtocoloDTO()) 
+        		{
+        			/*if(detalle.getId() != null ) {
+        				System.out.println("ingreso aqui actualizacion detalle ");
+        			}
+        			else {*/
+        				 detalle.setIdprotocolo(obj.getId());
+        				 detalleProtocoloService.guardarDetalleProtocolo(detalle);
+        			//}
+        			  
+        		}
+        	}
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
@@ -105,15 +124,53 @@ public class ProtocoloController {
         }
     }
     
+    @GetMapping("porid/{id}")
+    @Operation(summary = "Read Protocolo", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProtocoloDTO.class)))})
+    public ResponseEntity<?> obtenerDetalleProtocoloPorIdProtocolo(@PathVariable("id") Long id) {
+        try {
+            ProtocoloDTO obj = protocoloService.obtenerDetalleProtocoloPorIdProtocolo(id);
+            if (obj != null) {
+                return new ResponseEntity(obj, HttpStatus.OK);
+            } else {
+                return new ResponseEntity(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
    
 
     @PutMapping("/{id}")
     @Operation(summary = "Update Protocolo", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProtocoloDTO.class)))})
-    public ResponseEntity<?> actualizarProtocolo(@RequestBody ProtocoloDTO ProtocoloDto, @PathVariable("id") Long id) {
+    public ResponseEntity<?> actualizarProtocolo(@RequestBody ProtocoloDTO protocoloDto, @PathVariable("id") Long id) {
         try {
-            ProtocoloDTO obj = protocoloService.actualizarProtocolo(ProtocoloDto, id);
+            ProtocoloDTO obj = protocoloService.actualizarProtocolo(protocoloDto, id);
             if (obj != null) {
+            	if(protocoloDto.getListaDetallleProtocoloDTO().size()>0) {
+            		for(DetalleProtocoloDTO detalle:protocoloDto.getListaDetallleProtocoloDTO()) 
+            		{    
+            			if(detalle.getId() != null ) {
+            				 if(detalle.isEliminado())
+            				 {
+            					detalleProtocoloService.eliminarDetalleProtocolo(detalle.getId()) ;
+            				 }
+            				 else{
+            					 detalle.setIdprotocolo(obj.getId());
+            					 detalleProtocoloService.actualizarDetalleProtocolo(detalle, detalle.getId());
+            				 }
+            				
+            			}
+            			else {
+            				 detalle.setIdprotocolo(obj.getId());
+            				 detalleProtocoloService.guardarDetalleProtocolo(detalle);
+            			}
+            			  
+            		}
+            	}
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {
                 return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -130,6 +187,7 @@ public class ProtocoloController {
     public ResponseEntity<AnimalDTO> eliminarProtocolo(@PathVariable("id") Long id) {
         try {
             Boolean obj = protocoloService.eliminarProtocolo(id);
+                detalleProtocoloService.eliminarDetalleProtocoloPorIdProtocolo(id);
             if (obj) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {

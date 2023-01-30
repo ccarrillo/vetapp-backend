@@ -1,6 +1,6 @@
 package com.vetapp.dto;
 
-
+import java.util.List;
 
 public class ProtocoloDTO extends BaseModelDTO{
       
@@ -11,6 +11,8 @@ public class ProtocoloDTO extends BaseModelDTO{
     private Long grupoProtocoloId;
     
     private String nombreGrupo;
+    
+    private List<DetalleProtocoloDTO> listaDetallleProtocoloDTO;
 
 	public Long getId() {
 		return id;
@@ -44,6 +46,14 @@ public class ProtocoloDTO extends BaseModelDTO{
 
 	public void setNombreGrupo(String nombreGrupo) {
 		this.nombreGrupo = nombreGrupo;
+	}
+
+	public List<DetalleProtocoloDTO> getListaDetallleProtocoloDTO() {
+		return listaDetallleProtocoloDTO;
+	}
+
+	public void setListaDetallleProtocoloDTO(List<DetalleProtocoloDTO> listaDetallleProtocoloDTO) {
+		this.listaDetallleProtocoloDTO = listaDetallleProtocoloDTO;
 	}
     
 	

@@ -1,21 +1,27 @@
 package com.vetapp.dto;
 
-import javax.persistence.Column;
-
 import com.vetapp.model.BaseModel;
 
 public class DetalleProtocoloDTO extends BaseModel {
-   
-	 private Long id;
+
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 		
-	 @Column(name = "idprotocolo")
 	 private Long idprotocolo;
 
-    @Column(name = "idtipoevento")
     private Long idtipoevento;
 
-    @Column(name = "numerodias")
     private Integer numerodias;
+    
+    private boolean editado;
+    
+    private boolean eliminado;
 
 	public Long getId() {
 		return id;
@@ -47,6 +53,22 @@ public class DetalleProtocoloDTO extends BaseModel {
 
 	public void setNumerodias(Integer numerodias) {
 		this.numerodias = numerodias;
+	}
+
+	public boolean isEditado() {
+		return editado;
+	}
+
+	public void setEditado(boolean editado) {
+		this.editado = editado;
+	}
+
+	public boolean isEliminado() {
+		return eliminado;
+	}
+
+	public void setEliminado(boolean eliminado) {
+		this.eliminado = eliminado;
 	}
     
     
