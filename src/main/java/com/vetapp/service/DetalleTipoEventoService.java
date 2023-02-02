@@ -18,5 +18,7 @@ public interface DetalleTipoEventoService {
     DetalleTipoEventoDTO actualizarDetalleTipoEvento(DetalleTipoEventoDTO detalleTipoEventoDto, Long id);
 
     boolean eliminarDetalleTipoEvento(Long id);
+    
+    void eliminarDetalleTipoEventoPorIdTipoEvento(Long id);
 
 }

@@ -117,4 +117,11 @@ public class RecordatorioEventoServiceImpl implements RecordatorioEventoService 
 		// TODO Auto-generated method stub
 		return recordatorioEventoDao.obtenerRecordatorioEventoPorIdTipo(id);
 	}
+
+	@Override
+	public void eliminarDetalleRecordatorioPorIdTipoEvento(Long id) {
+		// TODO Auto-generated method stub
+		recordatorioEventoDao.eliminarDetalleRecordatorioPorIdTipoEvento(id);;
+		
+	}
 }

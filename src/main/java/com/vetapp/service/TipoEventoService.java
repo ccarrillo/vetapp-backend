@@ -18,4 +18,5 @@ public interface TipoEventoService {
     TipoEventoDTO actualizarTipoEvento(TipoEventoDTO tipoEventoDto, Long id);
 
     boolean eliminarTipoEvento(Long id);
+    
 }

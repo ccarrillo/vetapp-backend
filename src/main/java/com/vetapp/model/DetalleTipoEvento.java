@@ -35,25 +35,12 @@ public class DetalleTipoEvento extends BaseModel {
 
     @Column(name = "thasta")
     private String thasta;
-    
-    @Column(name = "ndesde")
-    private   String ndesde;
-
-    @Column(name = "nhasta")
-    private String nhasta;
-    
-    @Column(name = "ddesde")
-    private  String ddesde;
-
-    @Column(name = "dhasta")
-    private String dhasta;
-
-
+ 
     @Column(name = "combosseleccionables", length = 300)
     private String combosseleccionables;
     
-    @Column(name = "padremadre", length = 1)
-    private String padremadre;
+    /*@Column(name = "padremadre", length = 1)
+    private String padremadre;*/
     
     @Column(name = "radioinformacion")
     private String radioInformacion;
@@ -109,37 +96,9 @@ public class DetalleTipoEvento extends BaseModel {
 		this.thasta = thasta;
 	}
 
-	public String getNdesde() {
-		return ndesde;
-	}
+	
 
-	public void setNdesde(String ndesde) {
-		this.ndesde = ndesde;
-	}
-
-	public String getNhasta() {
-		return nhasta;
-	}
-
-	public void setNhasta(String nhasta) {
-		this.nhasta = nhasta;
-	}
-
-	public String getDdesde() {
-		return ddesde;
-	}
-
-	public void setDdesde(String ddesde) {
-		this.ddesde = ddesde;
-	}
-
-	public String getDhasta() {
-		return dhasta;
-	}
-
-	public void setDhasta(String dhasta) {
-		this.dhasta = dhasta;
-	}
+	
 
 	public String getCombosseleccionables() {
 		return combosseleccionables;
@@ -149,13 +108,6 @@ public class DetalleTipoEvento extends BaseModel {
 		this.combosseleccionables = combosseleccionables;
 	}
 
-	public String getPadremadre() {
-		return padremadre;
-	}
-
-	public void setPadremadre(String padremadre) {
-		this.padremadre = padremadre;
-	}
 
 	public String getRadioInformacion() {
 		return radioInformacion;

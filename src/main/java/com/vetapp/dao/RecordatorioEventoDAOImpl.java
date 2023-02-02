@@ -71,5 +71,17 @@ public class RecordatorioEventoDAOImpl extends GenericDAOImpl<RecordatorioEvento
 		
 		return listaRecordatorioEventoDTO;
 	}
+	
+	
+	@Override
+	public void eliminarDetalleRecordatorioPorIdTipoEvento(Long id) {
+		
+		Query query = this.em.createQuery("DELETE FROM RecordatorioEvento o WHERE o.idtipoeventopadre = :id");
+		query.setParameter("id", id);
+		query.executeUpdate();
+	
+		 
+		
+	}
 
 }

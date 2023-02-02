@@ -15,4 +15,6 @@ public interface GenericDAO<T, ID extends Serializable> {
     T actualizar(T t);
 
     void eliminarPorId(ID id);
+
+	
 }

@@ -20,4 +20,6 @@ public interface RecordatorioEventoService {
 	List<RecordatorioEventoDTO> obtenerRecordatorioEventoPorIdGrupo(Long id);
 
 	List<RecordatorioEventoDTO> obtenerRecordatorioEventoPorIdTipo(Long id);
+	
+	void eliminarDetalleRecordatorioPorIdTipoEvento(Long id);
 }

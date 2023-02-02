@@ -126,4 +126,6 @@ public class TipoEventoServiceImpl implements TipoEventoService {
 		// TODO Auto-generated method stub
 		return tipoEventoDao.obtenerTipoEventosGrupos();
 	}
+
+	
 }

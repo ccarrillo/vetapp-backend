@@ -19,24 +19,8 @@ public class DetalleTipoEventoDTO extends BaseModelDTO {
 	   
 	    private String thasta;
 	    
-	   
-	    private   String ndesde;
-
-	   
-	    private String nhasta;
-	    
-	    
-	    private  String ddesde;
-
-	   
-	    private String dhasta;
-
-
-	    
+  
 	    private String combosseleccionables;
-	    
-	    
-	    private String padremadre;
 	    
 	    
 	    private String radioInformacion;
@@ -104,46 +88,6 @@ public class DetalleTipoEventoDTO extends BaseModelDTO {
 		}
 
 
-		public String getNdesde() {
-			return ndesde;
-		}
-
-
-		public void setNdesde(String ndesde) {
-			this.ndesde = ndesde;
-		}
-
-
-		public String getNhasta() {
-			return nhasta;
-		}
-
-
-		public void setNhasta(String nhasta) {
-			this.nhasta = nhasta;
-		}
-
-
-		public String getDdesde() {
-			return ddesde;
-		}
-
-
-		public void setDdesde(String ddesde) {
-			this.ddesde = ddesde;
-		}
-
-
-		public String getDhasta() {
-			return dhasta;
-		}
-
-
-		public void setDhasta(String dhasta) {
-			this.dhasta = dhasta;
-		}
-
-
 		public String getCombosseleccionables() {
 			return combosseleccionables;
 		}
@@ -151,16 +95,6 @@ public class DetalleTipoEventoDTO extends BaseModelDTO {
 
 		public void setCombosseleccionables(String combosseleccionables) {
 			this.combosseleccionables = combosseleccionables;
-		}
-
-
-		public String getPadremadre() {
-			return padremadre;
-		}
-
-
-		public void setPadremadre(String padremadre) {
-			this.padremadre = padremadre;
 		}
 
 

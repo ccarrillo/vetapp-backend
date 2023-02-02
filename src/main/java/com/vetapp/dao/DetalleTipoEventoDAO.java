@@ -11,4 +11,6 @@ public interface DetalleTipoEventoDAO extends GenericDAO<DetalleTipoEvento, Long
 
 	List<DetalleTipoEventoDTO> obtenerListaDetalleTipoEventoPorIdTipo(Long id);
 
+	void eliminarDetalleTipoEventoPorIdTipoEvento(Long id);
+
 }

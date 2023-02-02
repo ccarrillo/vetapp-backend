@@ -10,5 +10,7 @@ public interface RecordatorioEventoDAO extends GenericDAO<RecordatorioEvento, Lo
 	List<RecordatorioEventoDTO> obtenerRecordatorioEventoPorIdGrupo(Long id);
 
 	List<RecordatorioEventoDTO> obtenerRecordatorioEventoPorIdTipo(Long id);
+	
+	void eliminarDetalleRecordatorioPorIdTipoEvento(Long id);
 
 }

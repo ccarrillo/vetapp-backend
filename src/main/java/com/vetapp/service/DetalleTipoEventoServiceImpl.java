@@ -112,4 +112,10 @@ public class DetalleTipoEventoServiceImpl implements DetalleTipoEventoService{
 		return detalleTipoEventoDao.obtenerListaDetalleTipoEventoPorIdTipo( id);
 		
 	}
+
+	@Override
+	public void eliminarDetalleTipoEventoPorIdTipoEvento(Long id) {
+		detalleTipoEventoDao.eliminarDetalleTipoEventoPorIdTipoEvento(id);
+		
+	}
 }
