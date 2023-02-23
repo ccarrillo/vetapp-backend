@@ -16,6 +16,8 @@ public interface AnimalService {
 
     AnimalDTO obtenerAnimalPorId(Long id);
     
+    Long obtenerAnimalPorAreteNombre(String aretenombre);
+    
     AnimalDTO buscarAnimalPorId(Long id);
 
     AnimalDTO actualizarAnimal(AnimalDTO employeeDto, Long id);

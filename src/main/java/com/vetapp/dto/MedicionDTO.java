@@ -3,6 +3,7 @@ package com.vetapp.dto;
 import java.util.Date;
 
 
+
 public class MedicionDTO  extends BaseModelDTO{
 	
 	    private Long id;
@@ -15,7 +16,8 @@ public class MedicionDTO  extends BaseModelDTO{
 
 	    private int concorporal;
 	    
-	    private Long idanimal;
+	    private AnimalDTO idanimal;
+	    
 
 		public Long getId() {
 			return id;
@@ -58,13 +60,15 @@ public class MedicionDTO  extends BaseModelDTO{
 			this.concorporal = concorporal;
 		}
 
-		public Long getIdanimal() {
+		public AnimalDTO getIdanimal() {
 			return idanimal;
 		}
 
-		public void setIdanimal(Long idanimal) {
+		public void setIdanimal(AnimalDTO idanimal) {
 			this.idanimal = idanimal;
 		}
+       
+		
 	    
 	    
 	    

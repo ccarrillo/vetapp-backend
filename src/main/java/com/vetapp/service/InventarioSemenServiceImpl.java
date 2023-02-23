@@ -113,4 +113,16 @@ public class InventarioSemenServiceImpl implements InventarioSemenService {
 		// TODO Auto-generated method stub
 		return (List<InventarioSemenDTO>) inventarioSemenDao.obtenerInventarioSemenGrupos(true);
 	}
+
+	@Override
+	public boolean existenciainventarioDistintoId(String nombrenumero) {
+		// TODO Auto-generated method stub
+		return inventarioSemenDao.existenciainventarioDistintoId(nombrenumero);
+	}
+
+	@Override
+	public boolean existenciainventarioDistintoId(Long id, String nombrenumero) {
+		// TODO Auto-generated method stub
+		return inventarioSemenDao.existenciainventarioDistintoId(id,nombrenumero);
+	}
 }

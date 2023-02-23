@@ -8,7 +8,8 @@ public class RecordatorioEventoDTO extends BaseModelDTO {
 
     private Integer numerodias;
     
-    private Long idtipoeventopadre;
+    private TipoEventoDTO idtipoeventopadre;
+    
     
     private boolean editado;
     
@@ -38,13 +39,17 @@ public class RecordatorioEventoDTO extends BaseModelDTO {
         this.numerodias = numerodias;
     }
 
-	public Long getIdtipoeventopadre() {
+	
+
+	public TipoEventoDTO getIdtipoeventopadre() {
 		return idtipoeventopadre;
 	}
 
-	public void setIdtipoeventopadre(Long idtipoeventopadre) {
+	public void setIdtipoeventopadre(TipoEventoDTO idtipoeventopadre) {
 		this.idtipoeventopadre = idtipoeventopadre;
 	}
+	
+	
 
 	public boolean isEditado() {
 		return editado;

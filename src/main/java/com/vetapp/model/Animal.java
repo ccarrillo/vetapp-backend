@@ -55,8 +55,6 @@ public class Animal extends BaseModel {
     @Column(name = "estadoproductivoid")
     private Long estadoproductivoId;
 
-    @Column(name = "corralid")
-    private Long corralId;
 
     @Column(name = "sexo", length = 1)
     private String sexo;
@@ -118,6 +116,9 @@ public class Animal extends BaseModel {
     
     @Column(name = "radio_padre")
     private String radioPadre;
+    
+    @Column(name = "pajilla")
+    private boolean pajilla;
     
 
     public Long getId() {
@@ -243,13 +244,6 @@ public class Animal extends BaseModel {
         this.estadoproductivoId = estadoproductivoId;
     }
 
-    public Long getCorralId() {
-        return corralId;
-    }
-
-    public void setCorralId(Long corralId) {
-        this.corralId = corralId;
-    }
 
     public String getSexo() {
         return sexo;
@@ -409,6 +403,14 @@ public class Animal extends BaseModel {
 
 	public void setRadioPadre(String radioPadre) {
 		this.radioPadre = radioPadre;
+	}
+
+	public boolean isPajilla() {
+		return pajilla;
+	}
+
+	public void setPajilla(boolean pajilla) {
+		this.pajilla = pajilla;
 	}
    
     

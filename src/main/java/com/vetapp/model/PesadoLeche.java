@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,9 +23,8 @@ public class PesadoLeche extends BaseModel {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="vet.pesadoleche_id_seq",sequenceName="vet.pesadoleche_id_seq",allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vet.pesadoleche_id_seq")
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 

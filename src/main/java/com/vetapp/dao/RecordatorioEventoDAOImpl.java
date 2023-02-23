@@ -1,6 +1,6 @@
 package com.vetapp.dao;
 
-import com.vetapp.dto.DetalleTipoEventoDTO;
+
 import com.vetapp.dto.RecordatorioEventoDTO;
 import com.vetapp.model.RecordatorioEvento;
 
@@ -20,7 +20,7 @@ public class RecordatorioEventoDAOImpl extends GenericDAOImpl<RecordatorioEvento
 		// TODO Auto-generated method stub
 				StringBuilder jpql = new StringBuilder();
 				List<RecordatorioEventoDTO> listaRecordatorioEventoDTO = new ArrayList<>();
-				jpql.append(" select id, created_at, is_active, modified_at, user_creation, user_updated, idtipoevento, numerodias, idtipoeventopadre ");
+				jpql.append(" select id, created_at, is_active, modified_at, user_creation, user_updated, idtipoevento, numerodias ");
 				jpql.append(" from vet.recordatorioevento where idtipoeventopadre = :id ");
 				
 				Query query = em.createNativeQuery(jpql.toString());		
@@ -37,7 +37,7 @@ public class RecordatorioEventoDAOImpl extends GenericDAOImpl<RecordatorioEvento
 					recordatorio.setUserUpdated(o[5] == null? 0 :Long.parseLong(o[5].toString()));
 					recordatorio.setIdtipoevento(Long.parseLong(o[6].toString()));
 					recordatorio.setNumerodias(Integer.parseInt(o[7].toString()));
-					recordatorio.setIdtipoeventopadre(Long.parseLong(o[8].toString()));
+					//recordatorio.setIdtipoeventopadre(Long.parseLong(o[8].toString()));
 					listaRecordatorioEventoDTO.add(recordatorio);
 				}
 				
@@ -48,7 +48,7 @@ public class RecordatorioEventoDAOImpl extends GenericDAOImpl<RecordatorioEvento
 	public List<RecordatorioEventoDTO> obtenerRecordatorioEventoPorIdTipo(Long id) {
 		StringBuilder jpql = new StringBuilder();
 		List<RecordatorioEventoDTO> listaRecordatorioEventoDTO = new ArrayList<>();
-		jpql.append(" select id, created_at, is_active, modified_at, user_creation, user_updated, idtipoevento, numerodias, idtipoeventopadre ");
+		jpql.append(" select id, created_at, is_active, modified_at, user_creation, user_updated, idtipoevento, numerodias ");
 		jpql.append(" from vet.recordatorioevento where idtipoeventopadre = :id ");
 		
 		Query query = em.createNativeQuery(jpql.toString());		
@@ -65,7 +65,7 @@ public class RecordatorioEventoDAOImpl extends GenericDAOImpl<RecordatorioEvento
 			recordatorio.setUserUpdated(o[5] == null? 0 :Long.parseLong(o[5].toString()));
 			recordatorio.setIdtipoevento(Long.parseLong(o[6].toString()));
 			recordatorio.setNumerodias(Integer.parseInt(o[7].toString()));
-			recordatorio.setIdtipoeventopadre(Long.parseLong(o[8].toString()));
+			//recordatorio.setIdtipoeventopadre(Long.parseLong(o[8].toString()));
 			listaRecordatorioEventoDTO.add(recordatorio);
 		}
 		

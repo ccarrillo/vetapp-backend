@@ -19,8 +19,7 @@ public class GrupoProtocolo extends BaseModel {
 
 
 	@Id
-    @SequenceGenerator(name="vet.grupoprotocolo_id_seq",sequenceName="vet.grupoprotocolo_id_seq",allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vet.grupoprotocolo_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
  

@@ -40,4 +40,29 @@ public class InventarioSemenDAOImpl extends GenericDAOImpl<InventarioSemen, Long
 		return listaInventarioDTO;
 	}
 
+	@Override
+	public boolean existenciainventarioDistintoId(String nombrenumero) {
+		// TODO Auto-generated method stub
+				String jpql = "select count(*) from vet.inventariosemen where  is_active= true and nombreNum= :nombrenumero ";
+				Query query = em.createNativeQuery(jpql);
+				query.setParameter("nombrenumero", nombrenumero);
+				int cantidad = Integer.parseInt("" + query.getSingleResult());
+				if (cantidad > 0) {
+					return true;
+				} else return false;
+	}
+
+	@Override
+	public boolean existenciainventarioDistintoId(Long id, String nombrenumero) {
+		// TODO Auto-generated method stub
+		String jpql = "select count(*) from  vet.inventariosemen where id not in(:id) and nombreNum= :nombrenumero ";
+		Query query = em.createNativeQuery(jpql);
+		query.setParameter("id", id);
+		query.setParameter("nombrenumero", nombrenumero);
+		int cantidad = Integer.parseInt("" + query.getSingleResult());
+		if (cantidad > 0) {
+			return true;
+		} else return false;
+	}
+
 }

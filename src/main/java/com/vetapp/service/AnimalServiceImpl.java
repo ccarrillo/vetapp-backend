@@ -139,6 +139,12 @@ public class AnimalServiceImpl implements AnimalService {
 		return animalDao.existenciaAnimalDistintoId(id,arete);
 	}
 
+	@Override
+	public Long obtenerAnimalPorAreteNombre(String aretenombre) {
+		// TODO Auto-generated method stub
+		return animalDao.obtenerAnimalPorAreteNombre(aretenombre);
+	}
+
 	
 
 	

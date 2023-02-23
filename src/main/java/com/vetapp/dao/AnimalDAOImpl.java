@@ -1,7 +1,5 @@
 package com.vetapp.dao;
 
-import com.vetapp.dto.AnimalBusquedaDTO;
-import com.vetapp.dto.AnimalDTO;
 import com.vetapp.model.Animal;
 import com.vetapp.vo.AnimalVO;
 
@@ -70,6 +68,17 @@ public class AnimalDAOImpl extends GenericDAOImpl<Animal, Long> implements Anima
 		if (cantidad > 0) {
 			return true;
 		} else return false;
+	}
+
+	@Override
+	public Long obtenerAnimalPorAreteNombre(String aretenombre) {
+		// TODO Auto-generated method stub
+		String jpql = "select id from  vet.animal where arete= :aretenombre ";
+		Query query = em.createNativeQuery(jpql);
+		query.setParameter("aretenombre", aretenombre);
+		Long idanimal = Long.parseLong("" + query.getSingleResult());
+		return idanimal;
+		
 	}
 
 	

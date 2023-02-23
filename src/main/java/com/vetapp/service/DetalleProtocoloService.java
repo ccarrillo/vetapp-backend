@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vetapp.dto.DetalleProtocoloDTO;
+import com.vetapp.dto.ProtocoloDTO;
 
 public interface DetalleProtocoloService {
 	
@@ -23,5 +24,8 @@ public interface DetalleProtocoloService {
 		List<DetalleProtocoloDTO> buscarDetalleProtocoloPorAnimal(Long id);
 
 		List<DetalleProtocoloDTO> obtenerListaDetalleProtocolo(Long id);
-
+		
+		DetalleProtocoloDTO guardarDetalleProtocolo(ProtocoloDTO protocolo,DetalleProtocoloDTO detalleDto);
+        
+		DetalleProtocoloDTO actualizarDetalleProtocolo( ProtocoloDTO protocolo, DetalleProtocoloDTO detalleDto,Long id);
 }

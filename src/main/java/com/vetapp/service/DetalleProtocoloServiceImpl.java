@@ -16,6 +16,7 @@ import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.DetalleProtocoloDAO;
 import com.vetapp.dao.UserAuthRepository;
 import com.vetapp.dto.DetalleProtocoloDTO;
+import com.vetapp.dto.ProtocoloDTO;
 import com.vetapp.model.DetalleProtocolo;
 import com.vetapp.model.UserAuth;
 
@@ -131,6 +132,37 @@ public class DetalleProtocoloServiceImpl implements DetalleProtocoloService{
 	
             detalleDao.eliminarDetalleProtocoloPorIdProtocolo(id);
        
+	}
+
+	@Override
+	public DetalleProtocoloDTO actualizarDetalleProtocolo(ProtocoloDTO protocolo, DetalleProtocoloDTO detalleDto,
+			Long id) {
+		 Authentication auth = authenticationFacade.getAuthentication();
+	        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+	        DetalleProtocolo objTemp = detalleDao.buscarPorId(id);
+	        if (objTemp != null) {
+	        	detalleDto.setId(objTemp.getId());
+	        	detalleDto.setUserCreation(objTemp.getUserCreation());
+	        	detalleDto.setCreatedAt(objTemp.getCreatedAt());
+	        	detalleDto.setUserUpdated(user.getId());
+	        	detalleDto.setModifiedAt(Calendar.getInstance().getTime());
+	        	detalleDto.setProtocolo(protocolo);
+	        	DetalleProtocolo obj = detalleDao.actualizar(convertDtoToEntity(detalleDto));
+	            return convertEntityToDto(obj);
+	        } else {
+	            return null;
+	        }
+	}
+
+	@Override
+	public DetalleProtocoloDTO guardarDetalleProtocolo(ProtocoloDTO protocolo, DetalleProtocoloDTO detalleDto) {
+		Authentication auth = authenticationFacade.getAuthentication();
+        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+        detalleDto.setUserCreation(user.getId());
+        detalleDto.setCreatedAt(Calendar.getInstance().getTime());
+        detalleDto.setProtocolo(protocolo);
+        DetalleProtocolo obj = detalleDao.insertar(convertDtoToEntity(detalleDto));
+        return convertEntityToDto(obj);
 	}
 
 }

@@ -4,6 +4,7 @@ import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.DetalleTipoEventoAnimalDAO;
 import com.vetapp.dao.UserAuthRepository;
 import com.vetapp.dto.DetalleTipoEventoAnimalDTO;
+import com.vetapp.dto.EventoAnimalDTO;
 import com.vetapp.model.DetalleTipoEventoAnimal;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,6 +43,20 @@ public class DetalleTipoEventoAnimalServiceImpl implements DetalleTipoEventoAnim
         System.out.println("-----------------");
         detalleTipoEventoAnimalDto.setUserCreation(user.getId());
         detalleTipoEventoAnimalDto.setCreatedAt(Calendar.getInstance().getTime());
+        DetalleTipoEventoAnimal obj = detalleTipoEventoAnimalDao.insertar(convertDtoToEntity(detalleTipoEventoAnimalDto));
+        return convertEntityToDto(obj);
+    }
+    
+    public DetalleTipoEventoAnimalDTO guardarDetalleTipoEventoAnimal(EventoAnimalDTO evento, DetalleTipoEventoAnimalDTO detalleTipoEventoAnimalDto) {
+        Authentication auth = authenticationFacade.getAuthentication();
+        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+        System.out.println("-----------------");
+        System.out.println(auth.getName());
+        System.out.println(user.getId());
+        System.out.println("-----------------");
+        detalleTipoEventoAnimalDto.setUserCreation(user.getId());
+        detalleTipoEventoAnimalDto.setCreatedAt(Calendar.getInstance().getTime());
+        detalleTipoEventoAnimalDto.setIdeventoanimal(evento);
         DetalleTipoEventoAnimal obj = detalleTipoEventoAnimalDao.insertar(convertDtoToEntity(detalleTipoEventoAnimalDto));
         return convertEntityToDto(obj);
     }
@@ -73,6 +89,26 @@ public class DetalleTipoEventoAnimalServiceImpl implements DetalleTipoEventoAnim
             return null;
         }
     }
+    
+    @Override
+	public DetalleTipoEventoAnimalDTO actualizarDetalleTipoEventoAnimal(EventoAnimalDTO evento,
+			DetalleTipoEventoAnimalDTO detalleTipoEventoAnimalDto, Long id) {
+    	 Authentication auth = authenticationFacade.getAuthentication();
+         UserAuth user = userAuthRepository.findByEmail(auth.getName());
+         DetalleTipoEventoAnimal objTemp = detalleTipoEventoAnimalDao.buscarPorId(id);
+         if (objTemp != null) {
+             detalleTipoEventoAnimalDto.setId(objTemp.getId());
+             detalleTipoEventoAnimalDto.setUserCreation(objTemp.getUserCreation());
+             detalleTipoEventoAnimalDto.setCreatedAt(objTemp.getCreatedAt());
+             detalleTipoEventoAnimalDto.setUserUpdated(user.getId());
+             detalleTipoEventoAnimalDto.setModifiedAt(Calendar.getInstance().getTime());
+             detalleTipoEventoAnimalDto.setIdeventoanimal(evento);
+             DetalleTipoEventoAnimal obj = detalleTipoEventoAnimalDao.actualizar(convertDtoToEntity(detalleTipoEventoAnimalDto));
+             return convertEntityToDto(obj);
+         } else {
+             return null;
+         }
+	}
 
     public boolean eliminarDetalleTipoEventoAnimal(Long id) {
         try {
@@ -104,4 +140,12 @@ public class DetalleTipoEventoAnimalServiceImpl implements DetalleTipoEventoAnim
             return null;
         }
     }
+
+	@Override
+	public List<DetalleTipoEventoAnimalDTO> obtenerListaDetallePorIdEventoAnimal(Long id) {
+		// TODO Auto-generated method stub
+		return detalleTipoEventoAnimalDao.obtenerListaDetallePorIdEventoAnimal( id);
+	}
+
+	
 }

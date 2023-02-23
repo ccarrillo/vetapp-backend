@@ -1,88 +1,104 @@
 package com.vetapp.dto;
 
-import java.util.Date;
+
+
 
 public class DetalleTipoEventoAnimalDTO extends BaseModelDTO {
 
-    private Long id;
+	    private Long id;
 
-    private Long idDetalleTipoEvento;
+	    private String nombre;
+	    
+	    private String nombrevalor;
 
-    private String detallesTipoEvento;
+	    private   String tdesde;
 
-    private Date fechaDetalle;
+	    private String thasta;
 
-    private Long idEmpleado;
+	    private String combosseleccionables;
 
-    private Long estadoRecordatorio;
+	    private String radioInformacion;
 
-    private Date fechaRecordatorio;
+	    private boolean requerido;
 
-    private String observaciones;
+	    private EventoAnimalDTO ideventoanimal;
 
-    public String getDetallesTipoEvento() {
-        return detallesTipoEvento;
-    }
+		public Long getId() {
+			return id;
+		}
 
-    public void setDetallesTipoEvento(String detallesTipoEvento) {
-        this.detallesTipoEvento = detallesTipoEvento;
-    }
+		public void setId(Long id) {
+			this.id = id;
+		}
 
-    public Long getId() {
-        return id;
-    }
+		public String getNombre() {
+			return nombre;
+		}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+		public void setNombre(String nombre) {
+			this.nombre = nombre;
+		}
+		
 
-    public Long getIdDetalleTipoEvento() {
-        return idDetalleTipoEvento;
-    }
+		public String getNombrevalor() {
+			return nombrevalor;
+		}
 
-    public void setIdDetalleTipoEvento(Long idDetalleTipoEvento) {
-        this.idDetalleTipoEvento = idDetalleTipoEvento;
-    }
+		public void setNombrevalor(String nombrevalor) {
+			this.nombrevalor = nombrevalor;
+		}
 
-    public Date getFechaDetalle() {
-        return fechaDetalle;
-    }
+		public String getTdesde() {
+			return tdesde;
+		}
 
-    public void setFechaDetalle(Date fechaDetalle) {
-        this.fechaDetalle = fechaDetalle;
-    }
+		public void setTdesde(String tdesde) {
+			this.tdesde = tdesde;
+		}
 
-    public Long getIdEmpleado() {
-        return idEmpleado;
-    }
+		public String getThasta() {
+			return thasta;
+		}
 
-    public void setIdEmpleado(Long idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
+		public void setThasta(String thasta) {
+			this.thasta = thasta;
+		}
 
-    public Long getEstadoRecordatorio() {
-        return estadoRecordatorio;
-    }
+		public String getCombosseleccionables() {
+			return combosseleccionables;
+		}
 
-    public void setEstadoRecordatorio(Long estadoRecordatorio) {
-        this.estadoRecordatorio = estadoRecordatorio;
-    }
+		public void setCombosseleccionables(String combosseleccionables) {
+			this.combosseleccionables = combosseleccionables;
+		}
 
-    public Date getFechaRecordatorio() {
-        return fechaRecordatorio;
-    }
+		public String getRadioInformacion() {
+			return radioInformacion;
+		}
 
-    public void setFechaRecordatorio(Date fechaRecordatorio) {
-        this.fechaRecordatorio = fechaRecordatorio;
-    }
+		public void setRadioInformacion(String radioInformacion) {
+			this.radioInformacion = radioInformacion;
+		}
 
-    public String getObservaciones() {
-        return observaciones;
-    }
+		public boolean isRequerido() {
+			return requerido;
+		}
 
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
+		public void setRequerido(boolean requerido) {
+			this.requerido = requerido;
+		}
+
+		public EventoAnimalDTO getIdeventoanimal() {
+			return ideventoanimal;
+		}
+
+		public void setIdeventoanimal(EventoAnimalDTO ideventoanimal) {
+			this.ideventoanimal = ideventoanimal;
+		}
+
+		
+
+        
 
 
 }

@@ -4,6 +4,7 @@ import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.DetalleTipoEventoDAO;
 import com.vetapp.dao.UserAuthRepository;
 import com.vetapp.dto.DetalleTipoEventoDTO;
+import com.vetapp.dto.TipoEventoDTO;
 import com.vetapp.model.DetalleTipoEvento;
 import com.vetapp.model.UserAuth;
 import org.modelmapper.ModelMapper;
@@ -117,5 +118,39 @@ public class DetalleTipoEventoServiceImpl implements DetalleTipoEventoService{
 	public void eliminarDetalleTipoEventoPorIdTipoEvento(Long id) {
 		detalleTipoEventoDao.eliminarDetalleTipoEventoPorIdTipoEvento(id);
 		
+	}
+	
+	 public DetalleTipoEventoDTO guardarDetalleTipoEvento(TipoEventoDTO tipoEvento,DetalleTipoEventoDTO detalleTipoEventoDto) {
+	        Authentication auth = authenticationFacade.getAuthentication();
+	        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+	        System.out.println("-----------------");
+	        System.out.println(auth.getName());
+	        System.out.println(user.getId());
+	        System.out.println("-----------------");
+	        detalleTipoEventoDto.setUserCreation(user.getId());
+	        detalleTipoEventoDto.setCreatedAt(Calendar.getInstance().getTime());
+	        detalleTipoEventoDto.setIdTipoEvento(tipoEvento);
+	        DetalleTipoEvento obj = detalleTipoEventoDao.insertar(convertDtoToEntity(detalleTipoEventoDto));
+	        return convertEntityToDto(obj);
+	    }
+
+	@Override
+	public DetalleTipoEventoDTO actualizarDetalleTipoEvento(TipoEventoDTO tipoEvento,
+			DetalleTipoEventoDTO detalleTipoEventoDto, Long id) {
+		 Authentication auth = authenticationFacade.getAuthentication();
+	        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+	        DetalleTipoEvento objTemp = detalleTipoEventoDao.buscarPorId(id);
+	        if (objTemp != null) {
+	            detalleTipoEventoDto.setId(objTemp.getId());
+	            detalleTipoEventoDto.setUserCreation(objTemp.getUserCreation());
+	            detalleTipoEventoDto.setCreatedAt(objTemp.getCreatedAt());
+	            detalleTipoEventoDto.setUserUpdated(user.getId());
+	            detalleTipoEventoDto.setModifiedAt(Calendar.getInstance().getTime());
+	            detalleTipoEventoDto.setIdTipoEvento(tipoEvento);
+	            DetalleTipoEvento obj = detalleTipoEventoDao.actualizar(convertDtoToEntity(detalleTipoEventoDto));
+	            return convertEntityToDto(obj);
+	        } else {
+	            return null;
+	        }
 	}
 }

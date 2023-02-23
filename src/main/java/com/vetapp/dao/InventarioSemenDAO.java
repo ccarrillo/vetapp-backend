@@ -10,4 +10,8 @@ public interface InventarioSemenDAO extends GenericDAO<InventarioSemen, Long> {
 
 	List<InventarioSemenDTO> obtenerInventarioSemenGrupos(boolean b);
 
+	boolean existenciainventarioDistintoId(String nombrenumero);
+
+	boolean existenciainventarioDistintoId(Long id, String nombrenumero);
+
 }

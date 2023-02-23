@@ -18,9 +18,9 @@ public class InventarioSemen extends BaseModel {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="vet.inventariosemen_id_seq",sequenceName="vet.inventariosemen_id_seq",allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vet.inventariosemen_id_seq")
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(name = "nombre", length = 50)
@@ -176,15 +176,16 @@ public class InventarioSemen extends BaseModel {
 		this.meritoNeto = meritoNeto;
 	}
 
+
 	public Long getIdraza() {
-        return idraza;
-    }
+		return idraza;
+	}
 
-    public void setIdraza(Long idraza) {
-        this.idraza = idraza;
-    }
+	public void setIdraza(Long idraza) {
+		this.idraza = idraza;
+	}
 
-    public Integer getNumPajuelasDisponibles() {
+	public Integer getNumPajuelasDisponibles() {
         return numPajuelasDisponibles;
     }
 
@@ -200,25 +201,25 @@ public class InventarioSemen extends BaseModel {
         this.precio = precio;
     }
 
-    public Long getIdPadre() {
-        return idPadre;
-    }
+   
+ 
+	public Long getIdPadre() {
+		return idPadre;
+	}
 
-    public void setIdPadre(Long idPadre) {
-        this.idPadre = idPadre;
-    }
+	public void setIdPadre(Long idPadre) {
+		this.idPadre = idPadre;
+	}
 
-    public Long getIdMadre() {
-        return idMadre;
-    }
+	public Long getIdMadre() {
+		return idMadre;
+	}
 
-    public void setIdMadre(Long idMadre) {
-        this.idMadre = idMadre;
-    }
-    
-    
+	public void setIdMadre(Long idMadre) {
+		this.idMadre = idMadre;
+	}
 
-    public String getOtraIdentificacionPadre() {
+	public String getOtraIdentificacionPadre() {
 		return otraIdentificacionPadre;
 	}
 
@@ -241,6 +242,8 @@ public class InventarioSemen extends BaseModel {
     public void setObservacion(String observacion) {
         this.observacion = observacion;
     }
+
+     
 
 	public Long getIdGrupoInventario() {
 		return idGrupoInventario;

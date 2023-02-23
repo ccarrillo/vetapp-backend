@@ -2,7 +2,6 @@ package com.vetapp.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 
 
 
@@ -34,7 +33,7 @@ public class AnimalDTO extends BaseModelDTO {
 
     private Long estadoproductivoId;
 
-    private Long corralId;
+  
 
     private String sexo;
 
@@ -75,6 +74,8 @@ public class AnimalDTO extends BaseModelDTO {
     private String radioMadre;
     
     private String radioPadre;
+    
+    private boolean pajilla;
     
 
     public Long getId() {
@@ -185,13 +186,6 @@ public class AnimalDTO extends BaseModelDTO {
         this.estadoproductivoId = estadoproductivoId;
     }
 
-    public Long getCorralId() {
-        return corralId;
-    }
-
-    public void setCorralId(Long corralId) {
-        this.corralId = corralId;
-    }
 
     public String getSexo() {
         return sexo;
@@ -351,6 +345,14 @@ public class AnimalDTO extends BaseModelDTO {
 
 	public void setRadioPadre(String radioPadre) {
 		this.radioPadre = radioPadre;
+	}
+
+	public boolean isPajilla() {
+		return pajilla;
+	}
+
+	public void setPajilla(boolean pajilla) {
+		this.pajilla = pajilla;
 	}
    
     

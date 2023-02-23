@@ -18,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vetapp.dto.AnimalDTO;
 import com.vetapp.dto.DetalleProtocoloDTO;
-import com.vetapp.dto.DetalleTipoEventoDTO;
 import com.vetapp.dto.ProtocoloDTO;
 import com.vetapp.service.DetalleProtocoloService;
-import com.vetapp.service.DetalleTipoEventoService;
 import com.vetapp.service.ProtocoloService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -58,7 +56,7 @@ public class ProtocoloController {
         				System.out.println("ingreso aqui actualizacion detalle ");
         			}
         			else {*/
-        				 detalle.setIdprotocolo(obj.getId());
+        				 detalle.setProtocolo(obj);
         				 detalleProtocoloService.guardarDetalleProtocolo(detalle);
         			//}
         			  
@@ -159,14 +157,14 @@ public class ProtocoloController {
             					detalleProtocoloService.eliminarDetalleProtocolo(detalle.getId()) ;
             				 }
             				 else{
-            					 detalle.setIdprotocolo(obj.getId());
-            					 detalleProtocoloService.actualizarDetalleProtocolo(detalle, detalle.getId());
+            					// detalle.setIdprotocolo(obj.getId()); cambiado
+            					 detalleProtocoloService.actualizarDetalleProtocolo(obj,detalle, detalle.getId());
             				 }
             				
             			}
             			else {
-            				 detalle.setIdprotocolo(obj.getId());
-            				 detalleProtocoloService.guardarDetalleProtocolo(detalle);
+            				// detalle.setIdprotocolo(obj.getId()); cambiado
+            				 detalleProtocoloService.guardarDetalleProtocolo(obj,detalle);
             			}
             			  
             		}
@@ -187,7 +185,7 @@ public class ProtocoloController {
     public ResponseEntity<AnimalDTO> eliminarProtocolo(@PathVariable("id") Long id) {
         try {
             Boolean obj = protocoloService.eliminarProtocolo(id);
-                detalleProtocoloService.eliminarDetalleProtocoloPorIdProtocolo(id);
+               // detalleProtocoloService.eliminarDetalleProtocoloPorIdProtocolo(id);
             if (obj) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {

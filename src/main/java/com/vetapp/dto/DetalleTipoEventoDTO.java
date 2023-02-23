@@ -1,7 +1,6 @@
 package com.vetapp.dto;
 
 
-
 public class DetalleTipoEventoDTO extends BaseModelDTO {
 
 
@@ -9,7 +8,7 @@ public class DetalleTipoEventoDTO extends BaseModelDTO {
 
 	    
 	    private String nombre;
-
+       
 	  
 	    private String abreviacion;
 
@@ -27,12 +26,12 @@ public class DetalleTipoEventoDTO extends BaseModelDTO {
 	    
 	    private boolean requerido;
 	    
-	    
-	    private Long idTipoEvento;
+	    private TipoEventoDTO idTipoEvento;
 	    
 	    private boolean editado;
 	    
 	    private boolean eliminado;
+	    
       
 
 
@@ -117,18 +116,16 @@ public class DetalleTipoEventoDTO extends BaseModelDTO {
 			this.requerido = requerido;
 		}
 
-
-		public Long getIdTipoEvento() {
+        
+		
+		public TipoEventoDTO getIdTipoEvento() {
 			return idTipoEvento;
 		}
 
 
-		public void setIdTipoEvento(Long idTipoEvento) {
+		public void setIdTipoEvento(TipoEventoDTO idTipoEvento) {
 			this.idTipoEvento = idTipoEvento;
 		}
-
-
-	
 
 
 		public boolean isEditado() {

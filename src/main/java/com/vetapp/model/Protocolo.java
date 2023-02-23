@@ -2,11 +2,19 @@ package com.vetapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Table(name = "protocolo", schema = "vet")
 @Entity
@@ -18,10 +26,9 @@ public class Protocolo extends BaseModel{
 	private static final long serialVersionUID = 1L;
 
 
-		@Id
-	    @SequenceGenerator(name="vet.protocolo_id_seq",sequenceName="vet.protocolo_id_seq",allocationSize=1)
-	    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vet.protocolo_id_seq")
-	    @Column(name = "id")
+	    @Id
+        @Column(name = "id", nullable = false)
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
 	    
@@ -30,7 +37,7 @@ public class Protocolo extends BaseModel{
 	    
 	    @Column(name = "grupoprotocoloid")
 	    private Long grupoProtocoloId;
-
+         
 
 		public Long getId() {
 			return id;

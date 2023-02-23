@@ -118,10 +118,8 @@ public class MedicionServiceImpl implements MedicionService{
 		@Override
 		public List<MedicionDTO> buscarMedicionesPorAnimal(Long id) {
 			
-			return (ArrayList<MedicionDTO>) medicionDao.buscarMedicionesPorAnimal(id)
-            .stream()
-            .map(this::convertEntityToDto)
-            .collect(Collectors.toList());
+			return  medicionDao.buscarMedicionesPorAnimal(id);
+            
 		}
 
 }

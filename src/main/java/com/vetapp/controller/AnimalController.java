@@ -1,6 +1,5 @@
 package com.vetapp.controller;
 
-import com.vetapp.dto.AnimalBusquedaDTO;
 import com.vetapp.dto.AnimalDTO;
 import com.vetapp.service.AnimalService;
 import com.vetapp.vo.AnimalVO;
@@ -94,7 +93,6 @@ public class AnimalController {
         		else {
         			respuesta = true;
         		}
-        		//respuesta = false;
         	}
             
             return new ResponseEntity(respuesta, HttpStatus.OK);
@@ -207,5 +205,8 @@ public class AnimalController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    
+    
 
 }

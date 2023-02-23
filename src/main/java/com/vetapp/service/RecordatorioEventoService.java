@@ -1,6 +1,7 @@
 package com.vetapp.service;
 
 import com.vetapp.dto.RecordatorioEventoDTO;
+import com.vetapp.dto.TipoEventoDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,4 +23,7 @@ public interface RecordatorioEventoService {
 	List<RecordatorioEventoDTO> obtenerRecordatorioEventoPorIdTipo(Long id);
 	
 	void eliminarDetalleRecordatorioPorIdTipoEvento(Long id);
+	
+	 RecordatorioEventoDTO guardarRecordatorioEvento(TipoEventoDTO tipoEventoDTO, RecordatorioEventoDTO recordatorioEventoDto);
+	 RecordatorioEventoDTO actualizarRecordatorioEvento(TipoEventoDTO tipoEventoDTO ,RecordatorioEventoDTO recordatorioEventoDto, Long id);
 }

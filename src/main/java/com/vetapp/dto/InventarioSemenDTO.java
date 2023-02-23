@@ -1,6 +1,8 @@
 package com.vetapp.dto;
 
-
+import com.vetapp.model.Animal;
+import com.vetapp.model.GrupoInventario;
+import com.vetapp.model.ParVetValue;
 
 public class InventarioSemenDTO extends BaseModelDTO {
 
@@ -141,16 +143,17 @@ public class InventarioSemenDTO extends BaseModelDTO {
 	public void setMeritoNeto(double meritoNeto) {
 		this.meritoNeto = meritoNeto;
 	}
+    
 
 	public Long getIdraza() {
-        return idraza;
-    }
+		return idraza;
+	}
 
-    public void setIdraza(Long idraza) {
-        this.idraza = idraza;
-    }
+	public void setIdraza(Long idraza) {
+		this.idraza = idraza;
+	}
 
-    public Integer getNumPajuelasDisponibles() {
+	public Integer getNumPajuelasDisponibles() {
         return numPajuelasDisponibles;
     }
 
@@ -165,26 +168,25 @@ public class InventarioSemenDTO extends BaseModelDTO {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+     
 
-    public Long getIdPadre() {
-        return idPadre;
-    }
+	public Long getIdPadre() {
+		return idPadre;
+	}
 
-    public void setIdPadre(Long idPadre) {
-        this.idPadre = idPadre;
-    }
+	public void setIdPadre(Long idPadre) {
+		this.idPadre = idPadre;
+	}
 
-    public Long getIdMadre() {
-        return idMadre;
-    }
+	public Long getIdMadre() {
+		return idMadre;
+	}
 
-    public void setIdMadre(Long idMadre) {
-        this.idMadre = idMadre;
-    }
-    
-    
-    
-    public String getOtraIdentificacionPadre() {
+	public void setIdMadre(Long idMadre) {
+		this.idMadre = idMadre;
+	}
+
+	public String getOtraIdentificacionPadre() {
 		return otraIdentificacionPadre;
 	}
 
@@ -207,6 +209,7 @@ public class InventarioSemenDTO extends BaseModelDTO {
     public void setObservacion(String observacion) {
         this.observacion = observacion;
     }
+
 
 	public Long getIdGrupoInventario() {
 		return idGrupoInventario;

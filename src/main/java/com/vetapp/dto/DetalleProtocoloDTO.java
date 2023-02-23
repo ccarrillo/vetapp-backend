@@ -13,11 +13,12 @@ public class DetalleProtocoloDTO extends BaseModel {
 
 	private Long id;
 		
-	 private Long idprotocolo;
 
     private Long idtipoevento;
 
     private Integer numerodias;
+    
+    private ProtocoloDTO protocolo;
     
     private boolean editado;
     
@@ -31,13 +32,6 @@ public class DetalleProtocoloDTO extends BaseModel {
 		this.id = id;
 	}
 
-	public Long getIdprotocolo() {
-		return idprotocolo;
-	}
-
-	public void setIdprotocolo(Long idprotocolo) {
-		this.idprotocolo = idprotocolo;
-	}
 
 	public Long getIdtipoevento() {
 		return idtipoevento;
@@ -70,6 +64,16 @@ public class DetalleProtocoloDTO extends BaseModel {
 	public void setEliminado(boolean eliminado) {
 		this.eliminado = eliminado;
 	}
+
+	public ProtocoloDTO getProtocolo() {
+		return protocolo;
+	}
+
+	public void setProtocolo(ProtocoloDTO protocolo) {
+		this.protocolo = protocolo;
+	}
+
+	
     
     
     

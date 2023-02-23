@@ -20,7 +20,7 @@ public class DetalleTipoEventoDAOImpl extends GenericDAOImpl<DetalleTipoEvento, 
 		StringBuilder jpql = new StringBuilder();
 		List<DetalleTipoEventoDTO> listaDetalleTipoEventoDTO = new ArrayList<>();
 		jpql.append(" select id,nombre,abreviacion,tdesde,thasta,combosseleccionables, ");
-		jpql.append(" radioinformacion,requerido,idtipoevento from vet.detalletipoevento where idtipoevento = :id ");
+		jpql.append(" radioinformacion,requerido from vet.detalletipoevento where idtipoevento = :id ");
 		
 		Query query = em.createNativeQuery(jpql.toString());		
 		query.setParameter("id", id);
@@ -36,7 +36,7 @@ public class DetalleTipoEventoDAOImpl extends GenericDAOImpl<DetalleTipoEvento, 
 			detalle.setCombosseleccionables(o[5] == null? " ": o[5].toString());
 			detalle.setRadioInformacion(o[6] == null? " ": o[6].toString());
 			detalle.setRequerido((boolean) o[7] );
-			detalle.setIdTipoEvento(Long.parseLong(o[8].toString()));
+			//detalle.setIdTipoEvento(Long.parseLong(o[8].toString()));
 			
 			listaDetalleTipoEventoDTO.add(detalle);
 		}

@@ -18,4 +18,9 @@ public interface InventarioSemenService {
 
     boolean eliminarInventarioSemen(Long id);
 
+	boolean existenciainventarioDistintoId( String nombrenumero);
+
+	boolean existenciainventarioDistintoId(Long id, String nombrenumero);
+
+
 }

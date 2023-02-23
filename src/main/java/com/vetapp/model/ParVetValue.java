@@ -13,9 +13,8 @@ public class ParVetValue extends BaseModel {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="vet.parvetvalue_id_seq",sequenceName="vet.parvetvalue_id_seq",allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vet.parvetvalue_id_seq")
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", length = 70)

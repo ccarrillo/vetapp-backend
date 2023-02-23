@@ -1,14 +1,19 @@
 package com.vetapp.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "detalletipoeventoanimal", schema = "vet")
@@ -20,98 +25,133 @@ public class DetalleTipoEventoAnimal extends BaseModel {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="vet.detalletipoeventoanimal_id_seq",sequenceName="vet.detalletipoeventoanimal_id_seq",allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vet.detalletipoeventoanimal_id_seq")
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "iddetalletipoevento")
-    private Long idDetalleTipoEvento;
-
-    @Column(name = "detallestipoevento", length = 300)
-    private String detallesTipoEvento;
-
-    @Column(name = "fechadetalle")
-    private Date fechaDetalle;
-
-    @Column(name = "idempleado")
-    private Long idEmpleado;
-
-    @Column(name = "estadorecordatorio")
-    private Long estadoRecordatorio;
-
-    @Column(name = "fecharecordatorio")
-    private Date fechaRecordatorio;
-
-    @Column(name = "observaciones", length = 200)
-    private String observaciones;
+    @Column(name = "nombre", length = 100)
+    private String nombre;
     
-    @Column(name = "idtipoevento")
-    private Long idtipoevento;
+    @Column(name = "nombrevalor", length = 100)
+    private String nombrevalor;
 
-    public String getDetallesTipoEvento() {
-        return detallesTipoEvento;
-    }
+    @Column(name = "tdesde")
+    private   String tdesde;
 
-    public void setDetallesTipoEvento(String detallesTipoEvento) {
-        this.detallesTipoEvento = detallesTipoEvento;
-    }
+    @Column(name = "thasta")
+    private String thasta;
+ 
+    @Column(name = "combosseleccionables",length = 1200)
+    private String combosseleccionables;
+    
+    
+    @Column(name = "radioinformacion")
+    private String radioInformacion;
+    
+    @Column(name = "requerido")
+    private boolean requerido;
 
-    public Long getId() {
-        return id;
-    }
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ideventoanimal", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private EventoAnimal ideventoanimal;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Long getIdDetalleTipoEvento() {
-        return idDetalleTipoEvento;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setIdDetalleTipoEvento(Long idDetalleTipoEvento) {
-        this.idDetalleTipoEvento = idDetalleTipoEvento;
-    }
 
-    public Date getFechaDetalle() {
-        return fechaDetalle;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setFechaDetalle(Date fechaDetalle) {
-        this.fechaDetalle = fechaDetalle;
-    }
 
-    public Long getIdEmpleado() {
-        return idEmpleado;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setIdEmpleado(Long idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
 
-    public Long getEstadoRecordatorio() {
-        return estadoRecordatorio;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	
 
-    public void setEstadoRecordatorio(Long estadoRecordatorio) {
-        this.estadoRecordatorio = estadoRecordatorio;
-    }
 
-    public Date getFechaRecordatorio() {
-        return fechaRecordatorio;
-    }
+	public String getNombrevalor() {
+		return nombrevalor;
+	}
 
-    public void setFechaRecordatorio(Date fechaRecordatorio) {
-        this.fechaRecordatorio = fechaRecordatorio;
-    }
 
-    public String getObservaciones() {
-        return observaciones;
-    }
+	public void setNombrevalor(String nombrevalor) {
+		this.nombrevalor = nombrevalor;
+	}
 
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
+
+	public String getTdesde() {
+		return tdesde;
+	}
+
+
+	public void setTdesde(String tdesde) {
+		this.tdesde = tdesde;
+	}
+
+
+	public String getThasta() {
+		return thasta;
+	}
+
+
+	public void setThasta(String thasta) {
+		this.thasta = thasta;
+	}
+
+
+	public String getCombosseleccionables() {
+		return combosseleccionables;
+	}
+	
+
+	public void setCombosseleccionables(String combosseleccionables) {
+		this.combosseleccionables = combosseleccionables;
+	}
+
+
+	public String getRadioInformacion() {
+		return radioInformacion;
+	}
+
+
+	public void setRadioInformacion(String radioInformacion) {
+		this.radioInformacion = radioInformacion;
+	}
+
+
+	public boolean isRequerido() {
+		return requerido;
+	}
+
+
+	public void setRequerido(boolean requerido) {
+		this.requerido = requerido;
+	}
+
+
+	public EventoAnimal getIdeventoanimal() {
+		return ideventoanimal;
+	}
+
+
+	public void setIdeventoanimal(EventoAnimal ideventoanimal) {
+		this.ideventoanimal = ideventoanimal;
+	}
+
+    
+    
 
 
 }

@@ -15,9 +15,8 @@ public class GrupoEvento extends BaseModel {
 	private static final long serialVersionUID = 1L;
 
 
-	@Id
-    @SequenceGenerator(name="vet.grupoevento_id_seq",sequenceName="vet.grupoevento_id_seq",allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vet.grupoevento_id_seq")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 

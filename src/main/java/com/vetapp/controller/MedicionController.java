@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vetapp.dto.AnimalBusquedaDTO;
 import com.vetapp.dto.AnimalDTO;
 import com.vetapp.dto.MedicionDTO;
-
+import com.vetapp.service.AnimalService;
 import com.vetapp.service.MedicionService;
 import com.vetapp.vo.AnimalVO;
 
@@ -40,12 +40,20 @@ public class MedicionController {
 
     @Autowired
     private MedicionService medicionService;
+    
+    @Autowired
+    private AnimalService animalService;
 
-    @PostMapping("")
+    @PostMapping("/animal/{animalId}")
     @Operation(summary = "Create Medicion", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MedicionDTO.class)))})
-    public ResponseEntity<?> guardarMedicion(@RequestBody MedicionDTO medicionDto) {
+    public ResponseEntity<?> guardarMedicion(@PathVariable("animalId") Long animalId,@RequestBody MedicionDTO medicionDto) {
         try {
+        	 AnimalDTO objAnimal = animalService.obtenerAnimalPorId(animalId);
+    		 if (objAnimal == null) {
+                 return new ResponseEntity(HttpStatus.NOT_FOUND);
+             }
+    		     medicionDto.setIdanimal(objAnimal);
             MedicionDTO obj = medicionService.guardarMedicion(medicionDto);
             return new ResponseEntity(obj, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -109,11 +117,16 @@ public class MedicionController {
     
    
 
-    @PutMapping("/{id}")
+    @PutMapping("/animal/{animalId}/medicion/{id}")
     @Operation(summary = "Update Medicion", responses = {
             @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MedicionDTO.class)))})
-    public ResponseEntity<?> actualizarMedicion(@RequestBody MedicionDTO medicionDto, @PathVariable("id") Long id) {
+    public ResponseEntity<?> actualizarMedicion(@PathVariable("animalId") Long animalId,@RequestBody MedicionDTO medicionDto, @PathVariable("id") Long id) {
         try {
+        	 AnimalDTO objAnimal = animalService.obtenerAnimalPorId(animalId);
+    		 if (objAnimal == null) {
+                 return new ResponseEntity(HttpStatus.NOT_FOUND);
+             }
+    		  medicionDto.setIdanimal(objAnimal);
             MedicionDTO obj = medicionService.actualizarMedicion(medicionDto, id);
             if (obj != null) {
                 return new ResponseEntity(obj, HttpStatus.OK);

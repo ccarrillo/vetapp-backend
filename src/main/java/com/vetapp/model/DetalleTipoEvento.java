@@ -2,13 +2,20 @@ package com.vetapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-//ventana de informacion adicional
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "detalletipoevento", schema = "vet")
 public class DetalleTipoEvento extends BaseModel {
@@ -19,9 +26,8 @@ public class DetalleTipoEvento extends BaseModel {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="vet.detalletipoevento_id_seq",sequenceName="vet.detalletipoevento_id_seq",allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vet.detalletipoevento_id_seq")
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nombre", length = 100)
@@ -36,7 +42,7 @@ public class DetalleTipoEvento extends BaseModel {
     @Column(name = "thasta")
     private String thasta;
  
-    @Column(name = "combosseleccionables", length = 300)
+    @Column(name = "combosseleccionables",length = 1200)
     private String combosseleccionables;
     
     /*@Column(name = "padremadre", length = 1)
@@ -47,9 +53,13 @@ public class DetalleTipoEvento extends BaseModel {
     
     @Column(name = "requerido")
     private boolean requerido;
-   
-    @Column(name = "idtipoevento")
-    private Long idTipoEvento;
+
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idtipoevento", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private TipoEvento idTipoEvento;
     
  
 
@@ -96,9 +106,6 @@ public class DetalleTipoEvento extends BaseModel {
 		this.thasta = thasta;
 	}
 
-	
-
-	
 
 	public String getCombosseleccionables() {
 		return combosseleccionables;
@@ -125,13 +132,15 @@ public class DetalleTipoEvento extends BaseModel {
 		this.requerido = requerido;
 	}
 
-	public Long getIdTipoEvento() {
+	public TipoEvento getIdTipoEvento() {
 		return idTipoEvento;
 	}
 
-	public void setIdTipoEvento(Long idTipoEvento) {
+	public void setIdTipoEvento(TipoEvento idTipoEvento) {
 		this.idTipoEvento = idTipoEvento;
 	}
+
+	
      
      
     

@@ -15,7 +15,7 @@ public class DetalleProtocoloDAOImpl extends GenericDAOImpl<DetalleProtocolo, Lo
 	public List<DetalleProtocoloDTO> obtenerListaDetalleProtocoloPorIdTipo(Long id) {
 		StringBuilder jpql = new StringBuilder();
 		List<DetalleProtocoloDTO> listaDetalleProtocoloDTO = new ArrayList<>();
-		jpql.append(" select id,idprotocolo,idtipoevento,numerodias");
+		jpql.append(" select id,idtipoevento,numerodias");
 		jpql.append(" from vet.detalleprotocolo where idprotocolo = :id ");
 		
 		Query query = em.createNativeQuery(jpql.toString());		
@@ -25,9 +25,8 @@ public class DetalleProtocoloDAOImpl extends GenericDAOImpl<DetalleProtocolo, Lo
 		for(Object[] o : lista){
 			DetalleProtocoloDTO  detalle = new DetalleProtocoloDTO();
 			detalle.setId(Long.parseLong(o[0].toString()));
-			detalle.setIdprotocolo(Long.parseLong(o[1].toString()));
-			detalle.setIdtipoevento(Long.parseLong(o[2].toString()));
-			detalle.setNumerodias(Integer.parseInt(o[3].toString()));
+			detalle.setIdtipoevento(Long.parseLong(o[1].toString()));
+			detalle.setNumerodias(Integer.parseInt(o[2].toString()));
 			
 			
 			listaDetalleProtocoloDTO.add(detalle);

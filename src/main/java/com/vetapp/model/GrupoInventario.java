@@ -16,8 +16,7 @@ public class GrupoInventario extends BaseModel {
 
 
 	@Id
-    @SequenceGenerator(name="vet.grupoinventario_id_seq",sequenceName="vet.grupoinventario_id_seq",allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vet.grupoinventario_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 

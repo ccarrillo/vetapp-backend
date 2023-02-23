@@ -10,6 +10,7 @@ public interface AnimalDAO extends GenericDAO<Animal, Long> {
 	List<AnimalVO> obtenerAnimalesVO(Boolean estado);
 	boolean existenciaAnimal(String areteNombre);
 	boolean existenciaAnimalDistintoId(Long id, String arete);
+	Long obtenerAnimalPorAreteNombre(String aretenombre);
 	
 
 }

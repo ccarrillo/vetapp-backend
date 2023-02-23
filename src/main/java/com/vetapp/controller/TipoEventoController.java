@@ -54,7 +54,7 @@ public class TipoEventoController {
         				System.out.println("ingreso aqui actualizacion detalle ");
         			}
         			else {*/
-        				 detalle.setIdTipoEvento(obj.getId());
+        				 detalle.setIdTipoEvento(obj);
         				 detalleTipoEventoService.guardarDetalleTipoEvento(detalle);
         			//}
         			  
@@ -67,7 +67,7 @@ public class TipoEventoController {
         			}
         			else {*/
         				//System.out.println("ingreso aqui crear recordatorio ");
-        				recordatorio.setIdtipoevento(obj.getId());
+        				recordatorio.setIdtipoeventopadre(obj);
         				recordatorioEventoService.guardarRecordatorioEvento(recordatorio);
         			//}
         			  
@@ -139,12 +139,15 @@ public class TipoEventoController {
             if (obj != null) {
             	if(tipoEventoDto.getListaDetallleTipoEventoDTO().size()>0) {
             		for(DetalleTipoEventoDTO detalle:tipoEventoDto.getListaDetallleTipoEventoDTO()) {
-            			if(detalle.getId() != null && detalle.isEditado() ) {
-            				detalleTipoEventoService.actualizarDetalleTipoEvento(detalle, detalle.getId());
+            			if(detalle.getId() != null && detalle.isEditado() && !detalle.isEliminado() ) {
+            				detalleTipoEventoService.actualizarDetalleTipoEvento(obj,detalle, detalle.getId());
+            			}
+            			if(detalle.getId() != null && detalle.isEliminado() ) {
+            				detalleTipoEventoService.eliminarDetalleTipoEvento(detalle.getId());
             			}
             			if( detalle.getId() == null ) {
             				  //System.out.println("ingreso a la prueba"+detalle.getNombre());
-            				  detalle.setIdTipoEvento(obj.getId());
+            				  detalle.setIdTipoEvento(obj);
              				 detalleTipoEventoService.guardarDetalleTipoEvento(detalle);
             			}
             				  
@@ -152,12 +155,15 @@ public class TipoEventoController {
             	}
             	if(tipoEventoDto.getListaRecordatorioEventoDTO().size()>0) {
             		for(RecordatorioEventoDTO recordatorio:tipoEventoDto.getListaRecordatorioEventoDTO()) {
-            			if(recordatorio.getId() != null && recordatorio.isEditado() ) {
-            				recordatorioEventoService.actualizarRecordatorioEvento(recordatorio, recordatorio.getId());
+            			if(recordatorio.getId() != null && recordatorio.isEditado() && !recordatorio.isEliminado()) {
+            				recordatorioEventoService.actualizarRecordatorioEvento(obj,recordatorio, recordatorio.getId());
+            			}
+            			if(recordatorio.getId() != null && recordatorio.isEliminado() ) {
+            				recordatorioEventoService.eliminarRecordatorioEvento(recordatorio.getId());
             			}
             			if( recordatorio.getId() == null ) {
-            				recordatorio.setIdtipoevento(obj.getId());
-            				recordatorioEventoService.guardarRecordatorioEvento(recordatorio);
+            				//recordatorio.setIdtipoevento(obj.getId());
+            				recordatorioEventoService.guardarRecordatorioEvento(obj,recordatorio);
           			   }
             		}
             	}
@@ -177,6 +183,8 @@ public class TipoEventoController {
     public ResponseEntity<TipoEventoDTO> eliminarTipoEvento(@PathVariable("id") Long id) {
         try {
             Boolean obj = tipoEventoService.eliminarTipoEvento(id);
+                          //detalleTipoEventoService.eliminarDetalleTipoEventoPorIdTipoEvento(id);
+                          //recordatorioEventoService.eliminarDetalleRecordatorioPorIdTipoEvento(id);
             if (obj) {
                 return new ResponseEntity(obj, HttpStatus.OK);
             } else {

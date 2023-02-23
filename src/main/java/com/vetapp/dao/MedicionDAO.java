@@ -6,6 +6,6 @@ import com.vetapp.model.Medicion;
 
 public interface MedicionDAO extends GenericDAO<Medicion, Long> {
 
-	List<Medicion> buscarMedicionesPorAnimal(Long id);
+	List<MedicionDTO> buscarMedicionesPorAnimal(Long id);
 
 }
