@@ -53,6 +53,7 @@ public class InventarioSemenController {
             animal.setSexo("M");
             animal.setOtraIdentificacionMadre(obj.getOtraIdentificacionMadre());
             animal.setOtraIdentificacionPadre(obj.getOtraIdentificacionPadre());
+            animal.setPajilla(true);
             animalService.guardarAnimal(animal);
             
             
@@ -116,6 +117,7 @@ public class InventarioSemenController {
                 animal.setSexo("M");
                 animal.setOtraIdentificacionMadre(obj.getOtraIdentificacionMadre());
                 animal.setOtraIdentificacionPadre(obj.getOtraIdentificacionPadre());
+                animal.setPajilla(true);
                 animalService.actualizarAnimal(animal, idAnimal);
             	
                 return new ResponseEntity(obj, HttpStatus.OK);
