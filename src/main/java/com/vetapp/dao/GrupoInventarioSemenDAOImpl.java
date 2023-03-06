@@ -20,7 +20,7 @@ public class GrupoInventarioSemenDAOImpl extends GenericDAOImpl<GrupoInventario,
 		// TODO Auto-generated method stub
 		StringBuilder jpql = new StringBuilder();
 		List<GrupoInventarioDTO> listaGrupo = new ArrayList<>();
-		jpql.append("  SELECT id,nombre ,padre ,level  FROM vet.grupoinventario where is_active = :estado  ");
+		jpql.append("  SELECT id,nombre,nombredetallado ,padre ,level  FROM vet.grupoinventario where is_active = :estado  ");
 		Query query = em.createNativeQuery(jpql.toString());		
 		query.setParameter("estado", estado);
 		List<Object[]> lista = query.getResultList();
@@ -29,8 +29,9 @@ public class GrupoInventarioSemenDAOImpl extends GenericDAOImpl<GrupoInventario,
 			GrupoInventarioDTO  grupo = new GrupoInventarioDTO();
 			grupo.setId(Long.parseLong(o[0].toString()));
 			grupo.setNombre(o[1] == null? " ": o[1].toString());
-			grupo.setPadre(o[2] == null? 0: Long.parseLong(o[2].toString()));
-			grupo.setLevel(o[3] == null? 0: Long.parseLong(o[3].toString()));
+			grupo.setNombredetallado(o[2] == null? " ": o[2].toString());
+			grupo.setPadre(o[3] == null? 0: Long.parseLong(o[3].toString()));
+			grupo.setLevel(o[4] == null? 0: Long.parseLong(o[4].toString()));
 			
 			listaGrupo.add(grupo);
 		}

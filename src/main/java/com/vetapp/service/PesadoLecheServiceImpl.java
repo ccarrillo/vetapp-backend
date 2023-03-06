@@ -62,7 +62,7 @@ public class PesadoLecheServiceImpl implements PesadoLecheService {
         UserAuth user = userAuthRepository.findByEmail(auth.getName());
         PesadoLeche objTemp = pesadoLecheDao.buscarPorId(id);
         if (objTemp != null) {
-            pesadoLecheDto.setId(objTemp.getId());
+            pesadoLecheDto.setId(objTemp.getIdpesado());
             pesadoLecheDto.setUserCreation(objTemp.getUserCreation());
             pesadoLecheDto.setCreatedAt(objTemp.getCreatedAt());
             pesadoLecheDto.setUserUpdated(user.getId());

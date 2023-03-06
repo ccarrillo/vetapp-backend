@@ -14,6 +14,8 @@ public class GrupoProtocoloDTO  extends BaseModel{
 	private Long id;
 
 	 private String nombre;
+	 
+	 private String nombredetallado;
 
     private Long padre ;
 
@@ -39,6 +41,16 @@ public class GrupoProtocoloDTO  extends BaseModel{
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	
+
+	public String getNombredetallado() {
+		return nombredetallado;
+	}
+
+	public void setNombredetallado(String nombredetallado) {
+		this.nombredetallado = nombredetallado;
 	}
 
 	public Long getPadre() {

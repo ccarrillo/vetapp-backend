@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,82 +18,132 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 public class PesadoLeche extends BaseModel {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+	private Long idpesado;
+	
+	@Column(name="pesado")
+	private double pesado;
+	
+	@Column(name="animalid")
+	private Long animalid;
+	
+	@Column(name="fechapesado")
+	@JsonFormat(pattern="dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Calendar  fechapesado;
+	
+	
+	/*@Column(name="eliminado")
+	private byte eliminado;*///
+	
+	@Column(name="turnoid")
+	private Long turnoid;
+	
+	@Column(name="idgrupoanimal")
+	private Long idgrupoanimal;
+	
+	@Transient
+	private String arete;
+	
 
-    @Column(name = "pesado")
-    private double pesado;
+	
+	@Transient
+	private String contador;
+	
 
-    @Column(name = "animalid")
-    private Long animalid;
+	public Long getIdpesado() {
+		return idpesado;
+	}
 
-    @Column(name = "turnoid")
-    private Long turnoid;
+	public void setIdpesado(Long idpesado) {
+		this.idpesado = idpesado;
+	}
 
-    @Column(name = "corralid")
-    private Long corralid;
+	public double getPesado() {
+		return pesado;
+	}
 
-    @Column(name = "fechapesado")
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    @Temporal(TemporalType.DATE)
-    private Calendar fechapesado;
+	public void setPesado(double pesado) {
+		this.pesado = pesado;
+	}
 
+	public Long getAnimalid() {
+		return animalid;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setAnimalid(Long animalid) {
+		this.animalid = animalid;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Calendar getFechapesado() {
+		return fechapesado;
+	}
 
-    public double getPesado() {
-        return pesado;
-    }
+	public void setFechapesado(Calendar fechapesado) {
+		this.fechapesado = fechapesado;
+	}
+    
+	
+	
+	/*public Long getUsuarioid() {
+		return usuarioid;
+	}
 
-    public void setPesado(double pesado) {
-        this.pesado = pesado;
-    }
+	public void setUsuarioid(Long usuarioid) {
+		this.usuarioid = usuarioid;
+	}
 
-    public Long getAnimalid() {
-        return animalid;
-    }
+	public byte getEliminado() {
+		return eliminado;
+	}
 
-    public void setAnimalid(Long animalid) {
-        this.animalid = animalid;
-    }
+	public void setEliminado(byte eliminado) {
+		this.eliminado = eliminado;
+	}*/
 
-    public Long getTurnoid() {
-        return turnoid;
-    }
+     
+	
 
-    public void setTurnoid(Long turnoid) {
-        this.turnoid = turnoid;
-    }
+	public String getArete() {
+		return arete;
+	}
 
-    public Long getCorralid() {
-        return corralid;
-    }
+	public Long getIdgrupoanimal() {
+		return idgrupoanimal;
+	}
 
-    public void setCorralid(Long corralid) {
-        this.corralid = corralid;
-    }
+	public void setIdgrupoanimal(Long idgrupoanimal) {
+		this.idgrupoanimal = idgrupoanimal;
+	}
 
-    public Calendar getFechapesado() {
-        return fechapesado;
-    }
+	public Long getTurnoid() {
+		return turnoid;
+	}
 
-    public void setFechapesado(Calendar fechapesado) {
-        this.fechapesado = fechapesado;
-    }
+	public void setTurnoid(Long turnoid) {
+		this.turnoid = turnoid;
+	}
 
+	public void setArete(String arete) {
+		this.arete = arete;
+	}
+
+	public String getContador() {
+		return contador;
+	}
+
+	public void setContador(String contador) {
+		this.contador = contador;
+	}
+	
+	
 
 }

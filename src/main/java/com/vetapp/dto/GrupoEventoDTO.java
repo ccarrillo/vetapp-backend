@@ -20,6 +20,8 @@ public class GrupoEventoDTO extends BaseModel {
     
     private Long level ;
     
+    private String nombredetallado;
+    
     private List<GrupoEventoDTO> children;
     
     public GrupoEventoDTO() {
@@ -40,6 +42,16 @@ public class GrupoEventoDTO extends BaseModel {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	
+
+	public String getNombredetallado() {
+		return nombredetallado;
+	}
+
+	public void setNombredetallado(String nombredetallado) {
+		this.nombredetallado = nombredetallado;
 	}
 
 	public Long getPadre() {

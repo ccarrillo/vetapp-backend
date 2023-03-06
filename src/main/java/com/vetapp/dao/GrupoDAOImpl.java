@@ -20,7 +20,7 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo, Long> implements GrupoDA
 		// TODO Auto-generated method stub
 		StringBuilder jpql = new StringBuilder();
 		List<Grupo> listaGrupo = new ArrayList<>();
-		jpql.append("  SELECT id,nombre ,padre ,level  FROM vet.grupo where is_active = :estado  ");
+		jpql.append("  SELECT id,nombre,nombredetallado, padre ,level  FROM vet.grupo where is_active = :estado  ");
 		Query query = em.createNativeQuery(jpql.toString());		
 		query.setParameter("estado", estado);
 		List<Object[]> lista = query.getResultList();
@@ -29,8 +29,9 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo, Long> implements GrupoDA
 			Grupo  grupo = new Grupo();
 			grupo.setId(Long.parseLong(o[0].toString()));
 			grupo.setNombre(o[1] == null? " ": o[1].toString());
-			grupo.setPadre(o[2] == null? 0: Long.parseLong(o[2].toString()));
-			grupo.setLevel(o[3] == null? 0: Long.parseLong(o[3].toString()));
+			grupo.setNombredetallado(o[2] == null? " ": o[2].toString());
+			grupo.setPadre(o[3] == null? 0: Long.parseLong(o[3].toString()));
+			grupo.setLevel(o[4] == null? 0: Long.parseLong(o[4].toString()));
 			
 			listaGrupo.add(grupo);
 		}
@@ -43,7 +44,7 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo, Long> implements GrupoDA
 		// TODO Auto-generated method stub
 				StringBuilder jpql = new StringBuilder();
 				List<GrupoDTO> listaGrupo = new ArrayList<>();
-				jpql.append("  SELECT id,nombre ,padre ,level  FROM vet.grupo where is_active = :estado  ");
+				jpql.append("  SELECT id,nombre,nombredetallado, padre ,level  FROM vet.grupo where is_active = :estado  ");
 				Query query = em.createNativeQuery(jpql.toString());		
 				query.setParameter("estado", estado);
 				List<Object[]> lista = query.getResultList();
@@ -52,8 +53,9 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo, Long> implements GrupoDA
 					GrupoDTO  grupo = new GrupoDTO();
 					grupo.setId(Long.parseLong(o[0].toString()));
 					grupo.setNombre(o[1] == null? " ": o[1].toString());
-					grupo.setPadre(o[2] == null? 0: Long.parseLong(o[2].toString()));
-					grupo.setLevel(o[3] == null? 0: Long.parseLong(o[3].toString()));
+					grupo.setNombredetallado(o[2] == null? " ": o[2].toString());
+					grupo.setPadre(o[3] == null? 0: Long.parseLong(o[3].toString()));
+					grupo.setLevel(o[4] == null? 0: Long.parseLong(o[4].toString()));
 					
 					listaGrupo.add(grupo);
 				}

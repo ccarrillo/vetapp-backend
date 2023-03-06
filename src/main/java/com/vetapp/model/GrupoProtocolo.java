@@ -26,6 +26,9 @@ public class GrupoProtocolo extends BaseModel {
      
 	 @Column(name = "nombre",length = 50)
 	 private String nombre;
+	 
+	 @Column(name = "nombredetallado")
+	 private String nombredetallado;
 	
     @Column(name = "padre")
     private Long padre ;
@@ -37,10 +40,11 @@ public class GrupoProtocolo extends BaseModel {
     	
     }
     
-	public GrupoProtocolo(Long id, String nombre, Long padre, Long level) {
+    public GrupoProtocolo(Long id, String nombre, String nombredetallado, Long padre, Long level) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
+		this.nombredetallado = nombredetallado;
 		this.padre = padre;
 		this.level = level;
 	}
@@ -59,6 +63,16 @@ public class GrupoProtocolo extends BaseModel {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	
+
+	public String getNombredetallado() {
+		return nombredetallado;
+	}
+
+	public void setNombredetallado(String nombredetallado) {
+		this.nombredetallado = nombredetallado;
 	}
 
 	public Long getPadre() {

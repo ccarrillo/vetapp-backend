@@ -12,6 +12,8 @@ public class GrupoInventarioDTO extends BaseModel{
 
 	private String nombre;
 	
+	private String nombredetallado;
+	
     private Long padre ;
     
     private Long level ;
@@ -36,6 +38,16 @@ public class GrupoInventarioDTO extends BaseModel{
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	
+
+	public String getNombredetallado() {
+		return nombredetallado;
+	}
+
+	public void setNombredetallado(String nombredetallado) {
+		this.nombredetallado = nombredetallado;
 	}
 
 	public Long getPadre() {
