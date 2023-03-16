@@ -8,4 +8,5 @@ import com.vetapp.model.Grupo;
 public interface GrupoDAO extends GenericDAO<Grupo, Long> {
 	List<Grupo> obtenerGrupoAnimales(boolean b);
 	List<GrupoDTO> obtenerGrupoAnimalesSinHijos(boolean b);
+	boolean existenciaAnimales(Long idgrupo);
 }

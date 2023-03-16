@@ -1,11 +1,13 @@
 package com.vetapp.service;
 
 
+import java.util.Calendar;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.GrupoDAO;
@@ -13,6 +15,7 @@ import com.vetapp.dao.UserAuthRepository;
 import com.vetapp.dto.GrupoDTO;
 import com.vetapp.model.Animal;
 import com.vetapp.model.Grupo;
+import com.vetapp.model.UserAuth;
 
 
 @Service
@@ -55,8 +58,12 @@ public class GrupoAnimalesServiceImpl implements GrupoAnimalesService{
 
 	@Override
 	public GrupoDTO guardarGrupoAnimles(GrupoDTO grupoDto) {
-		// TODO Auto-generated method stub
-		return null;
+		     Authentication auth = authenticationFacade.getAuthentication();
+	        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+	        grupoDto.setUserCreation(user.getId());
+	        grupoDto.setCreatedAt(Calendar.getInstance().getTime());
+	        Grupo obj = grupoDao.insertar(convertDtoToEntity(grupoDto));
+	        return convertEntityToDto(obj);
 	}
 
 	@Override
@@ -82,20 +89,43 @@ public class GrupoAnimalesServiceImpl implements GrupoAnimalesService{
 
 	@Override
 	public GrupoDTO actualizarGrupoAnimales(GrupoDTO grupoDto, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		  Authentication auth = authenticationFacade.getAuthentication();
+	        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+	        Grupo objTemp = grupoDao.buscarPorId(id);
+	        if (objTemp != null) {
+	            grupoDto.setId(objTemp.getId());
+	            grupoDto.setUserCreation(objTemp.getUserCreation());
+	            grupoDto.setCreatedAt(objTemp.getCreatedAt());
+	            grupoDto.setUserUpdated(user.getId());
+	            grupoDto.setModifiedAt(Calendar.getInstance().getTime());
+	            Grupo obj = grupoDao.actualizar(convertDtoToEntity(grupoDto));
+	            return convertEntityToDto(obj);
+	        } else {
+	            return null;
+	        }
 	}
 
 	@Override
 	public boolean eliminarGrupo(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		 try {
+	            grupoDao.eliminarPorId(id);
+	            return true;
+	        } catch (Exception err) {
+	            return false;
+	        }
 	}
 
 	@Override
 	public List<GrupoDTO> obtenerGrupoAnimalesSinHijos() {
 		// TODO Auto-generated method stub
 		 return  grupoDao.obtenerGrupoAnimalesSinHijos(true);
+	}
+
+	@Override
+	public boolean existenciaAnimales(Long idgrupo) {
+		// TODO Auto-generated method stub
+		return grupoDao.existenciaAnimales(idgrupo);
+		
 	}
 	
 	

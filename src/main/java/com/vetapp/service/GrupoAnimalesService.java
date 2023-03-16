@@ -23,4 +23,10 @@ public interface GrupoAnimalesService {
 
 	    boolean eliminarGrupo(Long id);
 
+
+		boolean existenciaAnimales(Long idgrupo);
+
+
+		
+
 }

@@ -18,4 +18,6 @@ public interface GrupoProtocoloService {
 
     boolean eliminarGrupoProtocolo(Long id);
 
+	boolean existenciaProtocolo(Long idgrupo);
+
 }

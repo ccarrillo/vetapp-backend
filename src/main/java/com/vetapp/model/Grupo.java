@@ -18,11 +18,11 @@ public class Grupo extends BaseModel{
 	private static final long serialVersionUID = 1L;
 
 
-	@Id
-    @SequenceGenerator(name="vet.grupo_id_seq",sequenceName="vet.grupo_id_seq",allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vet.grupo_id_seq")
+    @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 
      
 	 @Column(name = "nombre",length = 50)

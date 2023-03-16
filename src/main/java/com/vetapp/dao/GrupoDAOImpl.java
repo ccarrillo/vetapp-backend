@@ -63,6 +63,17 @@ public class GrupoDAOImpl extends GenericDAOImpl<Grupo, Long> implements GrupoDA
 				return listaGrupo;
 	}
 
+	@Override
+	public boolean existenciaAnimales(Long idgrupo) {
+		String jpql = "select count(*) from vet.grupo g inner join vet.animal a on g.id = a.idgrupoanimal where (a.idgrupoanimal = :idgrupo or g.padre = :idgrupo) and a.venta = false and a.muerto= false and a.is_active= true  ";
+		Query query = em.createNativeQuery(jpql);
+		query.setParameter("idgrupo", idgrupo);
+		int cantidad = Integer.parseInt("" + query.getSingleResult());
+		if (cantidad > 0) {
+			return true;
+		} else return false;
+	}
+
 	
 	
 }

@@ -1,19 +1,24 @@
 package com.vetapp.service;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import com.vetapp.config.IAuthenticationFacade;
 import com.vetapp.dao.GrupoProtocoloDAO;
 import com.vetapp.dao.UserAuthRepository;
 import com.vetapp.dto.GrupoEventoDTO;
 import com.vetapp.dto.GrupoProtocoloDTO;
+import com.vetapp.model.Grupo;
 import com.vetapp.model.GrupoEvento;
+import com.vetapp.model.GrupoInventario;
 import com.vetapp.model.GrupoProtocolo;
+import com.vetapp.model.UserAuth;
 
 @Service
 @Transactional
@@ -56,14 +61,17 @@ public class GrupoProtocoloServiceImpl implements GrupoProtocoloService {
 	
 	@Override
 	public GrupoProtocoloDTO guardarGrupoProtocolo(GrupoProtocoloDTO grupoProtocoloDto) {
-		// TODO Auto-generated method stub
-		return null;
+		Authentication auth = authenticationFacade.getAuthentication();
+        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+        grupoProtocoloDto.setUserCreation(user.getId());
+        grupoProtocoloDto.setCreatedAt(Calendar.getInstance().getTime());
+        GrupoProtocolo obj = grupoProtocoloDao.insertar(convertDtoToEntity(grupoProtocoloDto));
+        return convertEntityToDto(obj);
 	}
 
 	@Override
 	public List<GrupoProtocolo> obtenerGrupoProtocolo() {
-		// TODO Auto-generated method stub
-		return null;
+		return grupoProtocoloDao.obtenerGrupoProtocolo(true);
 	}
 
 	@Override
@@ -74,20 +82,43 @@ public class GrupoProtocoloServiceImpl implements GrupoProtocoloService {
 
 	@Override
 	public GrupoProtocoloDTO obtenerGrupoProtocoloPorId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		GrupoProtocolo grupo =  grupoProtocoloDao.buscarPorId(id);
+		 
+	    return convertEntityToDto(grupo);
 	}
 
 	@Override
 	public GrupoProtocoloDTO actualizarGrupoProtocolo(GrupoProtocoloDTO grupoProtocoloDto, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Authentication auth = authenticationFacade.getAuthentication();
+        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+        GrupoProtocolo objTemp = grupoProtocoloDao.buscarPorId(id);
+        if (objTemp != null) {
+        	grupoProtocoloDto.setId(objTemp.getId());
+        	grupoProtocoloDto.setUserCreation(objTemp.getUserCreation());
+        	grupoProtocoloDto.setCreatedAt(objTemp.getCreatedAt());
+        	grupoProtocoloDto.setUserUpdated(user.getId());
+        	grupoProtocoloDto.setModifiedAt(Calendar.getInstance().getTime());
+            GrupoProtocolo obj = grupoProtocoloDao.actualizar(convertDtoToEntity(grupoProtocoloDto));
+            return convertEntityToDto(obj);
+        } else {
+            return null;
+        }
 	}
 
 	@Override
 	public boolean eliminarGrupoProtocolo(Long id) {
+		try {
+			grupoProtocoloDao.eliminarPorId(id);
+            return true;
+        } catch (Exception err) {
+            return false;
+        }
+	}
+
+	@Override
+	public boolean existenciaProtocolo(Long idgrupo) {
 		// TODO Auto-generated method stub
-		return false;
+		return grupoProtocoloDao.existenciaProtocolo(idgrupo);
 	}
 
 }

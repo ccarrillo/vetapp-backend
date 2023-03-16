@@ -8,14 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.vetapp.dto.AnimalDTO;
 import com.vetapp.dto.GrupoDTO;
 import com.vetapp.dto.InventarioSemenDTO;
 import com.vetapp.dto.ListaGrupoDTO;
@@ -42,13 +45,21 @@ public class GrupoAnimalesController {
     @Autowired
     private GrupoAnimalesService grupoAnimalesService;
 	
-	 @PostMapping("")
-	 @Operation(summary = "Create GrupoAnimal", responses = {
-	            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json"))})
-	    public void guardarGrupoAnimal(@RequestBody ListaGrupoDTO grupoDto) {
-	          System.out.print("El grupo es"+grupoDto);
-	          
-	    }
+    @PostMapping("")
+    @Operation(summary = "Create GrupoAnimal", responses = {
+            @ApiResponse(description = "Successful Response", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = GrupoDTO.class)))})
+    public ResponseEntity<?> guardarGrupo(@RequestBody GrupoDTO grupoDto) {
+        try {
+        	
+        		GrupoDTO obj = grupoAnimalesService.guardarGrupoAnimles(grupoDto);
+                return new ResponseEntity(obj, HttpStatus.CREATED);
+        	
+            
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 	 
 	 
 	    @GetMapping("")
@@ -105,6 +116,67 @@ public class GrupoAnimalesController {
 	        } catch (Exception e) {
 	            logger.error(e.getLocalizedMessage());
 	            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	    }
+	    
+	    
+	    @GetMapping("existe/{idgrupo}")
+	    @Operation(summary = "existencia Animals", responses = {
+	    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = GrupoDTO.class)))})
+	    public ResponseEntity<?> existenciaAnimalArete(@PathVariable("idgrupo") Long idgrupo) {
+	        try {
+	        	boolean respuesta;
+	        	
+	        		if(grupoAnimalesService.existenciaAnimales(idgrupo))
+	        		{
+	        			respuesta=true;
+	        		}
+	        		else {
+	        			respuesta = false;
+	        		}
+	        	
+	            
+	            return new ResponseEntity(respuesta, HttpStatus.OK);
+	        } catch (Exception e) {
+	            logger.error(e.getLocalizedMessage());
+	            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	    }
+	    
+	    
+	    @PutMapping("/{id}")
+	    @Operation(summary = "Update Grupo", responses = {
+	            @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = GrupoDTO.class)))})
+	    public ResponseEntity<?> actualizarGrupo(@RequestBody GrupoDTO grupoDto, @PathVariable("id") Long id) {
+	        try {
+	        	
+	            GrupoDTO obj = grupoAnimalesService.actualizarGrupoAnimales(grupoDto, id);
+	            if (obj != null) {
+	                return new ResponseEntity(obj, HttpStatus.OK);
+	            } else {
+	                return new ResponseEntity(HttpStatus.NOT_FOUND);
+	            }
+	        } catch (Exception e) {
+	            logger.error(e.getLocalizedMessage());
+	            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	    }
+	    
+	    
+	    @DeleteMapping("/{id}")
+	    @Operation(summary = "Delete GrupoAnimal", responses = {
+	    @ApiResponse(description = "Successful Response", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = GrupoDTO.class)))})
+	    public ResponseEntity<GrupoDTO> eliminarGrupo(@PathVariable("id") Long id) {
+	        try {
+	            Boolean obj = grupoAnimalesService.eliminarGrupo(id);
+	            if (obj) {
+	                return new ResponseEntity(obj, HttpStatus.OK);
+	            } else {
+	                return new ResponseEntity(HttpStatus.NOT_FOUND);
+	            }
+	        } catch (Exception e) {
+	            logger.error(e.getLocalizedMessage());
+	            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	        }
 	    }
 	 

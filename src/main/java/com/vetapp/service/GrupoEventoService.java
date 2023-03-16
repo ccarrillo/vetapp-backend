@@ -21,4 +21,6 @@ public interface GrupoEventoService {
 
 	    boolean eliminarGrupoEvento(Long id);
 
+		boolean existenciaEvento(Long idgrupo);
+
 }

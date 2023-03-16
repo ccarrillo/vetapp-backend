@@ -1,5 +1,6 @@
 package com.vetapp.service;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,6 +8,7 @@ import javax.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.vetapp.config.IAuthenticationFacade;
@@ -17,6 +19,8 @@ import com.vetapp.dto.GrupoDTO;
 import com.vetapp.dto.GrupoEventoDTO;
 import com.vetapp.model.Grupo;
 import com.vetapp.model.GrupoEvento;
+import com.vetapp.model.GrupoInventario;
+import com.vetapp.model.UserAuth;
 
 @Service
 @Transactional
@@ -59,14 +63,18 @@ public class GrupoEventoServiceImpl implements GrupoEventoService {
 
 	@Override
 	public GrupoEventoDTO guardarGrupoEvento(GrupoEventoDTO grupoEventoDto) {
-		// TODO Auto-generated method stub
-		return null;
+		Authentication auth = authenticationFacade.getAuthentication();
+        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+        grupoEventoDto.setUserCreation(user.getId());
+        grupoEventoDto.setCreatedAt(Calendar.getInstance().getTime());
+        GrupoEvento obj = grupoEventoDao.insertar(convertDtoToEntity(grupoEventoDto));
+        return convertEntityToDto(obj);
 	}
 
 	@Override
 	public List<GrupoEvento> obtenerGrupoEvento() {
 		// TODO Auto-generated method stub
-		return null;
+		return grupoEventoDao.obtenerGrupoEvento(true);
 	}
 
 	@Override
@@ -78,19 +86,43 @@ public class GrupoEventoServiceImpl implements GrupoEventoService {
 	@Override
 	public GrupoEventoDTO obtenerGrupoEventoPorId(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		GrupoEvento grupo =  grupoEventoDao.buscarPorId(id);
+		 
+	    return convertEntityToDto(grupo);
 	}
 
 	@Override
 	public GrupoEventoDTO actualizarGrupoEvento(GrupoEventoDTO grupoEventoDto, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		 Authentication auth = authenticationFacade.getAuthentication();
+	        UserAuth user = userAuthRepository.findByEmail(auth.getName());
+	        GrupoEvento objTemp = grupoEventoDao.buscarPorId(id);
+	        if (objTemp != null) {
+	            grupoEventoDto.setId(objTemp.getId());
+	            grupoEventoDto.setUserCreation(objTemp.getUserCreation());
+	            grupoEventoDto.setCreatedAt(objTemp.getCreatedAt());
+	            grupoEventoDto.setUserUpdated(user.getId());
+	            grupoEventoDto.setModifiedAt(Calendar.getInstance().getTime());
+	            GrupoEvento obj = grupoEventoDao.actualizar(convertDtoToEntity(grupoEventoDto));
+	            return convertEntityToDto(obj);
+	        } else {
+	            return null;
+	        }
 	}
 
 	@Override
 	public boolean eliminarGrupoEvento(Long id) {
+		 try {
+	            grupoEventoDao.eliminarPorId(id);
+	            return true;
+	        } catch (Exception err) {
+	            return false;
+	        }
+	}
+
+	@Override
+	public boolean existenciaEvento(Long idgrupo) {
 		// TODO Auto-generated method stub
-		return false;
+		return grupoEventoDao.existenciaEvento(idgrupo);
 	}
 
 }
